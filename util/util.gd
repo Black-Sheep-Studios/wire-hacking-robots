@@ -10,9 +10,17 @@ static func require_child(parent: Node, type) -> Node:
 	return node
 
 
+static func require_sibling(node: Node, type) -> Node:
+	return require_child(node.get_parent(), type)
+
+
 static func find_child(parent: Node, type) -> Node:
 	var node: Node = (parent.get_children()
 	.filter(func(child: Node) -> bool: 
 		return is_instance_of(child, type)
 	).pop_front())
 	return node
+
+
+static func find_sibling(node: Node, type) -> Node:
+	return find_child(node.get_parent(), type)
