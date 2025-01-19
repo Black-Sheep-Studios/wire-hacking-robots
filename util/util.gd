@@ -11,7 +11,10 @@ static func require_child(parent: Node, type) -> Node:
 
 
 static func require_sibling(node: Node, type) -> Node:
-	return require_child(node.get_parent(), type)
+	var sibling: Node = find_sibling(node, type)
+	if sibling == null:
+		push_error("Required sibling not found")
+	return sibling
 
 
 static func find_child(parent: Node, type) -> Node:
