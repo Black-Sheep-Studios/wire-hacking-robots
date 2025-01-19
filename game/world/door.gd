@@ -11,6 +11,7 @@ func interact(interactor: Node2D) -> Result:
 	var can_open: bool = interactor.can_do(RobotCharacter.Abilities.DOORS)
 
 	if can_open:
+		print("Door opened!")
 		is_open = not is_open
 		result.success = true
 	

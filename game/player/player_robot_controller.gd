@@ -34,10 +34,13 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 
 
 func _process_action_result(action_result: RobotCharacter.ActionResult) -> void:
-	# TODO: maybe a failure sound effect, UI toast, etc
-	if !action_result.interact_result.success: return
+	if action_result.interact_result:
+		_process_interact_result(action_result.interact_result)
 
-	var interact_result: Interactable.Result = action_result.interact_result
+
+func _process_interact_result(interact_result: Interactable.Result) -> void:
+	# TODO: maybe a failure sound effect, UI toast, etc
+	if !interact_result.success: return
 
 	if [Interactable.Result.Type.CODEHACK, Interactable.Result.Type.WIREHACK].has(interact_result.type):
 		_scene_manager.set_active_scene(interact_result.minigame, true)
