@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://game/input_manager.gd" id="1_h6v18"]
 [ext_resource type="Script" path="res://game/scene_manager.gd" id="2_sf31k"]
-[ext_resource type="PackedScene" uid="uid://dogs7u8f2jr8o" path="res://scenes/test_overworld.tscn" id="3_4luie"]
+[ext_resource type="PackedScene" uid="uid://dogs7u8f2jr8o" path="res://scenes/test/test_overworld.tscn" id="3_s4k6s"]
 
 [node name="Game" type="Node2D"]
 
@@ -11,4 +11,4 @@ script = ExtResource("1_h6v18")
 
 [node name="SceneManager" type="Node" parent="."]
 script = ExtResource("2_sf31k")
-start_scene = ExtResource("3_4luie")
+start_scene = ExtResource("3_s4k6s")

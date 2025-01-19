@@ -1,7 +1,6 @@
-class_name TestOverworld
+class_name OverworldScene
 
 extends Scene
-
 
 var _player_robot_controller: PlayerRobotController
 

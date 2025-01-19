@@ -1,10 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7cp1skj4hd34"]
+[gd_scene load_steps=4 format=3 uid="uid://b7cp1skj4hd34"]
 
-[ext_resource type="Script" path="res://game/player/test_player_robot.gd" id="1_inxbg"]
+[ext_resource type="Script" path="res://game/robot/robot_character.gd" id="1_1v3f5"]
 [ext_resource type="Texture2D" uid="uid://b8hjnp51lroil" path="res://assets/graphics/temp_robot.svg" id="2_ihu0e"]
 
-[node name="TestPlayerRobot" type="Node2D"]
-script = ExtResource("1_inxbg")
+[sub_resource type="CircleShape2D" id="CircleShape2D_v66my"]
+radius = 24.0832
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="TestPlayerRobot" type="CharacterBody2D"]
+script = ExtResource("1_1v3f5")
+
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_ihu0e")
+
+[node name="MovementCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v66my")
