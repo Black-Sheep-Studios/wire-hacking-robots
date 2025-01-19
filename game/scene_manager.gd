@@ -1,7 +1,18 @@
 class_name SceneManager
 
 extends Node
-
+## SceneManager is responsible for tracking the current stack of active Scenes in the game.
+##
+## Each scene it instantiates will be given a handle back to the SceneManager, allowing Scenes to:
+## - Add a new scene to the top of the stack with set_active_scene(packed_scene_reference)
+##   - showing the pause menu
+##   - starting a minigame
+## - Replace the entire current stack with a new scene with set_active_scene(packed_scene_reference, true)
+##   - starting a new game
+##   - returning to the main menu
+## - Remove itself from the top of the stack with pop_scene(), which will return control to the previous scene
+##   - closing the pause menu
+##   - ending a minigame
 
 signal scene_changed(scene: Scene)
 

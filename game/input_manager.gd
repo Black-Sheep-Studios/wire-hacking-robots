@@ -1,7 +1,10 @@
 class_name InputManager
 
 extends Node
-
+## InputManager is responsible for delegating processing time to PlayerController instances, making
+## sure that only one controller is receiving inputs at a time.
+##
+## It automatically tracks the currently active PlayerController by hooking into the SceneManager
 
 var _scene_manager: SceneManager
 var current_controller: PlayerController
