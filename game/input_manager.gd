@@ -16,26 +16,27 @@ func _ready() -> void:
 	# NOTE: SceneManager could initialize before or after InputManager,
 	# so we manually trigger the first scene change event here in case scene
 	# is already set
-	_on_scene_changed(_scene_manager.get_active_scene())
+	# _on_scene_changed(_scene_manager.get_active_scene())
 	_scene_manager.scene_changed.connect(_on_scene_changed)
 
 
 func _process(_delta: float) -> void:
 	if current_controller == null: return
-	if current_controller.active == false: return
 
 	current_controller.process(_delta)
 
 
 func _on_scene_changed(scene: Scene) -> void:
 	if scene == null:
-		print("InputManager._on_scene_changed: scene is null")
+		push_warning("InputManager._on_scene_changed: scene is null")
 		return
 
 	print("InputManager._on_scene_changed: ", scene, " controller: ", scene.get_active_controller())
+
 	current_controller = scene.get_active_controller()
+
 	if current_controller == null:
-		print("InputManager._on_scene_changed: current_controller is null")
+		push_warning("InputManager._on_scene_changed: current_controller is null")
 		return
 
 	current_controller.init(_scene_manager)

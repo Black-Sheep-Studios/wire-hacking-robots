@@ -6,7 +6,17 @@ extends Node
 ## They should _never_ implement a _process() or _physics_process() method, because the InputManager
 ## will be responsible for delegating processing time to them when it's appropriate by calling process()
 
-var active: bool = true
+var _scene_manager: SceneManager
+
+
+func _init() -> void:
+	# Controllers should always process inputs, even when the game is paused. The InputManager will
+	# handle pausing of input processing when a controller is not active.
+	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
+
+
+func init(scene_manager: SceneManager) -> void:
+	_scene_manager = scene_manager
 
 
 func process(_delta: float) -> void:

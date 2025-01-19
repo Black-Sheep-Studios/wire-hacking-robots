@@ -1,6 +1,6 @@
 class_name Scene
 
-extends Node
+extends CanvasItem
 ## Scene is the base class for anything that should be managed by the SceneManager, which
 ## includes menus, minigames, and the main overworld map.
 ## 
@@ -18,11 +18,3 @@ func init(scene_manager: SceneManager) -> void:
 func get_active_controller() -> PlayerController:
 	push_error("implement get_active_controller() in derived class")
 	return null
-
-
-func pause() -> void:
-	get_tree().paused = true
-
-
-func unpause() -> void:
-	get_tree().paused = false

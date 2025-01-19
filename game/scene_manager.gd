@@ -39,24 +39,29 @@ func get_active_scenes() -> Array[Scene]:
 	return scenes
 
 
-func set_active_scene(packed_scene: PackedScene, replace: bool = false) -> void:
+func set_active_scene(packed_scene: PackedScene, pause: bool = false, replace: bool = false) -> void:
 	print("SceneManager.set_active_scene: ", packed_scene, " replace: ", replace)
 	if replace: _free_scenes()
 
+	if pause: 
+		get_tree().paused = true
+
 	var scene = _init_scene(packed_scene)
-	move_child(scene, 0)
 	scene_changed.emit(scene)
 
 
 func pop_scene() -> void:
 	var active_scenes: Array[Scene] = get_active_scenes()
-	if active_scenes.size() == 0:
+	if active_scenes.size() <= 1:
+		push_warning("SceneManager.pop_scene: no scenes to pop")
 		return
 
-	var scene = active_scenes[0]
-	scene.queue_free()
-	# TODO: a little inefficient to fetch the active scenes again
-	scene_changed.emit(get_active_scene())
+	var old_active_scene = active_scenes[active_scenes.size() - 1]
+	old_active_scene.queue_free()
+
+	var new_active_scene: Scene = get_active_scene()
+	get_tree().paused = false
+	scene_changed.emit(new_active_scene)
 
 
 func _init_scene(packed_scene: PackedScene) -> Scene:

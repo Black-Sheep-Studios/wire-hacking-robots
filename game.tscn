@@ -7,8 +7,10 @@
 [node name="Game" type="Node2D"]
 
 [node name="InputManager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("1_h6v18")
 
 [node name="SceneManager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("2_sf31k")
 start_scene = ExtResource("3_s4k6s")

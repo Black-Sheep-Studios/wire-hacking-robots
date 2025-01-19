@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=10 format=3 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="PackedScene" uid="uid://b7cp1skj4hd34" path="res://game/robot/robot_character.tscn" id="2_c2yuc"]
 [ext_resource type="Script" path="res://game/player/player_robot_controller.gd" id="2_ssp5s"]
+[ext_resource type="PackedScene" uid="uid://56osf625muiq" path="res://scenes/pause_menu.tscn" id="3_h8k3s"]
 [ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="4_fhs0o"]
 [ext_resource type="Script" path="res://game/world/door.gd" id="5_871bv"]
 [ext_resource type="Texture2D" uid="uid://b8hjnp51lroil" path="res://assets/graphics/temp_robot.svg" id="6_kndo3"]
@@ -14,11 +15,12 @@ move_speed = 1000
 [sub_resource type="CircleShape2D" id="CircleShape2D_7gysx"]
 radius = 24.0208
 
-[node name="TestOverworld" type="Node"]
+[node name="TestOverworld" type="Node2D"]
 script = ExtResource("1_eur80")
 
 [node name="PlayerRobotController" type="Node" parent="." node_paths=PackedStringArray("current_robot")]
 script = ExtResource("2_ssp5s")
+_pause_menu_scene = ExtResource("3_h8k3s")
 current_robot = NodePath("../TestPlayerRobot")
 
 [node name="TestPlayerRobot" parent="." instance=ExtResource("2_c2yuc")]

@@ -3,16 +3,14 @@ class_name PlayerRobotController
 extends PlayerController
 
 
+@export var _pause_menu_scene: PackedScene
 @export var current_robot: RobotCharacter
-
-var _scene_manager: SceneManager
-
-
-func init(scene_manager: SceneManager) -> void:
-	_scene_manager = scene_manager
 
 
 func process(delta: float) -> void:
+	if Input.is_action_just_pressed("menu"):
+		_scene_manager.set_active_scene(_pause_menu_scene, true)
+
 	if !current_robot: return
 
 	var action: RobotCharacter.Action = _build_action_from_inputs()
