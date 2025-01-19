@@ -34,3 +34,8 @@ func _on_scene_changed(scene: Scene) -> void:
 
 	print("InputManager._on_scene_changed: ", scene, " controller: ", scene.get_active_controller())
 	current_controller = scene.get_active_controller()
+	if current_controller == null:
+		print("InputManager._on_scene_changed: current_controller is null")
+		return
+
+	current_controller.init(_scene_manager)

@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="RobotStats" load_steps=2 format=3 uid="uid://bwl3j6bb8xlvb"]
-
-[ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="1_8fyxn"]
-
-[resource]
-script = ExtResource("1_8fyxn")
-move_speed = 1000

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7cp1skj4hd34"]
+
+[ext_resource type="Script" path="res://game/robot/robot_character.gd" id="1_1v3f5"]
+[ext_resource type="Texture2D" uid="uid://b8hjnp51lroil" path="res://assets/graphics/temp_robot.svg" id="2_ihu0e"]
+[ext_resource type="Script" path="res://game/detection_area.gd" id="3_n4j5c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v66my"]
+radius = 24.0832
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abtjx"]
+radius = 41.0488
+
+[node name="RobotCharacter" type="CharacterBody2D"]
+script = ExtResource("1_1v3f5")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_ihu0e")
+
+[node name="MovementCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v66my")
+
+[node name="InteractionReachArea" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("3_n4j5c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionReachArea"]
+shape = SubResource("CircleShape2D_abtjx")

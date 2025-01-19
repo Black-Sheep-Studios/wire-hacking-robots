@@ -3,12 +3,15 @@ class_name RobotCharacter
 extends CharacterBody2D
 
 
-enum Capabilities {
+enum Abilities {
 	DOORS,
+	HACK,
 }
 
 @export var _stats: RobotStats
-@export var _capabilities: Array[Capabilities]
+@export var _abilities: Array[Abilities]
+
+@onready var interaction_reach_area: DetectionArea = $InteractionReachArea
 
 
 func _ready() -> void:
@@ -20,17 +23,37 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 
-func act(action: Action) -> void:
+func act(action: Action) -> ActionResult:
+	var result: ActionResult = ActionResult.new()
+
 	set_velocity(action.movement_direction * _stats.move_speed)
-	if action.interact_target: _interact(action.interact_target)
+
+	if action.interact_target: 
+		result.interact_result = _interact(action.interact_target)
+	
+	return result
 
 
-func _interact(target: Node2D) -> void:
-	if target is Door:
-		if Capabilities.DOORS in _capabilities:
-			target.open()
+func can_reach(target: Node2D) -> bool:
+	return interaction_reach_area.get_overlapping_bodies().has(target)
+
+
+func can_do(ability: Abilities) -> bool:
+	return _abilities.has(ability)
+
+
+func _interact(target: Node2D) -> Interactable.Result:
+	return target.interact(self)
+
 
 
 class Action:
+	var delta: float
 	var movement_direction: Vector2
+	var aim_direction: Vector2
 	var interact_target: Node2D
+	var attack: bool
+
+
+class ActionResult:
+	var interact_result: Interactable.Result
