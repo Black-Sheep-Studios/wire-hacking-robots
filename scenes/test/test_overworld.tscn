@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=17 format=3 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="PackedScene" uid="uid://b7cp1skj4hd34" path="res://game/robot/robot_character.tscn" id="2_c2yuc"]
@@ -7,23 +7,24 @@
 [ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="4_fhs0o"]
 [ext_resource type="Script" path="res://game/world/door.gd" id="5_871bv"]
 [ext_resource type="Script" path="res://game/entities/trigger.gd" id="6_h3vra"]
-[ext_resource type="Texture2D" uid="uid://b8hjnp51lroil" path="res://assets/graphics/temp_robot.svg" id="6_kndo3"]
 [ext_resource type="Script" path="res://game/entities/open_interaction.gd" id="6_lyq78"]
 [ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/test_hack_scene.tscn" id="9_3afsu"]
+[ext_resource type="SpriteFrames" uid="uid://k12rtg016xot" path="res://game/world/door_spritesheet.tres" id="9_esgxa"]
 [ext_resource type="Script" path="res://game/entities/hack_interaction.gd" id="10_phr4h"]
+[ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
 
 [sub_resource type="Resource" id="Resource_1j45n"]
 script = ExtResource("4_fhs0o")
 move_speed = 100
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48kf8"]
-size = Vector2(41, 42)
+size = Vector2(82, 103)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8f5p"]
-size = Vector2(41, 40)
+size = Vector2(105, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im05h"]
-size = Vector2(39, 41)
+size = Vector2(82, 103)
 
 [node name="TestOverworld" type="Node2D"]
 script = ExtResource("1_eur80")
@@ -50,22 +51,23 @@ target = NodePath("../OpenTrigger")
 [node name="OpenTrigger" type="Node" parent="Door"]
 script = ExtResource("6_h3vra")
 
-[node name="Sprite" type="Sprite2D" parent="Door"]
-texture = ExtResource("6_kndo3")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
-position = Vector2(-0.5, 0)
+position = Vector2(-9, 4.5)
 shape = SubResource("RectangleShape2D_48kf8")
 
+[node name="Sprite" type="AnimatedSprite2D" parent="Door"]
+sprite_frames = ExtResource("9_esgxa")
+animation = &"close"
+
 [node name="Computer" type="StaticBody2D" parent="."]
-position = Vector2(233, 74)
+position = Vector2(145, 128)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Computer"]
-position = Vector2(0.5, -1)
+position = Vector2(4.5, -7)
 shape = SubResource("RectangleShape2D_t8f5p")
 
 [node name="Sprite2D" type="Sprite2D" parent="Computer"]
-texture = ExtResource("6_kndo3")
+texture = ExtResource("10_vai7r")
 
 [node name="HackInteraction" type="Node" parent="Computer" node_paths=PackedStringArray("success_triggers")]
 script = ExtResource("10_phr4h")
@@ -78,11 +80,12 @@ script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LockedDoor"]
-position = Vector2(0.5, -0.5)
+position = Vector2(-7, 4.5)
 shape = SubResource("RectangleShape2D_im05h")
-
-[node name="Sprite2D" type="Sprite2D" parent="LockedDoor"]
-texture = ExtResource("6_kndo3")
 
 [node name="OpenTrigger" type="Node" parent="LockedDoor"]
 script = ExtResource("6_h3vra")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="LockedDoor"]
+sprite_frames = ExtResource("9_esgxa")
+animation = &"close"
