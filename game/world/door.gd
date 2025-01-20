@@ -34,5 +34,5 @@ func close() -> void:
 	if not is_open:
 		return
 
-	sprite.play("close")
+	sprite.play_backwards("open")
 	movement_collider.disabled = false

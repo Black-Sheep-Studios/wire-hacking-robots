@@ -17,6 +17,4 @@ func interact(interactor: Node) -> Result:
 		return result
 
 	target.activate()
-
-	result.success = true
 	return result

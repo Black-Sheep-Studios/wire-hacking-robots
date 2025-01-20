@@ -26,7 +26,6 @@ func interact(interactor: Node) -> Result:
 	hack.hack_failed.connect(_on_failure)
 	
 	result.hack = hack
-	result.success = true
 	return result
 
 

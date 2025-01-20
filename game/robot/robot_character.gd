@@ -11,7 +11,8 @@ enum Abilities {
 @export var _stats: RobotStats
 @export var _abilities: Array[Abilities]
 
-var movement_direction: Vector2 = Vector2.ZERO
+var movement_direction: Vector2
+var aim_direction: Vector2
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var aim_raycast: RayCast2D = $AimRaycast
@@ -27,8 +28,8 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	# TODO: extract this stuff to a class for the sprite
-	if movement_direction.x != 0:
-		sprite.flip_h = movement_direction.x < 0
+	if aim_direction.x != 0:
+		sprite.flip_h = aim_direction.x < 0
 
 	if movement_direction.length() > 0:
 		sprite.play("move")
@@ -47,8 +48,9 @@ func act(action: Action) -> ActionResult:
 	if action.interact_target: 
 		result.interact_result = _interact(action.interact_target)
 	
-	if action.aim_direction != Vector2.ZERO:
-		aim_raycast.rotation = action.aim_direction.angle()
+	aim_direction = action.aim_direction
+	if aim_direction != Vector2.ZERO:
+		aim_raycast.rotation = aim_direction.angle()
 	
 	return result
 

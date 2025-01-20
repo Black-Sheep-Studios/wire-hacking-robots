@@ -30,7 +30,7 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 	if Input.is_action_just_pressed("primary_action"):
 		action.interact_target = _get_interact_target()
 
-	var mouse_position: Vector2 = get_viewport().get_mouse_position()
+	var mouse_position: Vector2 = get_viewport().get_mouse_position() - get_viewport().canvas_transform.origin
 	action.aim_direction = (mouse_position - current_robot.global_position).normalized()
 	
 	return action

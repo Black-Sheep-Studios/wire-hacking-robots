@@ -27,5 +27,4 @@ class Result:
 	}
 
 	var type: Type
-	var success: bool
 	var hack: HackScene
