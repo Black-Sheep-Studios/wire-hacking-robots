@@ -1,44 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7cp1skj4hd34"]
+[gd_scene load_steps=4 format=3 uid="uid://b7cp1skj4hd34"]
 
 [ext_resource type="Script" path="res://game/robot/robot_character.gd" id="1_1v3f5"]
-[ext_resource type="Texture2D" uid="uid://g0kccdf084mq" path="res://assets/graphics/roomba.png" id="3_seqfh"]
+[ext_resource type="SpriteFrames" uid="uid://dqo4br8tps0oc" path="res://assets/graphics/roomba_spritesheet.tres" id="2_k1yps"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v66my"]
 radius = 14.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2hgtc"]
-atlas = ExtResource("3_seqfh")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3mgey"]
-atlas = ExtResource("3_seqfh")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eoox6"]
-atlas = ExtResource("3_seqfh")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_alewp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2hgtc")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3mgey")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eoox6")
-}],
-"loop": true,
-"name": &"move",
-"speed": 5.0
-}]
 
 [node name="RobotCharacter" type="CharacterBody2D"]
 script = ExtResource("1_1v3f5")
@@ -47,7 +13,7 @@ script = ExtResource("1_1v3f5")
 shape = SubResource("CircleShape2D_v66my")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_alewp")
+sprite_frames = ExtResource("2_k1yps")
 animation = &"move"
 frame_progress = 0.0486101
 

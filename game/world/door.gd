@@ -4,6 +4,7 @@ extends Node2D
 
 
 @onready var sprite: AnimatedSprite2D = $Sprite
+@onready var movement_collider: CollisionShape2D = $MovementCollider
 @export var open_trigger: Trigger
 
 var is_open: bool = false
@@ -14,9 +15,24 @@ func _ready() -> void:
 
 
 func _toggle() -> void:
-	is_open = !is_open
-	print("Door ", get_path(), " is open:", is_open)
 	if is_open:
-		sprite.play("open")
+		close()
 	else:
-		sprite.play("close")
+		open()
+	print("Door ", get_path(), " is open:", is_open)
+
+
+func open() -> void:
+	if is_open:
+		return
+
+	sprite.play("open")
+	movement_collider.disabled = true
+
+
+func close() -> void:
+	if not is_open:
+		return
+
+	sprite.play("close")
+	movement_collider.disabled = false

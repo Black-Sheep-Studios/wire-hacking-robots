@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://game/entities/trigger.gd" id="6_h3vra"]
 [ext_resource type="Script" path="res://game/entities/open_interaction.gd" id="6_lyq78"]
 [ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/test_hack_scene.tscn" id="9_3afsu"]
-[ext_resource type="SpriteFrames" uid="uid://k12rtg016xot" path="res://game/world/door_spritesheet.tres" id="9_esgxa"]
+[ext_resource type="SpriteFrames" uid="uid://k12rtg016xot" path="res://assets/graphics/door_spritesheet.tres" id="9_esgxa"]
 [ext_resource type="Script" path="res://game/entities/hack_interaction.gd" id="10_phr4h"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
 
@@ -21,7 +21,7 @@ move_speed = 100
 size = Vector2(82, 103)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8f5p"]
-size = Vector2(105, 80)
+size = Vector2(95, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im05h"]
 size = Vector2(82, 103)
@@ -40,9 +40,10 @@ _stats = SubResource("Resource_1j45n")
 _abilities = Array[int]([0, 1])
 
 [node name="Door" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
-position = Vector2(517, 249)
+position = Vector2(568, 188)
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
+metadata/_edit_group_ = true
 
 [node name="OpenInteraction" type="Node" parent="Door" node_paths=PackedStringArray("target")]
 script = ExtResource("6_lyq78")
@@ -51,7 +52,7 @@ target = NodePath("../OpenTrigger")
 [node name="OpenTrigger" type="Node" parent="Door"]
 script = ExtResource("6_h3vra")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+[node name="MovementCollider" type="CollisionShape2D" parent="Door"]
 position = Vector2(-9, 4.5)
 shape = SubResource("RectangleShape2D_48kf8")
 
@@ -60,31 +61,33 @@ sprite_frames = ExtResource("9_esgxa")
 animation = &"close"
 
 [node name="Computer" type="StaticBody2D" parent="."]
-position = Vector2(145, 128)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Computer"]
-position = Vector2(4.5, -7)
-shape = SubResource("RectangleShape2D_t8f5p")
-
-[node name="Sprite2D" type="Sprite2D" parent="Computer"]
-texture = ExtResource("10_vai7r")
+position = Vector2(418, 199)
+metadata/_edit_group_ = true
 
 [node name="HackInteraction" type="Node" parent="Computer" node_paths=PackedStringArray("success_triggers")]
 script = ExtResource("10_phr4h")
 hack_scene = ExtResource("9_3afsu")
 success_triggers = [NodePath("../../LockedDoor/OpenTrigger")]
 
+[node name="MovementCollider" type="CollisionShape2D" parent="Computer"]
+position = Vector2(-0.5, -7)
+shape = SubResource("RectangleShape2D_t8f5p")
+
+[node name="Sprite2D" type="Sprite2D" parent="Computer"]
+texture = ExtResource("10_vai7r")
+
 [node name="LockedDoor" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
-position = Vector2(366, 74)
+position = Vector2(278, 189)
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LockedDoor"]
-position = Vector2(-7, 4.5)
-shape = SubResource("RectangleShape2D_im05h")
+metadata/_edit_group_ = true
 
 [node name="OpenTrigger" type="Node" parent="LockedDoor"]
 script = ExtResource("6_h3vra")
+
+[node name="MovementCollider" type="CollisionShape2D" parent="LockedDoor"]
+position = Vector2(-7, 4.5)
+shape = SubResource("RectangleShape2D_im05h")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="LockedDoor"]
 sprite_frames = ExtResource("9_esgxa")
