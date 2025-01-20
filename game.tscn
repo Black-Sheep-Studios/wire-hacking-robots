@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://game/scene_manager.gd" id="2_sf31k"]
 [ext_resource type="PackedScene" uid="uid://dogs7u8f2jr8o" path="res://scenes/test/test_overworld.tscn" id="3_s4k6s"]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node"]
 
 [node name="InputManager" type="Node" parent="."]
 process_mode = 3

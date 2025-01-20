@@ -19,7 +19,6 @@ func _toggle() -> void:
 		close()
 	else:
 		open()
-	print("Door ", get_path(), " is open:", is_open)
 
 
 func open() -> void:

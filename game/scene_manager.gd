@@ -43,7 +43,6 @@ func get_active_scenes() -> Array[Scene]:
 
 
 func set_active_scene(scene: Scene, pause: bool = false, replace: bool = false) -> void:
-	print("SceneManager.set_active_scene: ", scene, " replace: ", replace)
 	if replace: _free_scenes()
 
 	if pause: 

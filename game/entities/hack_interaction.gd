@@ -9,18 +9,14 @@ extends Interaction
 
 
 func interact(interactor: Node) -> Result:
-	print("Interacting with hack interaction")
 	var result = Result.new()
 
 	if not conditions_satisified():
-		print("Conditions not satisfied")
 		return result
 
 	if not interactor.can_do(RobotCharacter.Abilities.HACK):
-		print("Interactor can't hack")
 		return result
 
-	print("Starting hack")
 	var hack: HackScene = hack_scene.instantiate()
 	hack.hack_succeeded.connect(_on_success)
 	hack.hack_failed.connect(_on_failure)
