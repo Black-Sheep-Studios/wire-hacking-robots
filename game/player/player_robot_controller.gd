@@ -27,6 +27,9 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 
 	if Input.is_action_just_pressed("primary_action"):
 		action.interact_target = _get_interact_target()
+
+	var mouse_position: Vector2 = get_viewport().get_mouse_position()
+	action.aim_direction = (mouse_position - current_robot.global_position).normalized()
 	
 	return action
 
@@ -37,7 +40,6 @@ func _process_action_result(action_result: RobotCharacter.ActionResult) -> void:
 
 
 func _process_interact_result(interact_result: Interactable.Result) -> void:
-	# TODO: maybe a failure sound effect, UI toast, etc
 	if !interact_result.success: return
 
 	if [Interactable.Result.Type.CODEHACK, Interactable.Result.Type.WIREHACK].has(interact_result.type):
@@ -45,13 +47,7 @@ func _process_interact_result(interact_result: Interactable.Result) -> void:
 
 
 func _get_interact_target() -> Interactable:
-	# TODO: this is just grabbing the closes interactable object, but this will probably make
-	# more sense later to reimplement with the mouse direction and a raycast to get whatever
-	# the player is aiming at
-	var interactables: Array[Interactable] = current_robot.interaction_reach_area.get_interactables()
-	if interactables.size() == 0: return null
-
-	interactables.sort_custom(func(a: Interactable, b: Interactable) -> bool:
-		return a.global_position.distance_to(current_robot.global_position) < b.global_position.distance_to(current_robot.global_position)
-	)
-	return interactables[0]
+	var current_aimed_object: Object = current_robot.aim_raycast.get_collider()
+	if current_aimed_object is Interactable:
+		return current_aimed_object
+	return null
