@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=15 format=3 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="PackedScene" uid="uid://b7cp1skj4hd34" path="res://game/robot/robot_character.tscn" id="2_c2yuc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b8hjnp51lroil" path="res://assets/graphics/temp_robot.svg" id="6_kndo3"]
 [ext_resource type="Script" path="res://game/world/hack.gd" id="8_dsylr"]
 [ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/test_hack_scene.tscn" id="9_3afsu"]
+[ext_resource type="Script" path="res://game/world/interactable.gd" id="10_seo36"]
 
 [sub_resource type="Resource" id="Resource_1j45n"]
 script = ExtResource("4_fhs0o")
@@ -16,6 +17,13 @@ move_speed = 100
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7gysx"]
 radius = 24.0208
+
+[sub_resource type="Resource" id="Resource_sjfkt"]
+script = ExtResource("4_fhs0o")
+move_speed = 100
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e1d8f"]
+radius = 23.0217
 
 [node name="TestOverworld" type="Node2D"]
 script = ExtResource("1_eur80")
@@ -50,3 +58,21 @@ texture = ExtResource("6_kndo3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hack"]
 shape = SubResource("CircleShape2D_7gysx")
+
+[node name="EnemyRobot" parent="." instance=ExtResource("2_c2yuc")]
+position = Vector2(249, 312)
+_stats = SubResource("Resource_sjfkt")
+
+[node name="AlertTrigger" type="Node" parent="EnemyRobot"]
+
+[node name="Hackable Door" type="StaticBody2D" parent="."]
+position = Vector2(735, 100)
+script = ExtResource("10_seo36")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hackable Door"]
+texture = ExtResource("6_kndo3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hackable Door"]
+shape = SubResource("CircleShape2D_e1d8f")
+
+[node name="Hack" type="Node" parent="Hackable Door"]

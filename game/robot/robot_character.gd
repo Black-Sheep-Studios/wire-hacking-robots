@@ -18,9 +18,6 @@ var movement_direction: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
-	if not _stats:
-		push_error("RobotCharacter is missing stats! %s" % get_path())
-	
 	aim_raycast.add_exception(self)
 
 

@@ -52,4 +52,4 @@ animation = &"move"
 frame_progress = 0.0486101
 
 [node name="AimRaycast" type="RayCast2D" parent="."]
-target_position = Vector2(37, 0)
+target_position = Vector2(65, 0)

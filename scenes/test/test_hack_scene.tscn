@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://du5i0mh3mkwuq"]
+[gd_scene load_steps=3 format=3 uid="uid://du5i0mh3mkwuq"]
 
 [ext_resource type="Script" path="res://game/hack_scene.gd" id="1_jk2s7"]
+[ext_resource type="Script" path="res://game/player/player_hack_controller.gd" id="2_qo8v3"]
 
 [node name="TestHackScene" type="Control"]
 layout_mode = 3
@@ -11,7 +12,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jk2s7")
 
-[node name="complete" type="Button" parent="."]
+[node name="PlayerHackController" type="Node" parent="."]
+script = ExtResource("2_qo8v3")
+
+[node name="succeed" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -24,7 +28,7 @@ offset_right = 62.0
 offset_bottom = -32.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Complete hack"
+text = "Succeed hack"
 
 [node name="fail" type="Button" parent="."]
 layout_mode = 1
@@ -55,3 +59,7 @@ offset_bottom = 63.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Cancel hack"
+
+[connection signal="button_down" from="succeed" to="." method="_on_success"]
+[connection signal="button_down" from="fail" to="." method="_on_fail"]
+[connection signal="button_down" from="cancel" to="." method="_on_cancel"]
