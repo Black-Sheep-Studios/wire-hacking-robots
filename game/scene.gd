@@ -1,6 +1,6 @@
 class_name Scene
 
-extends CanvasItem
+extends Node
 ## Scene is the base class for anything that should be managed by the SceneManager, which
 ## includes menus, minigames, and the main overworld map.
 ## 

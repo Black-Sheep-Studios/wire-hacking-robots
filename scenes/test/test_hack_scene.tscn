@@ -3,20 +3,13 @@
 [ext_resource type="Script" path="res://game/hack_scene.gd" id="1_jk2s7"]
 [ext_resource type="Script" path="res://game/player/player_hack_controller.gd" id="2_qo8v3"]
 
-[node name="TestHackScene" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TestHackScene" type="CanvasLayer"]
 script = ExtResource("1_jk2s7")
 
 [node name="PlayerHackController" type="Node" parent="."]
 script = ExtResource("2_qo8v3")
 
 [node name="succeed" type="Button" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -31,7 +24,6 @@ grow_vertical = 2
 text = "Succeed hack"
 
 [node name="fail" type="Button" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -46,7 +38,6 @@ grow_vertical = 2
 text = "Fail hack"
 
 [node name="cancel" type="Button" parent="."]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
