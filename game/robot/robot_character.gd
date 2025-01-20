@@ -57,7 +57,7 @@ func can_do(ability: Abilities) -> bool:
 	return _abilities.has(ability)
 
 
-func _interact(target: Node2D) -> Interactable.Result:
+func _interact(target: Interaction) -> Interaction.Result:
 	return target.interact(self)
 
 
@@ -66,9 +66,9 @@ class Action:
 	var delta: float
 	var movement_direction: Vector2
 	var aim_direction: Vector2
-	var interact_target: Node2D
+	var interact_target: Interaction
 	var attack: bool
 
 
 class ActionResult:
-	var interact_result: Interactable.Result
+	var interact_result: Interaction.Result

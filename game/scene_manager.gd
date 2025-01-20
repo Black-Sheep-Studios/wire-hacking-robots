@@ -20,8 +20,11 @@ signal scene_changed(scene: Scene)
 
 
 func _ready() -> void:
-	if start_scene != null:
-		set_active_scene(start_scene, true)
+	if not start_scene:
+		push_error("SceneManager._ready: start_scene not set")
+		return
+
+	set_active_scene(start_scene.instantiate(), true)
 
 
 func get_active_scene() -> Scene:
@@ -39,14 +42,15 @@ func get_active_scenes() -> Array[Scene]:
 	return scenes
 
 
-func set_active_scene(packed_scene: PackedScene, pause: bool = false, replace: bool = false) -> void:
-	print("SceneManager.set_active_scene: ", packed_scene, " replace: ", replace)
+func set_active_scene(scene: Scene, pause: bool = false, replace: bool = false) -> void:
+	print("SceneManager.set_active_scene: ", scene, " replace: ", replace)
 	if replace: _free_scenes()
 
 	if pause: 
 		get_tree().paused = true
 
-	var scene = _init_scene(packed_scene)
+	add_child(scene)
+	scene.init(self)
 	scene_changed.emit(scene)
 
 
@@ -62,13 +66,6 @@ func pop_scene() -> void:
 	var new_active_scene: Scene = get_active_scene()
 	get_tree().paused = false
 	scene_changed.emit(new_active_scene)
-
-
-func _init_scene(packed_scene: PackedScene) -> Scene:
-	var scene = packed_scene.instantiate()
-	add_child(scene)
-	scene.init(self)
-	return scene
 
 
 func _free_scenes() -> void:

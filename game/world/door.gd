@@ -1,22 +1,18 @@
 class_name Door
 
-extends Interactable
+extends Node2D
 
 
-@export var is_open: bool = false
+@onready var sprite: Sprite2D = $Sprite
+@export var open_trigger: Trigger
+
+var is_open: bool = false
 
 
-func interact(interactor: Node2D) -> Result:
-	var result: Result = Result.new()
-	var can_open: bool = interactor.can_do(RobotCharacter.Abilities.DOORS)
+func _ready() -> void:
+	open_trigger.activated.connect(_toggle)
 
-	if can_open:
-		result.success = true
-		if is_open:
-			is_open = false
-			print("Door closed!")
-		else:
-			is_open = true
-			print("Door opened!")
-	
-	return result
+
+func _toggle() -> void:
+	is_open = !is_open
+	print("Door ", get_path(), " is open:", is_open)

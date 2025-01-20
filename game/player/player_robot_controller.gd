@@ -9,7 +9,9 @@ extends PlayerController
 
 func process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
-		_scene_manager.set_active_scene(_pause_menu_scene, true)
+		var pause_scene: Scene = _pause_menu_scene.instantiate()
+		_scene_manager.set_active_scene(pause_scene, true)
+		return
 
 	if !current_robot: return
 
@@ -39,15 +41,17 @@ func _process_action_result(action_result: RobotCharacter.ActionResult) -> void:
 		_process_interact_result(action_result.interact_result)
 
 
-func _process_interact_result(interact_result: Interactable.Result) -> void:
-	if !interact_result.success: return
-
-	if [Interactable.Result.Type.CODEHACK, Interactable.Result.Type.WIREHACK].has(interact_result.type):
-		_scene_manager.set_active_scene(interact_result.minigame, true)
+func _process_interact_result(interact_result: Interaction.Result) -> void:
+	if interact_result.hack:
+		_scene_manager.set_active_scene(interact_result.hack)
 
 
-func _get_interact_target() -> Interactable:
+func _get_interact_target() -> Interaction:
 	var current_aimed_object: Object = current_robot.aim_raycast.get_collider()
-	if current_aimed_object is Interactable:
-		return current_aimed_object
+	if !current_aimed_object: return null
+
+	var interaction: Interaction = Util.find_child(current_aimed_object, Interaction)
+	if interaction:
+		return interaction
+
 	return null
