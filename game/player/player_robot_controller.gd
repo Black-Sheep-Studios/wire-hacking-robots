@@ -6,6 +6,9 @@ extends PlayerController
 @export var _pause_menu_scene: PackedScene
 @export var current_robot: RobotCharacter
 
+const attack: String = "primary_action"
+const interact: String = "secondary_action"
+const hack: String = "tertiary_action"
 
 func process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -27,11 +30,14 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 	var action: RobotCharacter.Action = RobotCharacter.Action.new()
 	action.movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	if Input.is_action_just_pressed("primary_action"):
+	if Input.is_action_just_pressed(attack):
+		action.attack = true
+	if Input.is_action_just_pressed(interact):
 		action.interact_target = _get_interact_target()
+	if Input.is_action_just_pressed(hack):
+		action.hack = true
 
-	var mouse_position: Vector2 = get_viewport().get_mouse_position() - get_viewport().canvas_transform.origin
-	action.aim_direction = (mouse_position - current_robot.global_position).normalized()
+	action.aim_direction = (current_robot.get_global_mouse_position() - current_robot.global_position).normalized()
 	
 	return action
 
@@ -43,7 +49,7 @@ func _process_action_result(action_result: RobotCharacter.ActionResult) -> void:
 
 func _process_interact_result(interact_result: Interaction.Result) -> void:
 	if interact_result.hack:
-		_scene_manager.set_active_scene(interact_result.hack)
+		_scene_manager.set_active_scene(interact_result.hack, true)
 
 
 func _get_interact_target() -> Interaction:

@@ -1,6 +1,6 @@
 class_name RobotCharacter
 
-extends CharacterBody2D
+extends MovementObject
 
 
 enum Abilities {
@@ -22,10 +22,6 @@ func _ready() -> void:
 	aim_raycast.add_exception(self)
 
 
-func _physics_process(_delta: float) -> void:
-	move_and_slide()
-
-
 func _process(_delta: float) -> void:
 	# TODO: extract this stuff to a class for the sprite
 	if aim_direction.x != 0:
@@ -43,7 +39,7 @@ func act(action: Action) -> ActionResult:
 	var result: ActionResult = ActionResult.new()
 
 	movement_direction = action.movement_direction
-	set_velocity(movement_direction * _stats.move_speed)
+	target_velocity = movement_direction * _stats.move_speed
 
 	if action.interact_target: 
 		result.interact_result = _interact(action.interact_target)
@@ -63,13 +59,13 @@ func _interact(target: Interaction) -> Interaction.Result:
 	return target.interact(self)
 
 
-
 class Action:
 	var delta: float
 	var movement_direction: Vector2
 	var aim_direction: Vector2
 	var interact_target: Interaction
 	var attack: bool
+	var hack: bool
 
 
 class ActionResult:

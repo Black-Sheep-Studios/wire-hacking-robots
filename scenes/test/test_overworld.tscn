@@ -1,8 +1,8 @@
-[gd_scene load_steps=25 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=26 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/target_camera.gd" id="2_ad7tr"]
-[ext_resource type="PackedScene" uid="uid://b7cp1skj4hd34" path="res://game/robot/robot_character.tscn" id="2_c2yuc"]
+[ext_resource type="PackedScene" uid="uid://b7cp1skj4hd34" path="res://game/robot/robot.tscn" id="2_c2yuc"]
 [ext_resource type="Script" path="res://game/player/player_robot_controller.gd" id="2_ssp5s"]
 [ext_resource type="PackedScene" uid="uid://56osf625muiq" path="res://scenes/pause_menu.tscn" id="3_h8k3s"]
 [ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="4_fhs0o"]
@@ -72,6 +72,10 @@ size = Vector2(95, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im05h"]
 size = Vector2(128, 64)
+
+[sub_resource type="Resource" id="Resource_lx4jl"]
+script = ExtResource("4_fhs0o")
+move_speed = 100
 
 [node name="TestOverworld" type="Node2D"]
 script = ExtResource("1_eur80")
@@ -147,3 +151,7 @@ animation = &"open"
 
 [node name="MovementCollider" type="CollisionShape2D" parent="LockedDoor"]
 shape = SubResource("RectangleShape2D_im05h")
+
+[node name="Robot" parent="." instance=ExtResource("2_c2yuc")]
+position = Vector2(271, -83)
+_stats = SubResource("Resource_lx4jl")

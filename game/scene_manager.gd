@@ -24,7 +24,7 @@ func _ready() -> void:
 		push_error("SceneManager._ready: start_scene not set")
 		return
 
-	set_active_scene(start_scene.instantiate(), true)
+	set_active_scene(start_scene.instantiate())
 
 
 func get_active_scene() -> Scene:
@@ -45,8 +45,8 @@ func get_active_scenes() -> Array[Scene]:
 func set_active_scene(scene: Scene, pause: bool = false, replace: bool = false) -> void:
 	if replace: _free_scenes()
 
-	if pause: 
-		get_tree().paused = true
+	if pause:
+		TimeDilation.slow_time()
 
 	add_child(scene)
 	scene.init(self)
@@ -56,14 +56,15 @@ func set_active_scene(scene: Scene, pause: bool = false, replace: bool = false) 
 func pop_scene() -> void:
 	var active_scenes: Array[Scene] = get_active_scenes()
 	if active_scenes.size() <= 1:
-		push_warning("SceneManager.pop_scene: no scenes to pop")
+		push_error("SceneManager.pop_scene: no scenes to pop")
 		return
 
 	var old_active_scene = active_scenes[active_scenes.size() - 1]
 	old_active_scene.queue_free()
 
 	var new_active_scene: Scene = get_active_scene()
-	get_tree().paused = false
+	# TODO: this might not always be true, but it's a good assumption for now
+	TimeDilation.unslow_time()
 	scene_changed.emit(new_active_scene)
 
 
