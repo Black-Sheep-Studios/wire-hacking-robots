@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://o2kme1hok4ts"]
+
+[ext_resource type="Script" path="res://game/wirehack_scene.gd" id="1_qfd2f"]
+
+[node name="WirehackScene" type="CanvasLayer"]
+script = ExtResource("1_qfd2f")
