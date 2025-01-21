@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqb6jl6hj0wk4"]
 
-[ext_resource type="Script" path="res://game/or_gate.gd" id="1_aivr7"]
+[ext_resource type="Script" path="res://game/components/or_gate.gd" id="1_aivr7"]
 [ext_resource type="Texture2D" uid="uid://d1wvcinmjjr06" path="res://assets/graphics/OR.png" id="1_pvojl"]
 
 [node name="OrGate" type="Sprite2D"]

@@ -2,11 +2,18 @@ class_name WirehackScene
 extends HackScene
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _ready() -> void:
+	_initialize_components()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _initialize_components() -> void:
+	for input: LogicIn in _all_logic_inputs():
+		input.initialize_state()
+
+
+func _all_logic_inputs() -> Array[LogicIn]:
+	var logic_ins: Array[LogicIn] = []
+	for child in get_children():
+		if child is LogicIn:
+			logic_ins.append(child)
+	return logic_ins

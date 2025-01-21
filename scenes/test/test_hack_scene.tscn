@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://du5i0mh3mkwuq"]
 
-[ext_resource type="Script" path="res://game/hack_scene.gd" id="1_jk2s7"]
+[ext_resource type="Script" path="res://game/wirehack_scene.gd" id="1_4crut"]
 [ext_resource type="Script" path="res://game/player/player_hack_controller.gd" id="2_qo8v3"]
 [ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="3_4o883"]
 [ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="4_a0egx"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dhukyh0heob0b" path="res://scenes/components/xor_gate.tscn" id="7_f7ei1"]
 
 [node name="TestHackScene" type="CanvasLayer"]
-script = ExtResource("1_jk2s7")
+script = ExtResource("1_4crut")
 
 [node name="PlayerHackController" type="Node" parent="."]
 script = ExtResource("2_qo8v3")
