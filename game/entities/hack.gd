@@ -1,6 +1,6 @@
-class_name HackInteraction
+class_name Hack
 
-extends Interaction
+extends Node
 
 
 @export var hack_scene: PackedScene
@@ -8,20 +8,17 @@ extends Interaction
 @export var success_triggers: Array[Trigger]
 
 
-func interact(interactor: Node) -> Result:
+func hack(interactor: RobotCharacter) -> Result:
 	var result = Result.new()
-
-	if not conditions_satisified():
-		return result
 
 	if not interactor.can_do(RobotCharacter.Abilities.HACK):
 		return result
 
-	var hack: HackScene = hack_scene.instantiate()
-	hack.hack_succeeded.connect(_on_success)
-	hack.hack_failed.connect(_on_failure)
+	var hack_scene_instance: HackScene = hack_scene.instantiate()
+	hack_scene_instance.hack_succeeded.connect(_on_success)
+	hack_scene_instance.hack_failed.connect(_on_failure)
 	
-	result.hack = hack
+	result.hack_scene = hack_scene_instance
 	return result
 
 
@@ -33,3 +30,7 @@ func _on_success() -> void:
 func _on_failure() -> void:
 	for trigger in fail_triggers:
 		trigger.activate()
+
+
+class Result:
+	var hack_scene: HackScene
