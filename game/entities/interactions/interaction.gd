@@ -4,7 +4,7 @@ extends Node
 
 
 func interact(_interactor: RobotCharacter) -> void:
-	push_error("Interaction.interact() called; must be overridden in derived class")
+	push_error(name, " does not override interact!")
 
 
 func conditions_satisified() -> bool:

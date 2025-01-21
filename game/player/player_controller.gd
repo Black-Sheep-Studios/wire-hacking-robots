@@ -20,4 +20,4 @@ func init(scene_manager: SceneManager) -> void:
 
 
 func process(_delta: float) -> void:
-	push_warning("Controller.process() not implemented")
+	push_error(name, " does not override process!")

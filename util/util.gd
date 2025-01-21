@@ -6,14 +6,14 @@ extends Object
 static func require_child(parent: Node, type: Variant) -> Node:
 	var node: Node = find_child(parent, type)
 	if node == null:
-		push_error("Required child not found")
+		push_error(parent.get_path(), " requires child ", type)
 	return node
 
 
 static func require_sibling(node: Node, type: Variant) -> Node:
 	var sibling: Node = find_sibling(node, type)
 	if sibling == null:
-		push_error("Required sibling not found")
+		push_error(node.get_path(), " requires sibling ", type)
 	return sibling
 
 

@@ -16,5 +16,5 @@ func init(scene_manager: SceneManager) -> void:
 
 
 func get_active_controller() -> PlayerController:
-	push_error("implement get_active_controller() in derived class")
+	push_error(name, " does not override get_active_controller!")
 	return null
