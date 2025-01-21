@@ -8,7 +8,7 @@ extends Node
 @export var success_triggers: Array[Trigger]
 
 
-func hack(interactor: Node) -> Result:
+func hack(interactor: RobotCharacter) -> Result:
 	var result = Result.new()
 
 	if not interactor.can_do(RobotCharacter.Abilities.HACK):

@@ -27,6 +27,10 @@ func process(delta: float) -> void:
 	current_robot.act(action)
 
 
+func control_robot(robot: RobotCharacter) -> void:
+	current_robot = robot
+
+
 func _build_action_from_inputs() -> RobotCharacter.Action:
 	var action: RobotCharacter.Action = RobotCharacter.Action.new()
 	action.movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")

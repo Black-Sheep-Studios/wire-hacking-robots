@@ -3,7 +3,7 @@ class_name Interaction
 extends Node
 
 
-func interact(_interactor: Node) -> void:
+func interact(_interactor: RobotCharacter) -> void:
 	push_error("Interaction.interact() called; must be overridden in derived class")
 
 
