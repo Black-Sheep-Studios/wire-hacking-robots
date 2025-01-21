@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://5sibujrnogmh"]
+
+[ext_resource type="Texture2D" uid="uid://mp6327r0moqh" path="res://assets/graphics/AND.png" id="1_g1bg3"]
+[ext_resource type="Script" path="res://game/and_gate.gd" id="1_jf48q"]
+
+[node name="AndGate" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_g1bg3")
+script = ExtResource("1_jf48q")

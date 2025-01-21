@@ -1,11 +1,16 @@
+class_name Component
 extends Sprite2D
 
+signal output_changed
+
+@export var inputs: Array[Component]
+
+var output : bool = false
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _ready() -> void:
+	for i in inputs:
+		i.output_changed.connect(_eval_logic)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _eval_logic() -> void:
 	pass

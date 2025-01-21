@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ce7vb6mxloa4k"]
+
+[ext_resource type="Script" path="res://game/wire.gd" id="1_onsib"]
+[ext_resource type="Texture2D" uid="uid://co2bfytab3wrl" path="res://assets/graphics/wire.png" id="1_xv650"]
+
+[node name="Wire" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_xv650")
+script = ExtResource("1_onsib")
