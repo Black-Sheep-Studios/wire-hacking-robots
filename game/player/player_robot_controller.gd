@@ -6,9 +6,9 @@ extends PlayerController
 @export var _pause_menu_scene: PackedScene
 @export var current_robot: RobotCharacter
 
-const attack: String = "primary_action"
-const interact: String = "secondary_action"
-const hack: String = "tertiary_action"
+const attack_key: String = "primary_action"
+const interact_key: String = "secondary_action"
+const hack_key: String = "tertiary_action"
 
 func process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
@@ -18,46 +18,46 @@ func process(delta: float) -> void:
 
 	if !current_robot: return
 
+	var aim_target: Node2D = _get_aim_target()
+	if aim_target: _process_aim_target_inputs(aim_target, delta)
+
 	var action: RobotCharacter.Action = _build_action_from_inputs()
 	action.delta = delta
 
-	var action_result: RobotCharacter.ActionResult = current_robot.act(action)
-
-	_process_action_result(action_result)
+	current_robot.act(action)
 
 
 func _build_action_from_inputs() -> RobotCharacter.Action:
 	var action: RobotCharacter.Action = RobotCharacter.Action.new()
 	action.movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	if Input.is_action_just_pressed(attack):
+	if Input.is_action_just_pressed(attack_key):
 		action.attack = true
-	if Input.is_action_just_pressed(interact):
-		action.interact_target = _get_interact_target()
-	if Input.is_action_just_pressed(hack):
-		action.hack = true
 
 	action.aim_direction = (current_robot.get_global_mouse_position() - current_robot.global_position).normalized()
 	
 	return action
 
 
-func _process_action_result(action_result: RobotCharacter.ActionResult) -> void:
-	if action_result.interact_result:
-		_process_interact_result(action_result.interact_result)
+func _process_aim_target_inputs(aim_target: Node2D, _delta: float) -> void:
+	if Input.is_action_just_pressed(interact_key):
+		var interaction_target: Interaction = Util.find_child(aim_target, Interaction)
+		if interaction_target: _process_interaction(interaction_target)
+	elif Input.is_action_just_pressed(hack_key):
+		var hack_target: Hack = Util.find_child(aim_target, Hack)
+		if hack_target: _process_hack(hack_target)
 
 
-func _process_interact_result(interact_result: Interaction.Result) -> void:
-	if interact_result.hack:
-		_scene_manager.set_active_scene(interact_result.hack, true)
+func _process_interaction(interaction_target: Interaction) -> void:
+	interaction_target.interact(current_robot)
 
 
-func _get_interact_target() -> Interaction:
-	var current_aimed_object: Object = current_robot.aim_raycast.get_collider()
-	if !current_aimed_object: return null
+func _process_hack(hack_target: Hack) -> void:
+	var result: Hack.Result = hack_target.hack(current_robot)
+	if result.hack_scene:
+		_scene_manager.set_active_scene(result.hack_scene, true)
 
-	var interaction: Interaction = Util.find_child(current_aimed_object, Interaction)
-	if interaction:
-		return interaction
 
-	return null
+func _get_aim_target() -> Node2D:
+	return current_robot.aim_raycast.get_collider()
+

@@ -35,38 +35,21 @@ func _process(_delta: float) -> void:
 	pass
 
 
-func act(action: Action) -> ActionResult:
-	var result: ActionResult = ActionResult.new()
-
+func act(action: Action) -> void:
 	movement_direction = action.movement_direction
 	target_velocity = movement_direction * _stats.move_speed
 
-	if action.interact_target: 
-		result.interact_result = _interact(action.interact_target)
-	
 	aim_direction = action.aim_direction
 	if aim_direction != Vector2.ZERO:
 		aim_raycast.rotation = aim_direction.angle()
-	
-	return result
 
 
 func can_do(ability: Abilities) -> bool:
 	return _abilities.has(ability)
 
 
-func _interact(target: Interaction) -> Interaction.Result:
-	return target.interact(self)
-
-
 class Action:
 	var delta: float
 	var movement_direction: Vector2
 	var aim_direction: Vector2
-	var interact_target: Interaction
 	var attack: bool
-	var hack: bool
-
-
-class ActionResult:
-	var interact_result: Interaction.Result
