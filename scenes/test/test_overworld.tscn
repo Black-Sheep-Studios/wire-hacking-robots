@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=27 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player_robot_camera.gd" id="2_5vywi"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
 [ext_resource type="Script" path="res://game/entities/hack.gd" id="11_0mbbn"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
+[ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ax7ll"]
 texture = ExtResource("13_hvl28")
@@ -153,9 +154,14 @@ animation = &"open"
 shape = SubResource("RectangleShape2D_im05h")
 
 [node name="Robot" parent="." instance=ExtResource("2_c2yuc")]
-position = Vector2(271, -83)
+position = Vector2(614, 212)
 _stats = SubResource("Resource_lx4jl")
+_abilities = Array[int]([1, 0])
 
-[node name="Hack" type="Node" parent="Robot"]
+[node name="Hack" type="Node" parent="Robot" node_paths=PackedStringArray("success_triggers")]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("9_3afsu")
+success_triggers = [NodePath("../OverrideTrigger")]
+
+[node name="OverrideTrigger" type="Node" parent="Robot"]
+script = ExtResource("14_gn8n4")

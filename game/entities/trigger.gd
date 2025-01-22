@@ -4,5 +4,5 @@ extends Node
 
 signal activated
 
-func activate() -> void:
+func activate(_interactor: Node = null) -> void:
 	activated.emit()

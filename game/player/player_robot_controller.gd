@@ -57,7 +57,7 @@ func _process_interaction(interaction_target: Interaction) -> void:
 
 
 func _process_hack(hack_target: Hack) -> void:
-	var result: Hack.Result = hack_target.hack(current_robot)
+	var result: Hack.Result = hack_target.hack(self)
 	if result.hack_scene:
 		_scene_manager.set_active_scene(result.hack_scene, true)
 
