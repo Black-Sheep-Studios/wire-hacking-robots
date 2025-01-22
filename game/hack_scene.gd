@@ -6,11 +6,7 @@ signal hack_succeeded
 signal hack_failed
 signal hack_cancelled
 
-var _player_hack_controller: PlayerHackController
-
-
-func _ready() -> void:
-	_player_hack_controller = Util.require_child(self, PlayerHackController)
+@onready var _player_hack_controller: PlayerHackController = Util.require_child(self, PlayerHackController)
 
 
 func _on_fail() -> void:

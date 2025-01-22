@@ -10,6 +10,7 @@ const attack_key: String = "primary_action"
 const interact_key: String = "secondary_action"
 const hack_key: String = "tertiary_action"
 
+
 func process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		var pause_scene: Scene = _pause_menu_scene.instantiate()
