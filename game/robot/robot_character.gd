@@ -16,10 +16,12 @@ var aim_direction: Vector2
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var aim_raycast: RayCast2D = $AimRaycast
+@onready var weapon: Weapon
 
 
 func _ready() -> void:
 	aim_raycast.add_exception(self)
+	weapon = Util.find_child(self, Weapon)
 
 
 func _process(_delta: float) -> void:
@@ -42,6 +44,9 @@ func act(action: Action) -> void:
 	aim_direction = action.aim_direction
 	if aim_direction != Vector2.ZERO:
 		aim_raycast.rotation = aim_direction.angle()
+	
+	if action.attack and weapon:
+		weapon.fire(aim_direction)
 
 
 func can_do(ability: Abilities) -> bool:
