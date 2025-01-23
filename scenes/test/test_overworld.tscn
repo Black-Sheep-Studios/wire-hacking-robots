@@ -1,7 +1,7 @@
-[gd_scene load_steps=27 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=29 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
-[ext_resource type="Script" path="res://game/player_robot_camera.gd" id="2_5vywi"]
+[ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
 [ext_resource type="PackedScene" uid="uid://b7cp1skj4hd34" path="res://game/robot/robot.tscn" id="2_c2yuc"]
 [ext_resource type="Script" path="res://game/player/player_robot_controller.gd" id="2_ssp5s"]
 [ext_resource type="PackedScene" uid="uid://56osf625muiq" path="res://scenes/pause_menu.tscn" id="3_h8k3s"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://game/world/door.gd" id="5_871bv"]
 [ext_resource type="Script" path="res://game/world/trigger.gd" id="6_h3vra"]
 [ext_resource type="Script" path="res://game/world/interactions/open_interaction.gd" id="6_lyq78"]
+[ext_resource type="Texture2D" uid="uid://csdokh62dff2s" path="res://assets/graphics/crosshair.png" id="6_pftn8"]
+[ext_resource type="Script" path="res://game/player/cursor.gd" id="7_r5e4h"]
 [ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/test_hack_scene.tscn" id="9_3afsu"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
 [ext_resource type="Script" path="res://game/world/hack.gd" id="11_0mbbn"]
@@ -94,6 +96,12 @@ metadata/_edit_lock_ = true
 script = ExtResource("2_ssp5s")
 _pause_menu_scene = ExtResource("3_h8k3s")
 current_robot = NodePath("../TestPlayerRobot")
+
+[node name="Cursor" type="Sprite2D" parent="PlayerRobotController"]
+visible = false
+texture_filter = 1
+texture = ExtResource("6_pftn8")
+script = ExtResource("7_r5e4h")
 
 [node name="TestPlayerRobot" parent="." instance=ExtResource("2_c2yuc")]
 position = Vector2(609, 343)

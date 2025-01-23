@@ -46,6 +46,9 @@ func set_active_scene(scene: Scene, pause: bool = false, replace: bool = false) 
 	if replace: _free_scenes()
 
 	if pause:
+		var active_scene: Scene = get_active_scene()
+		if active_scene:
+			active_scene.on_pause()
 		TimeDilation.slow_time()
 
 	add_child(scene)
@@ -65,6 +68,7 @@ func pop_scene() -> void:
 	var new_active_scene: Scene = get_active_scene()
 	# TODO: this might not always be true, but it's a good assumption for now
 	TimeDilation.unslow_time()
+	new_active_scene.on_resume()
 	scene_changed.emit(new_active_scene)
 
 

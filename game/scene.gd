@@ -15,6 +15,14 @@ func init(scene_manager: SceneManager) -> void:
 	_scene_manager = scene_manager
 
 
+func on_pause() -> void:
+	pass
+
+
+func on_resume() -> void:
+	pass
+
+
 func get_active_controller() -> PlayerController:
 	push_error(name, " does not override get_active_controller!")
 	return null

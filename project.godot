@@ -23,6 +23,8 @@ TimeDilation="*res://game/time_dilation_manager.gd"
 window/size/viewport_width=1200
 window/size/viewport_height=600
 window/size/initial_screen=1
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [input]
 

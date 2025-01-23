@@ -10,8 +10,16 @@ const attack_key: String = "primary_action"
 const interact_key: String = "secondary_action"
 const hack_key: String = "tertiary_action"
 
+@onready var cursor: Cursor = Util.require_child(self, Cursor)
+
+
+func _ready() -> void:
+	_replace_mouse_cursor()
+
 
 func process(delta: float) -> void:
+	cursor.global_position = get_viewport().get_mouse_position()
+
 	if Input.is_action_just_pressed("menu"):
 		var pause_scene: Scene = _pause_menu_scene.instantiate()
 		_scene_manager.set_active_scene(pause_scene, true)
@@ -30,6 +38,24 @@ func process(delta: float) -> void:
 
 func control_robot(robot: RobotCharacter) -> void:
 	current_robot = robot
+
+
+func on_pause() -> void:
+	_restore_mouse_cursor()
+
+
+func on_resume() -> void:
+	_replace_mouse_cursor()
+
+
+func _replace_mouse_cursor() -> void:
+	cursor.set_visible(true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+
+
+func _restore_mouse_cursor() -> void:
+	cursor.set_visible(false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 
 func _build_action_from_inputs() -> RobotCharacter.Action:
