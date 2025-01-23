@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dhukyh0heob0b"]
 
 [ext_resource type="Texture2D" uid="uid://dh16vltlqdp8b" path="res://assets/graphics/XOR.png" id="1_4qw3s"]
-[ext_resource type="Script" path="res://game/components/xor_gate.gd" id="1_riju4"]
+[ext_resource type="Script" path="res://game/hack/components/xor_gate.gd" id="1_riju4"]
 
 [node name="XOrGate" type="Sprite2D"]
 texture_filter = 1

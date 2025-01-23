@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bq0r6dpjumyjn"]
 
-[ext_resource type="Script" path="res://game/components/logic_in.gd" id="1_lk6hf"]
+[ext_resource type="Script" path="res://game/hack/components/logic_in.gd" id="1_lk6hf"]
 
 [node name="LogicIn" type="Sprite2D"]
 script = ExtResource("1_lk6hf")
