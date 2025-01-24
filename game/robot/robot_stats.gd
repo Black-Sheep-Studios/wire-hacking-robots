@@ -7,9 +7,9 @@ extends Resource
 @export var weaknesses: Array[Weapon.DamageType]
 @export var resistances: Array[Weapon.DamageType]
 
-@export var abilities: Array[RobotCharacter.Abilities]
+@export var abilities: Array[RobotCharacter.Abilities] = [RobotCharacter.Abilities.HACK]
 
 @export var move_sound: AudioStream
 @export var sprite: SpriteFrames
-@export var collider_radius: float
-@export var interact_reach_distance: float
+@export var collider_radius: float = 15
+@export var interact_reach_distance: float = 25

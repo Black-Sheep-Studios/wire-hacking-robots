@@ -5,7 +5,7 @@ extends Node
 
 @export var normal_time_scale: float = 1.0
 @export var slow_time_scale: float = 0.1
-@export var time_transition_factor: float = 0.2
+@export var time_transition_factor: float = 0.1
 
 var time_scale: float = normal_time_scale
 var target_time_scale: float = normal_time_scale

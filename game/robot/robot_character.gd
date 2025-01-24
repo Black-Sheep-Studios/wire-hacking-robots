@@ -20,7 +20,7 @@ var aim_direction: Vector2
 @onready var collider: CollisionShape2D = _build_collider()
 @onready var aim_raycast: RayCast2D = _build_interact_raycast()
 @onready var weapon: Weapon = Util.find_child(self, Weapon)
-@onready var move_sound: AudioStreamPlayer2D = Util.attach_sound_player(self, _stats.move_sound)
+@onready var move_sound: MovementSound = MovementSound.attach(self, VariablePitchSound.from_stream(_stats.move_sound))
 
 
 func _ready() -> void:
@@ -41,10 +41,8 @@ func _process(_delta: float) -> void:
 		sprite.flip_h = aim_direction.x < 0
 
 	if movement_direction.length() > 0:
-		move_sound.play()
 		sprite.play("move")
 	else:
-		move_sound.stop()
 		sprite.play("idle")
 
 	pass
@@ -84,7 +82,11 @@ func _build_collider() -> CollisionShape2D:
 	add_child(new_collider)
 
 	set_collision_layer_value(Constants.CollisionLayers.MOVEMENT, true)
+	set_collision_mask_value(Constants.CollisionLayers.MOVEMENT, true)
 	set_collision_layer_value(Constants.CollisionLayers.INTERACTION, false)
+	set_collision_mask_value(Constants.CollisionLayers.INTERACTION, false)
+	set_collision_layer_value(Constants.CollisionLayers.BULLET, true)
+	set_collision_mask_value(Constants.CollisionLayers.BULLET, false)
 
 	return new_collider
 

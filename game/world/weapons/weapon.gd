@@ -10,7 +10,7 @@ enum DamageType {
 @onready var shooter: Node2D = get_parent()
 @onready var container: Scene = Util.require_parent(self, Scene)
 @onready var _delay_timer: Timer = Util.attach_one_shot_timer(self, stats.fire_delay_seconds, _end_cooldown)
-@onready var _fire_sound: AudioStreamPlayer2D = Util.attach_sound_player(shooter, stats.fire_sound)
+@onready var _fire_sound: AudioStreamPlayer2D = VariablePitchSound.attach(shooter, stats.fire_sound)
 
 @export var stats: WeaponStats
 

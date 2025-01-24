@@ -20,7 +20,12 @@ func _ready() -> void:
 
 
 func init() -> void:
+	set_collision_layer_value(Constants.CollisionLayers.MOVEMENT, false)
+	set_collision_mask_value(Constants.CollisionLayers.MOVEMENT, false)
 	set_collision_layer_value(Constants.CollisionLayers.INTERACTION, true)
+	set_collision_mask_value(Constants.CollisionLayers.INTERACTION, false)
+	set_collision_layer_value(Constants.CollisionLayers.BULLET, false)
+	set_collision_mask_value(Constants.CollisionLayers.BULLET, false)
 	_collider = _duplicate_parent_collider()
 
 

@@ -46,17 +46,20 @@ static func find_parent(node: Node, type: Variant) -> Node:
 	return null
 
 
+static func attach(node: Node, child: Node) -> Node:
+	node.add_child.call_deferred(child)
+	return child
+
+
 static func attach_sound_player(node: Node, sound: AudioStream) -> VariablePitchSound:
 	var player: VariablePitchSound = VariablePitchSound.new()
 	player.stream = sound
-	node.add_child.call_deferred(player)
-	return player
+	return attach(node, player)
 
 
 static func attach_one_shot_timer(node: Node, delay: float = 1.0, timeout: Callable = null_lambda) -> Timer:
 	var timer: Timer = one_shot_timer(delay, timeout)
-	node.add_child.call_deferred(timer)
-	return timer
+	return attach(node, timer)
 
 
 static func one_shot_timer(delay: float = 1.0, timeout: Callable = null_lambda) -> Timer:
