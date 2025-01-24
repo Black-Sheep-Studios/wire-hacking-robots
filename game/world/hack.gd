@@ -9,15 +9,19 @@ extends StaticBody2D
 @export var one_time: bool = false
 @export var retry_on_failure: bool = true
 
-@onready var parent_object: Node = get_parent()
-@onready var collider: CollisionShape2D = _duplicate_parent_collider()
-
-
-const interaction_collision_layer: int = 2
+var _collider: CollisionShape2D
 
 
 func _ready() -> void:
-	set_collision_layer_value(interaction_collision_layer, true)
+	# if this is attached to a robot, it needs to late init after the robot
+	# has created a collider
+	if get_parent() is not RobotCharacter:
+		init()
+
+
+func init() -> void:
+	set_collision_layer_value(Constants.CollisionLayers.INTERACTION, true)
+	_collider = _duplicate_parent_collider()
 
 
 func hack(player_controller: PlayerRobotController) -> Result:
@@ -53,7 +57,7 @@ func _on_failure(player_controller: PlayerRobotController) -> void:
 
 
 func _duplicate_parent_collider() -> CollisionShape2D:
-	var parent_collider: CollisionShape2D = Util.require_child(parent_object, CollisionShape2D)
+	var parent_collider: CollisionShape2D = Util.require_child(get_parent(), CollisionShape2D)
 	var new_collider: CollisionShape2D = parent_collider.duplicate()
 	add_child.call_deferred(new_collider)
 	return new_collider

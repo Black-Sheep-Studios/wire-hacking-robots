@@ -1,5 +1,4 @@
 class_name MovementObject
-
 extends CharacterBody2D
 
 ## MovementObject is a base class for all objects that can move.

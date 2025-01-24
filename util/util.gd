@@ -1,7 +1,5 @@
 class_name Util
 
-extends Object
-
 
 static var null_lambda: Callable = func() -> void: pass
 

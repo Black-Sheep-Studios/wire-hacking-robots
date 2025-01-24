@@ -15,7 +15,11 @@ enum DamageType {
 @export var stats: WeaponStats
 
 var cooldown: bool = false
-@onready var safe_spawn_distance: float = _calculate_safe_spawn_distance()
+var _safe_spawn_distance: float
+
+
+func init() -> void:
+	_safe_spawn_distance = _calculate_safe_spawn_distance()
 
 
 func fire(direction: Vector2) -> void:
@@ -24,7 +28,7 @@ func fire(direction: Vector2) -> void:
 	var bullet = stats.bullet_scene.instantiate()
 
 	var initial_velocity = direction * stats.bullet_speed
-	var initial_position = shooter.global_position + direction.normalized() * safe_spawn_distance
+	var initial_position = shooter.global_position + direction.normalized() * _safe_spawn_distance
 	bullet.init(initial_position, initial_velocity, shooter, stats)
 
 	_fire_sound.play()
@@ -36,7 +40,9 @@ func fire(direction: Vector2) -> void:
 
 # TODO: this is a bit of a guess. Seems okay for now, but it might not work if the hitbox on the bullet is really big?
 func _calculate_safe_spawn_distance() -> float:
-	var collider: CollisionShape2D = Util.require_child(shooter, CollisionShape2D)
+	var collider: CollisionShape2D = Util.find_child(shooter, CollisionShape2D)
+	if not collider:
+		return 0
 	var shape_rect = collider.shape.get_rect()
 	var radius = shape_rect.size.length() / 2
 	return radius + 1

@@ -20,6 +20,6 @@ func _on_hit(collision: KinematicCollision2D) -> void:
 	var collider = collision.get_collider()
 
 	if collider.has_method("take_damage"):
-		collision.collider.take_damage(stats.damage, stats.damage_type)
+		collider.take_damage(stats.damage, stats.damage_type)
 	
 	queue_free()

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="RobotStats" load_steps=4 format=3 uid="uid://d0vi7hnn5i6qk"]
+
+[ext_resource type="AudioStream" uid="uid://cw606kawilco2" path="res://assets/sounds/roomba.mp3" id="1_lcjyx"]
+[ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="2_y4g3c"]
+[ext_resource type="SpriteFrames" uid="uid://dqo4br8tps0oc" path="res://assets/graphics/roomba_spritesheet.tres" id="3_256lq"]
+
+[resource]
+script = ExtResource("2_y4g3c")
+move_speed = 100
+hit_points = 10.0
+weaknesses = Array[int]([])
+resistances = Array[int]([])
+abilities = Array[int]([1, 0])
+move_sound = ExtResource("1_lcjyx")
+sprite = ExtResource("3_256lq")
+collider_radius = 12.0
+interact_reach_distance = 25.0
