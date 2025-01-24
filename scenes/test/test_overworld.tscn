@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://game/world/interactions/open_interaction.gd" id="6_lyq78"]
 [ext_resource type="Texture2D" uid="uid://csdokh62dff2s" path="res://assets/graphics/crosshair.png" id="6_pftn8"]
 [ext_resource type="Script" path="res://game/player/cursor.gd" id="7_r5e4h"]
-[ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/test_hack_scene.tscn" id="9_3afsu"]
+[ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/tutorial_hack_scene.tscn" id="9_3afsu"]
 [ext_resource type="AudioStream" uid="uid://cw606kawilco2" path="res://assets/sounds/roomba.mp3" id="9_45ngs"]
 [ext_resource type="Script" path="res://game/world/weapons/weapon.gd" id="10_d3rmm"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]

@@ -1,6 +1,7 @@
 class_name LogicIn
 extends Component
 
+
 @onready var TxtLabel = $InputText
 @onready var InButton = $InputButton
 
@@ -12,7 +13,7 @@ func _ready():
 
 
 func initialize_state() -> void:
-	output = initial_state
+	_set_output(initial_state)
 	state_initialized.emit()
 
 
@@ -33,5 +34,3 @@ func _update_text() -> void:
 
 func _evaluate_state() -> bool:
 	return output
-
-
