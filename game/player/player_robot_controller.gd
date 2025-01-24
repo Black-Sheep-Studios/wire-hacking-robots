@@ -24,7 +24,8 @@ func process(delta: float) -> void:
 		_skip_frame = false
 		return
 
-	cursor.global_position = get_viewport().get_mouse_position()
+	cursor.global_position = current_robot.get_global_mouse_position()
+	_restore_cursor_outside_window()
 
 	if Input.is_action_just_pressed("menu"):
 		var pause_scene: Scene = _pause_menu_scene.instantiate()
@@ -65,6 +66,14 @@ func _replace_mouse_cursor() -> void:
 func _restore_mouse_cursor() -> void:
 	cursor.set_visible(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+
+func _restore_cursor_outside_window() -> void:
+	if get_viewport().get_visible_rect().has_point(get_viewport().get_mouse_position()):
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 
 
 func _build_action_from_inputs() -> RobotCharacter.Action:
