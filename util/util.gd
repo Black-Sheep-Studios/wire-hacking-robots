@@ -53,11 +53,16 @@ static func attach_sound_player(node: Node, sound: AudioStream) -> VariablePitch
 
 
 static func attach_one_shot_timer(node: Node, delay: float, timeout: Callable) -> Timer:
+	var timer: Timer = one_shot_timer(delay, timeout)
+	node.add_child.call_deferred(timer)
+	return timer
+
+
+static func one_shot_timer(delay: float, timeout: Callable = func() -> void: pass) -> Timer:
 	var timer: Timer = Timer.new()
 	timer.one_shot = true
 	timer.wait_time = delay
 	timer.timeout.connect(timeout)
-	node.add_child.call_deferred(timer)
 	return timer
 
 
