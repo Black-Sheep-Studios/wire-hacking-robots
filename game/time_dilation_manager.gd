@@ -10,8 +10,6 @@ extends Node
 var time_scale: float = normal_time_scale
 var target_time_scale: float = normal_time_scale
 
-@onready var _dilation_timer: Timer = Util.attach_one_shot_timer(self, 0.0, unslow_time)
-
 
 func _process(_delta: float) -> void:
 	if time_scale != target_time_scale:
@@ -20,11 +18,6 @@ func _process(_delta: float) -> void:
 
 func get_time_scale() -> float:
 	return time_scale
-
-
-func slow_time_for(duration: float) -> void:
-	slow_time()
-	_dilation_timer.start(duration)
 
 
 func slow_time() -> void:
