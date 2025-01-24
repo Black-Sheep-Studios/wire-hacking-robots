@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=35 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
@@ -17,8 +17,10 @@
 [ext_resource type="Script" path="res://game/world/hack.gd" id="11_0mbbn"]
 [ext_resource type="PackedScene" uid="uid://bk8r62r6huwgf" path="res://scenes/test/test_bullet_scene.tscn" id="11_232ms"]
 [ext_resource type="Script" path="res://game/world/weapons/weapon_stats.gd" id="12_sf1an"]
+[ext_resource type="AudioStream" uid="uid://g5h3yaek10gs" path="res://assets/sounds/kinetic.wav" id="12_uy21r"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
 [ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
+[ext_resource type="AudioStream" uid="uid://bbepisos6fv1" path="res://assets/sounds/door.wav" id="15_bounm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ax7ll"]
 texture = ExtResource("13_hvl28")
@@ -44,6 +46,7 @@ fire_delay_seconds = 0.5
 damage = 10
 damage_type = 0
 bullet_scene = ExtResource("11_232ms")
+fire_sound = ExtResource("12_uy21r")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpd48"]
 atlas = ExtResource("13_hvl28")
@@ -133,6 +136,7 @@ collision_layer = 7
 collision_mask = 0
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
+open_sound = ExtResource("15_bounm")
 metadata/_edit_group_ = true
 
 [node name="OpenInteraction" type="Node" parent="Door" node_paths=PackedStringArray("target")]
@@ -173,6 +177,7 @@ collision_layer = 7
 collision_mask = 0
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
+open_sound = ExtResource("15_bounm")
 metadata/_edit_group_ = true
 
 [node name="OpenTrigger" type="Node" parent="LockedDoor"]

@@ -7,6 +7,9 @@ extends Node2D
 @onready var movement_collider: CollisionShape2D = $MovementCollider
 @export var open_trigger: Trigger
 
+@export var open_sound: AudioStreamWAV
+@onready var _open_sound_player: AudioStreamPlayer2D = _init_open_sound_player()
+
 var is_open: bool = false
 
 
@@ -25,6 +28,7 @@ func open() -> void:
 	if is_open:
 		return
 
+	_open_sound_player.play()
 	sprite.play("open")
 	movement_collider.disabled = true
 
@@ -35,3 +39,10 @@ func close() -> void:
 
 	sprite.play_backwards("open")
 	movement_collider.disabled = false
+
+
+func _init_open_sound_player() -> AudioStreamPlayer2D:
+	_open_sound_player = AudioStreamPlayer2D.new()
+	_open_sound_player.stream = open_sound
+	add_child.call_deferred(_open_sound_player)
+	return _open_sound_player
