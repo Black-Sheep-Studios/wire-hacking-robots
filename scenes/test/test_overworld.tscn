@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=36 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
@@ -11,14 +11,19 @@
 [ext_resource type="Texture2D" uid="uid://csdokh62dff2s" path="res://assets/graphics/crosshair.png" id="6_pftn8"]
 [ext_resource type="Script" path="res://game/player/cursor.gd" id="7_r5e4h"]
 [ext_resource type="PackedScene" path="res://scenes/test/tutorial_hack_scene.tscn" id="9_3afsu"]
+[ext_resource type="Script" path="res://game/world/weapons/weapon.gd" id="10_d3rmm"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
 [ext_resource type="Script" path="res://game/world/hack.gd" id="11_0mbbn"]
+[ext_resource type="PackedScene" uid="uid://bk8r62r6huwgf" path="res://scenes/test/test_bullet_scene.tscn" id="11_232ms"]
+[ext_resource type="Script" path="res://game/world/weapons/weapon_stats.gd" id="12_sf1an"]
+[ext_resource type="AudioStream" uid="uid://g5h3yaek10gs" path="res://assets/sounds/kinetic.wav" id="12_uy21r"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
 [ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
 [ext_resource type="AudioStream" uid="uid://bbepisos6fv1" path="res://assets/sounds/door.wav" id="15_bounm"]
 [ext_resource type="Script" path="res://game/robot/robot_character.gd" id="15_xp0nl"]
 [ext_resource type="Resource" uid="uid://cdw0u0do5rqcy" path="res://assets/robot_stats/roomba.tres" id="16_71f40"]
 [ext_resource type="Resource" uid="uid://dtyfknspkowob" path="res://assets/robot_stats/cleaner_bot.tres" id="18_ncvcj"]
+[ext_resource type="Resource" uid="uid://cm13fw1hfhos8" path="res://assets/robot_stats/light_security_bot.tres" id="20_y78se"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_peu7m"]
 texture = ExtResource("4_7625h")
@@ -349,6 +354,15 @@ size = Vector2(95, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im05h"]
 size = Vector2(128, 16)
 
+[sub_resource type="Resource" id="Resource_qfanf"]
+script = ExtResource("12_sf1an")
+bullet_speed = 300.0
+fire_delay_seconds = 0.5
+damage = 10
+damage_type = 0
+bullet_scene = ExtResource("11_232ms")
+fire_sound = ExtResource("12_uy21r")
+
 [node name="TestOverworld" type="Node2D"]
 script = ExtResource("1_eur80")
 
@@ -463,3 +477,20 @@ success_triggers = [NodePath("../OverrideTrigger")]
 
 [node name="OverrideTrigger" type="Node" parent="CleanerBot"]
 script = ExtResource("14_gn8n4")
+
+[node name="LightSecurityBot" type="CharacterBody2D" parent="."]
+position = Vector2(120, -24)
+script = ExtResource("15_xp0nl")
+_stats = ExtResource("20_y78se")
+
+[node name="Hack" type="StaticBody2D" parent="LightSecurityBot" node_paths=PackedStringArray("success_triggers")]
+script = ExtResource("11_0mbbn")
+hack_scene = ExtResource("9_3afsu")
+success_triggers = [NodePath("../OverrideTrigger")]
+
+[node name="OverrideTrigger" type="Node" parent="LightSecurityBot"]
+script = ExtResource("14_gn8n4")
+
+[node name="Weapon" type="Node" parent="LightSecurityBot"]
+script = ExtResource("10_d3rmm")
+stats = SubResource("Resource_qfanf")
