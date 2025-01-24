@@ -20,7 +20,7 @@ var aim_direction: Vector2
 @onready var collider: CollisionShape2D = _build_collider()
 @onready var aim_raycast: RayCast2D = _build_interact_raycast()
 @onready var weapon: Weapon = Util.find_child(self, Weapon)
-@onready var move_sound: MovementSound = MovementSound.attach(self, VariablePitchSound.from_stream(_stats.move_sound))
+@onready var move_sound: MovementSound = MovementSound.attach(self, VariablePitchSound.from_stream(_stats.move_sound), _stats.move_sound_type)
 
 
 func _ready() -> void:

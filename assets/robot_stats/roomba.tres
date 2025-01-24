@@ -12,6 +12,7 @@ weaknesses = Array[int]([])
 resistances = Array[int]([])
 abilities = Array[int]([1])
 move_sound = ExtResource("1_p0q24")
+move_sound_type = 0
 sprite = ExtResource("3_6rk88")
 collider_radius = 12.0
 interact_reach_distance = 25.0

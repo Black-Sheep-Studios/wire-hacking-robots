@@ -10,6 +10,7 @@ extends Resource
 @export var abilities: Array[RobotCharacter.Abilities] = [RobotCharacter.Abilities.HACK]
 
 @export var move_sound: AudioStream
+@export var move_sound_type: MovementSound.SoundType = MovementSound.SoundType.ONE_SHOT
 @export var sprite: SpriteFrames
 @export var collider_radius: float = 15
 @export var interact_reach_distance: float = 25
