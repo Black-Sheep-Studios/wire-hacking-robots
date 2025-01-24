@@ -6,6 +6,8 @@ extends StaticBody2D
 @export var hack_scene: PackedScene
 @export var fail_triggers: Array[Trigger]
 @export var success_triggers: Array[Trigger]
+@export var one_time: bool = false
+@export var retry_on_failure: bool = true
 
 @onready var parent_object: Node = get_parent()
 @onready var collider: CollisionShape2D = _duplicate_parent_collider()
@@ -27,8 +29,14 @@ func hack(player_controller: PlayerRobotController) -> Result:
 	var hack_scene_instance: HackScene = hack_scene.instantiate()
 	hack_scene_instance.hack_succeeded.connect(func() -> void:
 		_on_success(player_controller)
+		if one_time:
+			queue_free()
 	)
-	hack_scene_instance.hack_failed.connect(_on_failure)
+	hack_scene_instance.hack_failed.connect(func() -> void:
+		_on_failure(player_controller)
+		if one_time or not retry_on_failure:
+			queue_free()
+	)
 	
 	result.hack_scene = hack_scene_instance
 	return result

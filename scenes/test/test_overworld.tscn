@@ -169,6 +169,7 @@ collision_mask = 0
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("9_3afsu")
 success_triggers = [NodePath("../../LockedDoor/OpenTrigger")]
+one_time = true
 
 [node name="MovementCollider" type="CollisionShape2D" parent="Computer"]
 position = Vector2(-0.5, -7)
