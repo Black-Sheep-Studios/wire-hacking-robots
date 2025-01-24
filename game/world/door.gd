@@ -8,7 +8,7 @@ extends Node2D
 @export var open_trigger: Trigger
 
 @export var open_sound: AudioStream
-@onready var _open_sound_player: AudioStreamPlayer2D = _init_open_sound_player()
+@onready var _open_sound_player: AudioStreamPlayer2D = Util.attach_sound_player(self, open_sound)
 
 var is_open: bool = false
 
@@ -39,10 +39,3 @@ func close() -> void:
 
 	sprite.play_backwards("open")
 	movement_collider.disabled = false
-
-
-func _init_open_sound_player() -> AudioStreamPlayer2D:
-	_open_sound_player = VariablePitchSound.new()
-	_open_sound_player.stream = open_sound
-	add_child.call_deferred(_open_sound_player)
-	return _open_sound_player

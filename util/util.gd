@@ -3,6 +3,9 @@ class_name Util
 extends Object
 
 
+static var null_lambda: Callable = func() -> void: pass
+
+
 static func require_child(parent: Node, type: Variant) -> Node:
 	var node: Node = find_child(parent, type)
 	if node == null:
@@ -43,6 +46,28 @@ static func find_parent(node: Node, type: Variant) -> Node:
 			return parent
 		parent = parent.get_parent()
 	return null
+
+
+static func attach_sound_player(node: Node, sound: AudioStream) -> VariablePitchSound:
+	var player: VariablePitchSound = VariablePitchSound.new()
+	player.stream = sound
+	node.add_child.call_deferred(player)
+	return player
+
+
+static func attach_one_shot_timer(node: Node, delay: float = 1.0, timeout: Callable = null_lambda) -> Timer:
+	var timer: Timer = one_shot_timer(delay, timeout)
+	node.add_child.call_deferred(timer)
+	return timer
+
+
+static func one_shot_timer(delay: float = 1.0, timeout: Callable = null_lambda) -> Timer:
+	var timer: Timer = Timer.new()
+	timer.one_shot = true
+	timer.wait_time = delay
+	if timeout != null_lambda:
+		timer.timeout.connect(timeout)
+	return timer
 
 
 static func sort_by_distance_from(position: Vector2, nodes: Array[Node2D]) -> Array[Node2D]:
