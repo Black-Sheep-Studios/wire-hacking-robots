@@ -45,7 +45,7 @@ func _init_delay_timer() -> Timer:
 
 
 func _init_audio_player() -> AudioStreamPlayer2D:
-	_fire_sound= AudioStreamPlayer2D.new()
+	_fire_sound= VariablePitchSound.new()
 	_fire_sound.stream = stats.fire_sound
 	shooter.add_child.call_deferred(_fire_sound)
 	return _fire_sound

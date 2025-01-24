@@ -42,7 +42,7 @@ func close() -> void:
 
 
 func _init_open_sound_player() -> AudioStreamPlayer2D:
-	_open_sound_player = AudioStreamPlayer2D.new()
+	_open_sound_player = VariablePitchSound.new()
 	_open_sound_player.stream = open_sound
 	add_child.call_deferred(_open_sound_player)
 	return _open_sound_player

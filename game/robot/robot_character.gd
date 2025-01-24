@@ -57,7 +57,7 @@ func can_do(ability: Abilities) -> bool:
 
 
 func _init_move_sound() -> AudioStreamPlayer2D:
-	_move_sound = AudioStreamPlayer2D.new()
+	_move_sound = VariablePitchSound.new()
 	_move_sound.stream = _stats.move_sound
 	add_child.call_deferred(_move_sound)
 	return _move_sound
