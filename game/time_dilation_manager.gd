@@ -10,14 +10,7 @@ extends Node
 var time_scale: float = normal_time_scale
 var target_time_scale: float = normal_time_scale
 
-var _dilation_timer: Timer
-
-
-func _ready() -> void:
-	_dilation_timer = Timer.new()
-	_dilation_timer.one_shot = true
-	_dilation_timer.timeout.connect(unslow_time)
-	add_child(_dilation_timer)
+@onready var _dilation_timer: Timer = Util.attach_one_shot_timer(self, 0.0, unslow_time)
 
 
 func _process(_delta: float) -> void:

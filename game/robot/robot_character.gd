@@ -17,7 +17,7 @@ var aim_direction: Vector2
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var aim_raycast: RayCast2D = $AimRaycast
 @onready var weapon: Weapon
-@onready var _move_sound: AudioStreamPlayer2D = _init_move_sound()
+@onready var _move_sound: AudioStreamPlayer2D = Util.attach_sound_player(self, _stats.move_sound)
 
 
 func _ready() -> void:
@@ -54,13 +54,6 @@ func act(action: Action) -> void:
 
 func can_do(ability: Abilities) -> bool:
 	return _abilities.has(ability)
-
-
-func _init_move_sound() -> AudioStreamPlayer2D:
-	_move_sound = VariablePitchSound.new()
-	_move_sound.stream = _stats.move_sound
-	add_child.call_deferred(_move_sound)
-	return _move_sound
 
 
 class Action:

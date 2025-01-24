@@ -9,11 +9,11 @@ enum DamageType {
 
 @onready var shooter: Node2D = get_parent()
 @onready var container: Scene = Util.require_parent(self, Scene)
+@onready var _delay_timer: Timer = Util.attach_one_shot_timer(self, stats.fire_delay_seconds, _end_cooldown)
+@onready var _fire_sound: AudioStreamPlayer2D = Util.attach_sound_player(shooter, stats.fire_sound)
 
 @export var stats: WeaponStats
 
-@onready var _delay_timer: Timer = _init_delay_timer()
-@onready var _fire_sound: AudioStreamPlayer2D = _init_audio_player()
 var cooldown: bool = false
 
 
@@ -33,19 +33,5 @@ func fire(direction: Vector2) -> void:
 	_delay_timer.start()
 
 
-func _init_delay_timer() -> Timer:
-	_delay_timer = Timer.new()
-	_delay_timer.set_wait_time(stats.fire_delay_seconds)
-	_delay_timer.set_one_shot(true)
-	_delay_timer.timeout.connect(func() -> void: 
-		cooldown = false
-	)
-	add_child.call_deferred(_delay_timer)
-	return _delay_timer
-
-
-func _init_audio_player() -> AudioStreamPlayer2D:
-	_fire_sound= VariablePitchSound.new()
-	_fire_sound.stream = stats.fire_sound
-	shooter.add_child.call_deferred(_fire_sound)
-	return _fire_sound
+func _end_cooldown() -> void:
+	cooldown = false

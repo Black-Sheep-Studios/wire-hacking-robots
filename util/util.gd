@@ -45,6 +45,22 @@ static func find_parent(node: Node, type: Variant) -> Node:
 	return null
 
 
+static func attach_sound_player(node: Node, sound: AudioStream) -> VariablePitchSound:
+	var player: VariablePitchSound = VariablePitchSound.new()
+	player.stream = sound
+	node.add_child.call_deferred(player)
+	return player
+
+
+static func attach_one_shot_timer(node: Node, delay: float, timeout: Callable) -> Timer:
+	var timer: Timer = Timer.new()
+	timer.one_shot = true
+	timer.wait_time = delay
+	timer.timeout.connect(timeout)
+	node.add_child.call_deferred(timer)
+	return timer
+
+
 static func sort_by_distance_from(position: Vector2, nodes: Array[Node2D]) -> Array[Node2D]:
 	var result: Array[Node2D] = nodes.duplicate()
 	result.sort_custom(func(a: Node2D, b: Node2D) -> bool:
