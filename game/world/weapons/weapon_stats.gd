@@ -6,4 +6,4 @@ extends Resource
 @export var damage: int
 @export var damage_type: Weapon.DamageType
 @export var bullet_scene: PackedScene
-@export var fire_sound: AudioStreamWAV
+@export var fire_sound: AudioStream

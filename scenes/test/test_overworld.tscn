@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=36 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://csdokh62dff2s" path="res://assets/graphics/crosshair.png" id="6_pftn8"]
 [ext_resource type="Script" path="res://game/player/cursor.gd" id="7_r5e4h"]
 [ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/test_hack_scene.tscn" id="9_3afsu"]
+[ext_resource type="AudioStream" uid="uid://cw606kawilco2" path="res://assets/sounds/roomba.mp3" id="9_45ngs"]
 [ext_resource type="Script" path="res://game/world/weapons/weapon.gd" id="10_d3rmm"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
 [ext_resource type="Script" path="res://game/world/hack.gd" id="11_0mbbn"]
@@ -38,6 +39,7 @@ sources/0 = SubResource("TileSetAtlasSource_ax7ll")
 [sub_resource type="Resource" id="Resource_1j45n"]
 script = ExtResource("4_fhs0o")
 move_speed = 100
+move_sound = ExtResource("9_45ngs")
 
 [sub_resource type="Resource" id="Resource_00dv5"]
 script = ExtResource("12_sf1an")

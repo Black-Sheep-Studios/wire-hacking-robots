@@ -7,7 +7,7 @@ extends Node2D
 @onready var movement_collider: CollisionShape2D = $MovementCollider
 @export var open_trigger: Trigger
 
-@export var open_sound: AudioStreamWAV
+@export var open_sound: AudioStream
 @onready var _open_sound_player: AudioStreamPlayer2D = _init_open_sound_player()
 
 var is_open: bool = false

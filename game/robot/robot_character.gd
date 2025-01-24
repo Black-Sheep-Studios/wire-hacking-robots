@@ -17,6 +17,7 @@ var aim_direction: Vector2
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var aim_raycast: RayCast2D = $AimRaycast
 @onready var weapon: Weapon
+@onready var _move_sound: AudioStreamPlayer2D = _init_move_sound()
 
 
 func _ready() -> void:
@@ -30,8 +31,10 @@ func _process(_delta: float) -> void:
 		sprite.flip_h = aim_direction.x < 0
 
 	if movement_direction.length() > 0:
+		_move_sound.play()
 		sprite.play("move")
 	else:
+		_move_sound.stop()
 		sprite.play("idle")
 
 	pass
@@ -51,6 +54,13 @@ func act(action: Action) -> void:
 
 func can_do(ability: Abilities) -> bool:
 	return _abilities.has(ability)
+
+
+func _init_move_sound() -> AudioStreamPlayer2D:
+	_move_sound = AudioStreamPlayer2D.new()
+	_move_sound.stream = _stats.move_sound
+	add_child.call_deferred(_move_sound)
+	return _move_sound
 
 
 class Action:
