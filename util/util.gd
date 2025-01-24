@@ -17,6 +17,13 @@ static func require_sibling(node: Node, type: Variant) -> Node:
 	return sibling
 
 
+static func require_parent(node: Node, type: Variant) -> Node:
+	var parent: Node = find_parent(node, type)
+	if parent == null:
+		push_error(node.get_path(), " requires parent ", type)
+	return parent
+
+
 static func find_child(parent: Node, type: Variant) -> Node:
 	var node: Node = (parent.get_children()
 	.filter(func(child: Node) -> bool: 
@@ -27,6 +34,15 @@ static func find_child(parent: Node, type: Variant) -> Node:
 
 static func find_sibling(node: Node, type: Variant) -> Node:
 	return find_child(node.get_parent(), type)
+
+
+static func find_parent(node: Node, type: Variant) -> Node:
+	var parent: Node = node.get_parent()
+	while parent != null:
+		if is_instance_of(parent, type):
+			return parent
+		parent = parent.get_parent()
+	return null
 
 
 static func sort_by_distance_from(position: Vector2, nodes: Array[Node2D]) -> Array[Node2D]:

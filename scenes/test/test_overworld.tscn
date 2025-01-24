@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=33 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
@@ -12,8 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://csdokh62dff2s" path="res://assets/graphics/crosshair.png" id="6_pftn8"]
 [ext_resource type="Script" path="res://game/player/cursor.gd" id="7_r5e4h"]
 [ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/test_hack_scene.tscn" id="9_3afsu"]
+[ext_resource type="Script" path="res://game/world/weapons/weapon.gd" id="10_d3rmm"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
 [ext_resource type="Script" path="res://game/world/hack.gd" id="11_0mbbn"]
+[ext_resource type="PackedScene" uid="uid://bk8r62r6huwgf" path="res://scenes/test/test_bullet_scene.tscn" id="11_232ms"]
+[ext_resource type="Script" path="res://game/world/weapons/weapon_stats.gd" id="12_sf1an"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
 [ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
 
@@ -21,15 +24,26 @@
 texture = ExtResource("13_hvl28")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 1:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_v7rpy"]
 tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 5
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_ax7ll")
 
 [sub_resource type="Resource" id="Resource_1j45n"]
 script = ExtResource("4_fhs0o")
 move_speed = 100
+
+[sub_resource type="Resource" id="Resource_00dv5"]
+script = ExtResource("12_sf1an")
+bullet_speed = 200.0
+fire_rate = 10.0
+damage = 10
+damage_type = 0
+bullet_scene = ExtResource("11_232ms")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpd48"]
 atlas = ExtResource("13_hvl28")
@@ -68,13 +82,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48kf8"]
-size = Vector2(128, 64)
+size = Vector2(128, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8f5p"]
 size = Vector2(95, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im05h"]
-size = Vector2(128, 64)
+size = Vector2(128, 16)
 
 [sub_resource type="Resource" id="Resource_lx4jl"]
 script = ExtResource("4_fhs0o")
@@ -108,9 +122,15 @@ position = Vector2(609, 343)
 _stats = SubResource("Resource_1j45n")
 _abilities = Array[int]([0, 1])
 
+[node name="Weapon" type="Node" parent="TestPlayerRobot"]
+script = ExtResource("10_d3rmm")
+stats = SubResource("Resource_00dv5")
+
 [node name="Door" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
 position = Vector2(480, 256)
 rotation = 1.5708
+collision_layer = 7
+collision_mask = 0
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
 metadata/_edit_group_ = true
@@ -131,6 +151,8 @@ shape = SubResource("RectangleShape2D_48kf8")
 
 [node name="Computer" type="StaticBody2D" parent="."]
 position = Vector2(382, 182)
+collision_layer = 7
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="Hack" type="Node" parent="Computer" node_paths=PackedStringArray("success_triggers")]
@@ -147,6 +169,8 @@ texture = ExtResource("10_vai7r")
 
 [node name="LockedDoor" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
 position = Vector2(256, 96)
+collision_layer = 7
+collision_mask = 0
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
 metadata/_edit_group_ = true

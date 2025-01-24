@@ -12,12 +12,18 @@ const hack_key: String = "tertiary_action"
 
 @onready var cursor: Cursor = Util.require_child(self, Cursor)
 
+var _skip_frame: bool = false
+
 
 func _ready() -> void:
 	_replace_mouse_cursor()
 
 
 func process(delta: float) -> void:
+	if _skip_frame:
+		_skip_frame = false
+		return
+
 	cursor.global_position = get_viewport().get_mouse_position()
 
 	if Input.is_action_just_pressed("menu"):
@@ -45,6 +51,9 @@ func on_pause() -> void:
 
 
 func on_resume() -> void:
+	# skip the next frame to prevent accidental weapon fires
+	# when interpreting a click that was meant for the previous scene
+	_skip_frame = true
 	_replace_mouse_cursor()
 
 
