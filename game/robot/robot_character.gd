@@ -14,8 +14,8 @@ enum Abilities {
 var movement_direction: Vector2
 var aim_direction: Vector2
 
-@onready var sprite: AnimatedSprite2D = $Sprite
-@onready var aim_raycast: RayCast2D = $AimRaycast
+@onready var sprite: AnimatedSprite2D = Util.require_child(self, AnimatedSprite2D)
+@onready var aim_raycast: RayCast2D = Util.require_child(self, RayCast2D)
 @onready var weapon: Weapon
 @onready var _move_sound: AudioStreamPlayer2D = Util.attach_sound_player(self, _stats.move_sound)
 

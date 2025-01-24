@@ -90,10 +90,12 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 
 func _process_aim_target_inputs(aim_target: Node2D, _delta: float) -> void:
 	if Input.is_action_just_pressed(interact_key):
-		var interaction_target: Interaction = Util.find_child(aim_target, Interaction)
+		var interaction_target: Interaction = aim_target as Interaction
+		# var interaction_target: Interaction = Util.find_child(aim_target, Interaction)
 		if interaction_target: _process_interaction(interaction_target)
 	elif Input.is_action_just_pressed(hack_key):
-		var hack_target: Hack = Util.find_child(aim_target, Hack)
+		var hack_target: Hack = aim_target as Hack
+		# var hack_target: Hack = Util.find_child(aim_target, Hack)
 		if hack_target: _process_hack(hack_target)
 
 

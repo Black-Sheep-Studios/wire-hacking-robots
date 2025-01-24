@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://game/world/interactions/open_interaction.gd" id="6_lyq78"]
 [ext_resource type="Texture2D" uid="uid://csdokh62dff2s" path="res://assets/graphics/crosshair.png" id="6_pftn8"]
 [ext_resource type="Script" path="res://game/player/cursor.gd" id="7_r5e4h"]
-[ext_resource type="PackedScene" uid="uid://du5i0mh3mkwuq" path="res://scenes/test/tutorial_hack_scene.tscn" id="9_3afsu"]
+[ext_resource type="PackedScene" path="res://scenes/test/tutorial_hack_scene.tscn" id="9_3afsu"]
 [ext_resource type="AudioStream" uid="uid://cw606kawilco2" path="res://assets/sounds/roomba.mp3" id="9_45ngs"]
 [ext_resource type="Script" path="res://game/world/weapons/weapon.gd" id="10_d3rmm"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
@@ -134,14 +134,16 @@ stats = SubResource("Resource_00dv5")
 [node name="Door" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
 position = Vector2(480, 256)
 rotation = 1.5708
-collision_layer = 7
+collision_layer = 5
 collision_mask = 0
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
 open_sound = ExtResource("15_bounm")
 metadata/_edit_group_ = true
 
-[node name="OpenInteraction" type="Node" parent="Door" node_paths=PackedStringArray("target")]
+[node name="OpenInteraction" type="StaticBody2D" parent="Door" node_paths=PackedStringArray("target")]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("6_lyq78")
 target = NodePath("../OpenTrigger")
 
@@ -157,11 +159,13 @@ shape = SubResource("RectangleShape2D_48kf8")
 
 [node name="Computer" type="StaticBody2D" parent="."]
 position = Vector2(382, 182)
-collision_layer = 7
+collision_layer = 5
 collision_mask = 0
 metadata/_edit_group_ = true
 
-[node name="Hack" type="Node" parent="Computer" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="Computer" node_paths=PackedStringArray("success_triggers")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("9_3afsu")
 success_triggers = [NodePath("../../LockedDoor/OpenTrigger")]
@@ -175,7 +179,7 @@ texture = ExtResource("10_vai7r")
 
 [node name="LockedDoor" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
 position = Vector2(256, 96)
-collision_layer = 7
+collision_layer = 5
 collision_mask = 0
 script = ExtResource("5_871bv")
 open_trigger = NodePath("OpenTrigger")
@@ -197,7 +201,9 @@ position = Vector2(614, 212)
 _stats = SubResource("Resource_lx4jl")
 _abilities = Array[int]([1, 0])
 
-[node name="Hack" type="Node" parent="Robot" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="Robot" node_paths=PackedStringArray("success_triggers")]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("9_3afsu")
 success_triggers = [NodePath("../OverrideTrigger")]
