@@ -3,6 +3,9 @@ class_name Util
 extends Object
 
 
+static var null_lambda: Callable = func() -> void: pass
+
+
 static func require_child(parent: Node, type: Variant) -> Node:
 	var node: Node = find_child(parent, type)
 	if node == null:
@@ -52,17 +55,18 @@ static func attach_sound_player(node: Node, sound: AudioStream) -> VariablePitch
 	return player
 
 
-static func attach_one_shot_timer(node: Node, delay: float, timeout: Callable) -> Timer:
+static func attach_one_shot_timer(node: Node, delay: float = 1.0, timeout: Callable = null_lambda) -> Timer:
 	var timer: Timer = one_shot_timer(delay, timeout)
 	node.add_child.call_deferred(timer)
 	return timer
 
 
-static func one_shot_timer(delay: float, timeout: Callable = func() -> void: pass) -> Timer:
+static func one_shot_timer(delay: float = 1.0, timeout: Callable = null_lambda) -> Timer:
 	var timer: Timer = Timer.new()
 	timer.one_shot = true
 	timer.wait_time = delay
-	timer.timeout.connect(timeout)
+	if timeout != null_lambda:
+		timer.timeout.connect(timeout)
 	return timer
 
 
