@@ -100,4 +100,3 @@ func _process_hack(hack_target: Hack) -> void:
 
 func _get_aim_target() -> Node2D:
 	return current_robot.aim_raycast.get_collider()
-
