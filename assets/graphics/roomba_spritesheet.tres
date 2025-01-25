@@ -1,6 +1,10 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dqo4br8tps0oc"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dqo4br8tps0oc"]
 
 [ext_resource type="Texture2D" uid="uid://g0kccdf084mq" path="res://assets/graphics/roomba.png" id="1_jh6e1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p5hl"]
+atlas = ExtResource("1_jh6e1")
+region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hgtc"]
 atlas = ExtResource("1_jh6e1")
@@ -16,6 +20,14 @@ region = Rect2(32, 0, 32, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p5hl")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2hgtc")

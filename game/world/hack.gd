@@ -17,6 +17,8 @@ func _ready() -> void:
 	# has created a collider
 	if get_parent() is not RobotCharacter:
 		init()
+	else:
+		get_parent().died.connect(_disable)
 
 
 func init() -> void:
@@ -39,12 +41,12 @@ func hack(player_controller: PlayerRobotController) -> Result:
 	hack_scene_instance.hack_succeeded.connect(func() -> void:
 		_on_success(player_controller)
 		if one_time:
-			queue_free()
+			_disable()
 	)
 	hack_scene_instance.hack_failed.connect(func() -> void:
 		_on_failure(player_controller)
 		if one_time or not retry_on_failure:
-			queue_free()
+			_disable()
 	)
 	
 	result.hack_scene = hack_scene_instance
@@ -66,6 +68,11 @@ func _duplicate_parent_collider() -> CollisionShape2D:
 	var new_collider: CollisionShape2D = parent_collider.duplicate()
 	add_child.call_deferred(new_collider)
 	return new_collider
+
+
+func _disable() -> void:
+	# TODO: could probably just queue_free here, idk
+	_collider.disabled = true
 
 
 class Result:

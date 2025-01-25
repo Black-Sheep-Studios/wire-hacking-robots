@@ -14,9 +14,11 @@ signal died
 
 var movement_direction: Vector2
 var aim_direction: Vector2
+var dead: bool = false
+
 @onready var hit_points: float = _stats.hit_points
 
-@onready var sprite: AnimatedSprite2D = _build_sprite()
+@onready var sprite: RobotSprite = _build_sprite()
 @onready var collider: CollisionShape2D = _build_collider()
 @onready var aim_raycast: RayCast2D = _build_interact_raycast()
 @onready var weapon: Weapon = Util.find_child(self, Weapon)
@@ -32,23 +34,15 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if hit_points <= 0:
+		dead = true
+		_disable_collider()
 		died.emit()
-		queue_free()
 		return
-
-	# TODO: extract this stuff to a class for the sprite
-	if aim_direction.x != 0:
-		sprite.flip_h = aim_direction.x < 0
-
-	if movement_direction.length() > 0:
-		sprite.play("move")
-	else:
-		sprite.play("idle")
-
-	pass
 
 
 func act(action: Action) -> void:
+	if dead: return
+
 	movement_direction = action.movement_direction
 	target_velocity = movement_direction * _stats.move_speed
 
@@ -61,6 +55,8 @@ func act(action: Action) -> void:
 
 
 func take_damage(damage: float, _damage_type: Weapon.DamageType) -> void:
+	if dead: return
+
 	var effective_damage: float = damage
 	if _stats.weaknesses.has(_damage_type):
 		effective_damage *= 2
@@ -72,6 +68,10 @@ func take_damage(damage: float, _damage_type: Weapon.DamageType) -> void:
 
 func can_do(ability: Abilities) -> bool:
 	return _stats.abilities.has(ability)
+
+
+func _disable_collider() -> void:
+	collider.disabled = true
 
 
 func _build_collider() -> CollisionShape2D:
@@ -99,8 +99,8 @@ func _build_interact_raycast() -> RayCast2D:
 	return raycast
 
 
-func _build_sprite() -> AnimatedSprite2D:
-	var new_sprite: AnimatedSprite2D = AnimatedSprite2D.new()
+func _build_sprite() -> RobotSprite:
+	var new_sprite: RobotSprite = RobotSprite.new()
 	new_sprite.frames = _stats.sprite
 	add_child(new_sprite)
 	return new_sprite
