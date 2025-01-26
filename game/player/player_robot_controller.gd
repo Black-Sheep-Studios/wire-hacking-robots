@@ -3,13 +3,14 @@ extends PlayerController
 
 
 @export var _pause_menu_scene: PackedScene
+@export var _cursor_sprite: SpriteFrames
 @export var current_robot: RobotCharacter
 
 const attack_key: String = "primary_action"
 const interact_key: String = "secondary_action"
 const hack_key: String = "tertiary_action"
 
-@onready var cursor: Cursor = Util.require_child(self, Cursor)
+@onready var cursor: AnimatedSprite2D = _build_cursor()
 
 var _skip_frame: bool = false
 
@@ -44,6 +45,10 @@ func process(delta: float) -> void:
 
 func control_robot(robot: RobotCharacter) -> void:
 	current_robot = robot
+	if Util.find_child(current_robot, Weapon):
+		cursor.play("weapon")
+	else:
+		cursor.play("default")
 
 
 func on_pause() -> void:
@@ -110,3 +115,13 @@ func _process_hack(hack_target: Hack) -> void:
 
 func _get_aim_target() -> Node2D:
 	return current_robot.aim_raycast.get_collider()
+
+
+func _build_cursor() -> AnimatedSprite2D:
+	var new_cursor: AnimatedSprite2D = AnimatedSprite2D.new()
+	new_cursor.frames = _cursor_sprite
+	new_cursor.animation = "default"
+	new_cursor.set_visible(false)
+	new_cursor.set_centered(true)
+	add_child.call_deferred(new_cursor)
+	return new_cursor
