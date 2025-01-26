@@ -1,0 +1,122 @@
+[gd_scene load_steps=7 format=3 uid="uid://kt4lhrkk0uab"]
+
+[ext_resource type="Script" path="res://game/wirehack_scene.gd" id="1_rm2yq"]
+[ext_resource type="Script" path="res://game/player/player_hack_controller.gd" id="2_orph5"]
+[ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="3_fuyrl"]
+[ext_resource type="PackedScene" uid="uid://5sibujrnogmh" path="res://scenes/components/and_gate.tscn" id="6_57b4t"]
+[ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="7_tb128"]
+[ext_resource type="PackedScene" uid="uid://bsneb5dbia1mu" path="res://scenes/components/logic_out.tscn" id="8_hgaen"]
+
+[node name="TutorialHackScene" type="CanvasLayer"]
+script = ExtResource("1_rm2yq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 1200.0
+offset_bottom = 600.0
+color = Color(0, 0, 0, 0.627451)
+
+[node name="PlayerHackController" type="Node" parent="."]
+script = ExtResource("2_orph5")
+
+[node name="succeed" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 381.0
+offset_top = -83.0
+offset_right = 505.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Succeed hack"
+
+[node name="fail" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 381.0
+offset_top = -35.0
+offset_right = 505.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fail hack"
+
+[node name="cancel" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 393.0
+offset_top = 13.0
+offset_right = 493.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cancel hack"
+
+[node name="Wire4" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_fuyrl")]
+position = Vector2(502, 287)
+scale = Vector2(16, 1)
+inputs = [NodePath("../LogicIn3")]
+
+[node name="Wire5" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_fuyrl")]
+position = Vector2(505, 319)
+scale = Vector2(16, 1)
+inputs = [NodePath("../LogicIn4")]
+
+[node name="Wire6" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_fuyrl")]
+position = Vector2(611, 305)
+scale = Vector2(16, 1)
+inputs = [NodePath("../AndGate")]
+
+[node name="AndGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("6_57b4t")]
+position = Vector2(556, 304)
+scale = Vector2(2, 2)
+inputs = [NodePath("../Wire4"), NodePath("../Wire5")]
+
+[node name="XOR" type="Label" parent="AndGate"]
+offset_left = -9.0
+offset_top = -6.0
+offset_right = 31.0
+offset_bottom = 17.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "AND"
+
+[node name="LogicIn3" parent="." instance=ExtResource("7_tb128")]
+position = Vector2(469, 286)
+
+[node name="LogicIn4" parent="." instance=ExtResource("7_tb128")]
+position = Vector2(470, 321)
+
+[node name="LogicOut2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_hgaen")]
+position = Vector2(641, 306)
+inputs = [NodePath("../Wire6")]
+
+[node name="Goal2" type="Label" parent="."]
+offset_left = 678.0
+offset_top = 266.0
+offset_right = 718.0
+offset_bottom = 315.0
+text = "Goal:
+1"
+horizontal_alignment = 1
+
+[node name="Tip2" type="Label" parent="."]
+offset_left = 287.0
+offset_top = 182.0
+offset_right = 891.0
+offset_bottom = 205.0
+text = "AND gate: if ALL of the inputs are 1, the output is 1. Otherwise, the output is 0."
+horizontal_alignment = 1
+
+[connection signal="button_down" from="succeed" to="." method="_on_success"]
+[connection signal="button_down" from="fail" to="." method="_on_fail"]
+[connection signal="button_down" from="cancel" to="." method="_on_cancel"]

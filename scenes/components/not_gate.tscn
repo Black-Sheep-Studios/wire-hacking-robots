@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr5vxukqwojan"]
+
+[ext_resource type="Texture2D" uid="uid://besy53pas7ghu" path="res://assets/graphics/NOT.png" id="1_urcr2"]
+[ext_resource type="Script" path="res://game/hack/components/not_gate.gd" id="2_2jqj1"]
+
+[node name="NotGate" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_urcr2")
+script = ExtResource("2_2jqj1")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -11.0
+offset_right = 15.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "NOT"
+horizontal_alignment = 1
+vertical_alignment = 1
