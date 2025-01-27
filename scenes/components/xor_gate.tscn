@@ -3,7 +3,20 @@
 [ext_resource type="Texture2D" uid="uid://dh16vltlqdp8b" path="res://assets/graphics/XOR.png" id="1_4qw3s"]
 [ext_resource type="Script" path="res://game/hack/components/xor_gate.gd" id="1_riju4"]
 
-[node name="XOrGate" type="Sprite2D"]
+[node name="XorGate" type="Sprite2D"]
 texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_4qw3s")
 script = ExtResource("1_riju4")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -3.0
+offset_top = -6.0
+offset_right = 35.0
+offset_bottom = 17.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "XOR"
+horizontal_alignment = 1
+vertical_alignment = 1

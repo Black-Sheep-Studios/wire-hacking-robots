@@ -1,0 +1,166 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqtp8ioyvmtfx"]
+
+[ext_resource type="Script" path="res://game/wirehack_scene.gd" id="1_keph4"]
+[ext_resource type="Script" path="res://game/player/player_hack_controller.gd" id="2_ax5hs"]
+[ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="3_ajiyh"]
+[ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="4_wv12x"]
+[ext_resource type="PackedScene" uid="uid://bsneb5dbia1mu" path="res://scenes/components/logic_out.tscn" id="5_p2nsn"]
+[ext_resource type="PackedScene" uid="uid://dhukyh0heob0b" path="res://scenes/components/xor_gate.tscn" id="6_e6isb"]
+[ext_resource type="PackedScene" uid="uid://dqb6jl6hj0wk4" path="res://scenes/components/or_gate.tscn" id="7_475xi"]
+[ext_resource type="PackedScene" uid="uid://5sibujrnogmh" path="res://scenes/components/and_gate.tscn" id="8_8iujp"]
+
+[node name="TutorialHackScene" type="CanvasLayer"]
+script = ExtResource("1_keph4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 1200.0
+offset_bottom = 600.0
+color = Color(0, 0, 0, 0.627451)
+
+[node name="PlayerHackController" type="Node" parent="."]
+script = ExtResource("2_ax5hs")
+
+[node name="succeed" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 381.0
+offset_top = -83.0
+offset_right = 505.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Succeed hack"
+
+[node name="fail" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 381.0
+offset_top = -35.0
+offset_right = 505.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fail hack"
+
+[node name="cancel" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 393.0
+offset_top = 13.0
+offset_right = 493.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cancel hack"
+
+[node name="Wire" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(509, 178)
+scale = Vector2(16, 1)
+inputs = [NodePath("../LogicIn")]
+
+[node name="Wire2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(509, 216)
+scale = Vector2(16, 1)
+inputs = [NodePath("../LogicIn2")]
+
+[node name="Wire3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(511, 271)
+scale = Vector2(16, 1)
+inputs = [null]
+
+[node name="Wire4" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(510, 305)
+scale = Vector2(16, 1)
+inputs = [NodePath("../LogicIn3")]
+
+[node name="Wire5" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(616, 194)
+scale = Vector2(16, 1)
+inputs = [NodePath("../XorGate")]
+
+[node name="Wire6" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(615, 290)
+scale = Vector2(16, 1)
+inputs = [NodePath("../OrGate")]
+
+[node name="Wire7" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(633, 214)
+scale = Vector2(1, 16)
+inputs = [NodePath("../Wire5")]
+
+[node name="Wire8" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(632, 271)
+scale = Vector2(1, 16)
+inputs = [NodePath("../Wire6")]
+
+[node name="Wire9" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(731, 242)
+scale = Vector2(16, 1)
+inputs = [NodePath("../AndGate")]
+
+[node name="LogicIn" parent="." instance=ExtResource("4_wv12x")]
+position = Vector2(480, 177)
+
+[node name="LogicIn2" parent="." instance=ExtResource("4_wv12x")]
+position = Vector2(480, 215)
+
+[node name="LogicIn3" parent="." instance=ExtResource("4_wv12x")]
+position = Vector2(477, 271)
+
+[node name="LogicIn4" parent="." instance=ExtResource("4_wv12x")]
+position = Vector2(478, 306)
+
+[node name="LogicOut" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_p2nsn")]
+position = Vector2(760, 242)
+inputs = [NodePath("../Wire9")]
+
+[node name="Goal1" type="Label" parent="."]
+offset_left = 781.0
+offset_top = 204.0
+offset_right = 821.0
+offset_bottom = 253.0
+text = "Goal:
+1"
+horizontal_alignment = 1
+
+[node name="Tip1" type="Label" parent="."]
+offset_left = 284.0
+offset_top = 83.0
+offset_right = 936.0
+offset_bottom = 110.0
+text = "Logic gates usually feed into each other to create a network."
+horizontal_alignment = 1
+
+[node name="Tip1" type="Label" parent="Tip1"]
+offset_left = 13.0
+offset_top = 312.0
+offset_right = 665.0
+offset_bottom = 339.0
+text = "Try tracing backward from the goal to figure out what you need to do."
+horizontal_alignment = 1
+
+[node name="XorGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("6_e6isb")]
+position = Vector2(560, 196)
+inputs = [NodePath("../Wire"), NodePath("../Wire2")]
+
+[node name="OrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("7_475xi")]
+position = Vector2(558, 288)
+inputs = [NodePath("../Wire3"), NodePath("../Wire4")]
+
+[node name="AndGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_8iujp")]
+position = Vector2(676, 241)
+inputs = [NodePath("../Wire7"), NodePath("../Wire8")]
+
+[connection signal="button_down" from="succeed" to="." method="_on_success"]
+[connection signal="button_down" from="fail" to="." method="_on_fail"]
+[connection signal="button_down" from="cancel" to="." method="_on_cancel"]

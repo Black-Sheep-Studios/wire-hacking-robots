@@ -115,46 +115,15 @@ inputs = [NodePath("../XOrGate")]
 
 [node name="OrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_5qcuf")]
 position = Vector2(578, 89)
-scale = Vector2(2, 2)
 inputs = [NodePath("../Wire"), NodePath("../Wire2")]
-
-[node name="OR" type="Label" parent="OrGate"]
-offset_left = -2.0
-offset_top = -6.5
-offset_right = 38.0
-offset_bottom = 16.5
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "OR"
 
 [node name="XOrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("7_f7ei1")]
 position = Vector2(572, 433)
-scale = Vector2(2, 2)
 inputs = [NodePath("../Wire7"), NodePath("../Wire8"), NodePath("../Wire9")]
-
-[node name="XOR" type="Label" parent="XOrGate"]
-offset_top = -6.0
-offset_right = 40.0
-offset_bottom = 17.0
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
-text = "XOR"
-vertical_alignment = 1
 
 [node name="AndGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("6_b1wl7")]
 position = Vector2(575, 262)
-scale = Vector2(2, 2)
 inputs = [NodePath("../Wire4"), NodePath("../Wire5")]
-
-[node name="XOR" type="Label" parent="AndGate"]
-offset_left = -9.0
-offset_top = -6.0
-offset_right = 31.0
-offset_bottom = 17.0
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "AND"
 
 [node name="LogicIn" parent="." instance=ExtResource("3_4o883")]
 position = Vector2(498, 70)

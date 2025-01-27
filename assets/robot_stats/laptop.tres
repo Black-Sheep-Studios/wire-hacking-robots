@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="RobotStats" load_steps=3 format=3 uid="uid://bjxmbr0ggohgr"]
+
+[ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="2_0hpiv"]
+[ext_resource type="SpriteFrames" uid="uid://bs52vlwom58mr" path="res://assets/graphics/laptop.tres" id="2_i3mdp"]
+
+[resource]
+script = ExtResource("2_0hpiv")
+move_speed = 0
+hit_points = 10.0
+weaknesses = Array[int]([])
+resistances = Array[int]([])
+abilities = Array[int]([1])
+move_sound_type = 0
+sprite = ExtResource("2_i3mdp")
+collider_radius = 12.0
+interact_reach_distance = 200.0

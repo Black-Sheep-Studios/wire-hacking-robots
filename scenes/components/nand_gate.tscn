@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwptk50d5iig8"]
+
+[ext_resource type="Texture2D" uid="uid://c50d5xpgl45k0" path="res://assets/graphics/NAND.png" id="1_emjv1"]
+[ext_resource type="Script" path="res://game/hack/components/nand_gate.gd" id="2_2f4ti"]
+
+[node name="NandGate" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_emjv1")
+script = ExtResource("2_2f4ti")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -13.0
+offset_top = -6.0
+offset_right = 29.0
+offset_bottom = 17.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "NAND"
+horizontal_alignment = 1
+vertical_alignment = 1

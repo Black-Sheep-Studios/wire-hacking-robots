@@ -81,15 +81,6 @@ position = Vector2(556, 304)
 scale = Vector2(2, 2)
 inputs = [NodePath("../Wire4"), NodePath("../Wire5")]
 
-[node name="XOR" type="Label" parent="AndGate"]
-offset_left = -9.0
-offset_top = -6.0
-offset_right = 31.0
-offset_bottom = 17.0
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "AND"
-
 [node name="LogicIn3" parent="." instance=ExtResource("7_tb128")]
 position = Vector2(469, 286)
 

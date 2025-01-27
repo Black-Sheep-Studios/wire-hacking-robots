@@ -83,19 +83,7 @@ inputs = [NodePath("../XOrGate")]
 
 [node name="XOrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_71d14")]
 position = Vector2(571, 276)
-scale = Vector2(2, 2)
 inputs = [NodePath("../Wire7"), NodePath("../Wire8"), NodePath("../Wire9")]
-
-[node name="XOR" type="Label" parent="XOrGate"]
-offset_top = -6.0
-offset_right = 40.0
-offset_bottom = 17.0
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
-text = "XOR"
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="LogicIn5" parent="." instance=ExtResource("7_78q6f")]
 position = Vector2(487, 252)

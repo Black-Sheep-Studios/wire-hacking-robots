@@ -73,6 +73,7 @@ inputs = [NodePath("../NotGate")]
 
 [node name="NotGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_52csp")]
 position = Vector2(561, 280)
+scale = Vector2(1.25, 1.25)
 inputs = [NodePath("../Wire")]
 
 [node name="LogicIn" parent="." instance=ExtResource("7_c1nq5")]

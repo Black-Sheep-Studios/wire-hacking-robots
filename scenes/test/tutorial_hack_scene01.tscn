@@ -78,17 +78,7 @@ inputs = [NodePath("../OrGate")]
 
 [node name="OrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_i1cog")]
 position = Vector2(522, 289)
-scale = Vector2(2, 2)
 inputs = [NodePath("../Wire"), NodePath("../Wire2")]
-
-[node name="OR" type="Label" parent="OrGate"]
-offset_left = -2.0
-offset_top = -6.5
-offset_right = 38.0
-offset_bottom = 16.5
-scale = Vector2(0.5, 0.5)
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "OR"
 
 [node name="LogicIn" parent="." instance=ExtResource("7_ftmv2")]
 position = Vector2(442, 270)

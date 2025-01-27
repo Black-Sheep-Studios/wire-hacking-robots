@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqlqns8dqe8st"]
+
+[ext_resource type="Texture2D" uid="uid://dqlghqi2jfpw4" path="res://assets/graphics/XNOR.png" id="1_ko5h3"]
+[ext_resource type="Script" path="res://game/hack/components/xnor_gate.gd" id="2_pgh7n"]
+
+[node name="XnorGate" type="Sprite2D"]
+texture_filter = 1
+scale = Vector2(2, 2)
+texture = ExtResource("1_ko5h3")
+script = ExtResource("2_pgh7n")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 34.0
+offset_bottom = 17.0
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 7
+text = "XNOR"
+horizontal_alignment = 1
+vertical_alignment = 1

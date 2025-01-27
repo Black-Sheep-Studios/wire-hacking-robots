@@ -5,16 +5,19 @@
 
 [node name="NotGate" type="Sprite2D"]
 texture_filter = 1
+scale = Vector2(2, 2)
 texture = ExtResource("1_urcr2")
 script = ExtResource("2_2jqj1")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -25.0
-offset_top = -11.0
-offset_right = 15.0
-offset_bottom = 12.0
+offset_left = -16.0
+offset_top = -6.0
+offset_right = 24.0
+offset_bottom = 17.0
+scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 8
+theme_override_font_sizes/font_size = 14
 text = "NOT"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
