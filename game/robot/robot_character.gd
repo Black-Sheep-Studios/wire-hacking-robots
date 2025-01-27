@@ -12,7 +12,6 @@ signal died
 
 @export var _stats: RobotStats
 
-var movement_direction: Vector2
 var aim_direction: Vector2
 var dead: bool = false
 
@@ -43,12 +42,11 @@ func _process(_delta: float) -> void:
 func act(action: Action) -> void:
 	if dead: return
 
-	movement_direction = action.movement_direction
-	target_velocity = movement_direction * _stats.move_speed
+	target_velocity = action.movement_direction * _stats.move_speed
 
 	aim_direction = action.aim_direction
 	if aim_direction != Vector2.ZERO:
-		aim_raycast.rotation = aim_direction.angle() - PI / 2
+		aim_raycast.rotation = aim_direction.angle()
 	
 	if action.attack and weapon:
 		weapon.fire(aim_direction)
@@ -79,6 +77,7 @@ func _build_collider() -> CollisionShape2D:
 	var circle_shape: CircleShape2D = CircleShape2D.new()
 	circle_shape.radius = _stats.collider_radius
 	new_collider.shape = circle_shape
+	new_collider.name = "MovementCollider"
 	add_child(new_collider)
 
 	set_collision_layer_value(Constants.CollisionLayers.MOVEMENT, true)
@@ -97,6 +96,8 @@ func _build_interact_raycast() -> RayCast2D:
 	var raycast: RayCast2D = RayCast2D.new()
 	raycast.collision_mask = Constants.CollisionLayers.INTERACTION
 	raycast.add_exception(self)
+	raycast.target_position = Vector2(_stats.interact_reach_distance, 0)
+	raycast.name = "AimRaycast"
 	add_child.call_deferred(raycast)
 	return raycast
 
@@ -104,6 +105,8 @@ func _build_interact_raycast() -> RayCast2D:
 func _build_sprite() -> RobotSprite:
 	var new_sprite: RobotSprite = RobotSprite.new()
 	new_sprite.frames = _stats.sprite
+	new_sprite.animation = "idle"
+	new_sprite.name = "Sprite"
 	add_child(new_sprite)
 	return new_sprite
 

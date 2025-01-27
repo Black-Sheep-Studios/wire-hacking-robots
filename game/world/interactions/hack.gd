@@ -3,22 +3,30 @@ class_name Hack
 extends StaticBody2D
 
 
+@onready var _parent_object: Node = get_parent()
+
 @export var hack_scene: PackedScene
 @export var fail_triggers: Array[Trigger]
 @export var success_triggers: Array[Trigger]
 @export var one_time: bool = false
 @export var retry_on_failure: bool = true
+@export var interaction_label: String = "Hack"
 
 var _collider: CollisionShape2D
+var _input_prompt: InputPrompt
 
 
 func _ready() -> void:
 	# if this is attached to a robot, it needs to late init after the robot
 	# has created a collider
-	if get_parent() is not RobotCharacter:
+	if _parent_object is not RobotCharacter:
 		init()
-	else:
-		get_parent().died.connect(_disable)
+	
+	if _parent_object.has_signal("died"):
+		_parent_object.died.connect(_disable)
+
+	_input_prompt = InputPrompt.find_or_create(_parent_object)
+	_input_prompt.set_action(InputPrompt.Type.TERTIARY, InputPrompt.ActionType.HACK, interaction_label)
 
 
 func init() -> void:
@@ -64,15 +72,16 @@ func _on_failure(player_controller: PlayerRobotController) -> void:
 
 
 func _duplicate_parent_collider() -> CollisionShape2D:
-	var parent_collider: CollisionShape2D = Util.require_child(get_parent(), CollisionShape2D)
+	var parent_collider: CollisionShape2D = Util.require_child(_parent_object, CollisionShape2D)
 	var new_collider: CollisionShape2D = parent_collider.duplicate()
+	new_collider.name = "HackCollider"
 	add_child.call_deferred(new_collider)
 	return new_collider
 
 
 func _disable() -> void:
-	# TODO: could probably just queue_free here, idk
 	_collider.disabled = true
+	_input_prompt.unset_action(InputPrompt.Type.TERTIARY)
 
 
 class Result:

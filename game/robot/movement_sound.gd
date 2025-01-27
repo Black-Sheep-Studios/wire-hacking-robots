@@ -16,6 +16,7 @@ var _sound_type: SoundType
 static func attach(node: Node, sound: AudioStreamPlayer2D, sound_type: SoundType) -> MovementSound:
 	var movement_sound: MovementSound = MovementSound.new()
 	movement_sound.init(sound_type, sound)
+	movement_sound.name = "MovementSound"
 	Util.attach(node, movement_sound)
 	return movement_sound
 

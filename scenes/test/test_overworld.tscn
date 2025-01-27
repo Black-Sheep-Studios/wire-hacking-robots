@@ -11,7 +11,7 @@
 [ext_resource type="SpriteFrames" uid="uid://din5jsx3wshxb" path="res://assets/graphics/crosshair.tres" id="8_h0tql"]
 [ext_resource type="Script" path="res://game/world/weapons/weapon.gd" id="10_d3rmm"]
 [ext_resource type="Texture2D" uid="uid://84370kw6vytb" path="res://assets/graphics/computer.png" id="10_vai7r"]
-[ext_resource type="Script" path="res://game/world/hack.gd" id="11_0mbbn"]
+[ext_resource type="Script" path="res://game/world/interactions/hack.gd" id="11_0mbbn"]
 [ext_resource type="PackedScene" uid="uid://bk8r62r6huwgf" path="res://scenes/test/test_bullet_scene.tscn" id="11_232ms"]
 [ext_resource type="Script" path="res://game/world/weapons/weapon_stats.gd" id="12_sf1an"]
 [ext_resource type="AudioStream" uid="uid://g5h3yaek10gs" path="res://assets/sounds/kinetic.wav" id="12_uy21r"]
@@ -23,7 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://bbepisos6fv1" path="res://assets/sounds/door.wav" id="15_bounm"]
 [ext_resource type="Script" path="res://game/robot/robot_character.gd" id="15_xp0nl"]
 [ext_resource type="Resource" uid="uid://cdw0u0do5rqcy" path="res://assets/robot_stats/roomba.tres" id="16_71f40"]
-[ext_resource type="Resource" uid="uid://bjxmbr0ggohgr" path="res://assets/robot_stats/laptop.tres" id="18_a41k4"]
+[ext_resource type="Resource" uid="uid://cxbksr1kugj8o" path="res://assets/robot_stats/laptop.tres" id="18_a41k4"]
 [ext_resource type="Resource" uid="uid://dtyfknspkowob" path="res://assets/robot_stats/cleaner_bot.tres" id="18_ncvcj"]
 [ext_resource type="Resource" uid="uid://cm13fw1hfhos8" path="res://assets/robot_stats/light_security_bot.tres" id="20_y78se"]
 

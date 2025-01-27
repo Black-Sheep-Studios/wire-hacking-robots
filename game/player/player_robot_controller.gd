@@ -13,6 +13,7 @@ const hack_key: String = "tertiary_action"
 @onready var cursor: AnimatedSprite2D = _build_cursor()
 
 var _skip_frame: bool = false
+var _last_aim_target: Node2D
 
 
 func _ready() -> void:
@@ -35,7 +36,9 @@ func process(delta: float) -> void:
 	if !current_robot: return
 
 	var aim_target: Node2D = _get_aim_target()
-	if aim_target: _process_aim_target_inputs(aim_target, delta)
+	_process_aim_target_prompts(aim_target)
+	if aim_target: 
+		_process_aim_target_inputs(aim_target, delta)
 
 	var action: RobotCharacter.Action = _build_action_from_inputs()
 	action.delta = delta
@@ -95,12 +98,22 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 func _process_aim_target_inputs(aim_target: Node2D, _delta: float) -> void:
 	if Input.is_action_just_pressed(interact_key):
 		var interaction_target: Interaction = aim_target as Interaction
-		# var interaction_target: Interaction = Util.find_child(aim_target, Interaction)
 		if interaction_target: _process_interaction(interaction_target)
 	elif Input.is_action_just_pressed(hack_key):
 		var hack_target: Hack = aim_target as Hack
-		# var hack_target: Hack = Util.find_child(aim_target, Hack)
 		if hack_target: _process_hack(hack_target)
+
+
+func _process_aim_target_prompts(aim_target: Node2D) -> void:
+	if is_instance_valid(_last_aim_target) and aim_target != _last_aim_target:
+		var last_action_prompt: InputPrompt = Util.find_sibling(_last_aim_target, InputPrompt)
+		if last_action_prompt: last_action_prompt.disable()
+	_last_aim_target = aim_target
+
+	if aim_target:
+		var input_prompt: InputPrompt = Util.find_sibling(aim_target, InputPrompt)
+		if input_prompt:
+			input_prompt.enable()
 
 
 func _process_interaction(interaction_target: Interaction) -> void:
