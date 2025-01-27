@@ -88,6 +88,8 @@ func _build_collider() -> CollisionShape2D:
 	set_collision_layer_value(Constants.CollisionLayers.BULLET, true)
 	set_collision_mask_value(Constants.CollisionLayers.BULLET, false)
 
+	set_motion_mode(CharacterBody2D.MOTION_MODE_FLOATING)
+
 	return new_collider
 
 
