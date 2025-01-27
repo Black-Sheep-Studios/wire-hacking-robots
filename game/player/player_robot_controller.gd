@@ -113,7 +113,7 @@ func _process_aim_target_prompts(aim_target: Node2D) -> void:
 	if aim_target:
 		var input_prompt: InputPrompt = Util.find_sibling(aim_target, InputPrompt)
 		if input_prompt:
-			input_prompt.enable()
+			input_prompt.enable(self)
 
 
 func _process_interaction(interaction_target: Interaction) -> void:

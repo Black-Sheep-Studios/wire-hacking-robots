@@ -1,11 +1,6 @@
 class_name InputPrompt
 extends Node2D
 
-enum ActionType {
-	HACK,
-	INTERACT,
-}
-
 enum Type {
 	PRIMARY,
 	SECONDARY,
@@ -37,13 +32,13 @@ static func find_or_create(container: Node) -> InputPrompt:
 	return prompt
 
 
-func _ready() -> void:
+func _init() -> void:
 	set_visible(false)
 
 
-func enable() -> void:
+func enable(controller: PlayerRobotController) -> void:
 	if not is_visible():
-		_update_actions()
+		_update_actions(controller)
 		set_visible(true)
 
 
@@ -52,16 +47,11 @@ func disable() -> void:
 		set_visible(false)
 
 
-func set_action(input_type: Type, action_type: ActionType, label: String) -> void:
-	var action = Action.new(input_type, action_type, label)
-	_actions[input_type] = action
+func register_interactable(input: Type, interactable: Interactable, label: String) -> void:
+	_actions[input] = Action.new(interactable, input, label)
 
 
-func unset_action(input_type: Type) -> void:
-	_actions.erase(input_type)
-
-
-func _update_actions() -> void:
+func _update_actions(controller: PlayerRobotController) -> void:
 	# remove existing prompts
 	for child: Node in get_children():
 		child.queue_free()
@@ -70,7 +60,8 @@ func _update_actions() -> void:
 	for input_type in Type.values():
 		if not _actions.has(input_type): continue
 
-		var action = _actions[input_type]
+		var action: Action = _actions[input_type]
+		if not action.interactable.can_interact(controller.current_robot): continue
 
 		var sprite: AnimatedSprite2D = AnimatedSprite2D.new()
 		sprite.frames = _spritesheet
@@ -85,15 +76,15 @@ func _update_actions() -> void:
 		add_child.call_deferred(label)
 
 		prompt_position += 1
-
+	
 
 class Action:
-	var action_type: ActionType
-	var input_type: Type
 	var label: String
+	var input: Type
+	var interactable: Interactable
 
-	@warning_ignore("shadowed_variable")
-	func _init(input_type: Type, action_type: ActionType, label: String) -> void:
-		self.action_type = action_type
-		self.input_type = input_type
+	@warning_ignore("SHADOWED_VARIABLE")
+	func _init(interactable: Interactable, input: Type, label: String) -> void:
+		self.interactable = interactable
 		self.label = label
+		self.input = input
