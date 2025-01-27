@@ -142,6 +142,7 @@ text = "Logic gates usually feed into each other to create a network."
 horizontal_alignment = 1
 
 [node name="Tip1" type="Label" parent="Tip1"]
+layout_mode = 0
 offset_left = 13.0
 offset_top = 312.0
 offset_right = 665.0
