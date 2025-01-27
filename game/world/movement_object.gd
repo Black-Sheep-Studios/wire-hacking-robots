@@ -16,8 +16,6 @@ extends CharacterBody2D
 var is_slowed: bool = true
 var target_velocity: Vector2
 
-signal collided(collision: KinematicCollision2D)
-
 
 func _physics_process(_delta: float) -> void:
 	if is_slowed:
@@ -25,6 +23,4 @@ func _physics_process(_delta: float) -> void:
 	else:
 		velocity = target_velocity
 
-	var collision: KinematicCollision2D = move_and_collide(velocity * _delta)
-	if collision:
-		collided.emit(collision)
+	move_and_slide()

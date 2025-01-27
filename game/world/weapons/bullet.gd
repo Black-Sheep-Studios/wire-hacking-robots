@@ -1,6 +1,6 @@
 class_name Bullet
 
-extends MovementObject
+extends CollisionObject
 
 
 var stats: WeaponStats
