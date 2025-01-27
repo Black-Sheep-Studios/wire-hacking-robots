@@ -73,7 +73,6 @@ func _update_actions() -> void:
 		var action = _actions[input_type]
 
 		var sprite: AnimatedSprite2D = AnimatedSprite2D.new()
-		print(_spritesheet)
 		sprite.frames = _spritesheet
 		sprite.set_centered(false)
 		sprite.play(input_action_names[input_type])
