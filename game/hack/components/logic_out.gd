@@ -1,10 +1,12 @@
 class_name LogicOut
 extends Component
 
+
 @onready var TxtLabel = $OutputText
 
 @export var initial_state : bool = false
 @export var desired_state : bool = true
+
 
 func _toggle_output() -> void:
 	_set_state(not output)
@@ -14,6 +16,10 @@ func _toggle_output() -> void:
 func _set_state(value: bool) -> void:
 	output = value
 	_update_text()
+
+
+func correct_output() -> bool:
+	return output == desired_state
 
 
 func _update_text() -> void:
