@@ -65,7 +65,6 @@ func _update_actions(controller: PlayerRobotController) -> void:
 
 	var prompt_index: int = 0
 	for input_type in Type.values():
-		print(get_path(), " Actions while updating: ", _actions)
 		if not _actions.has(input_type): continue
 
 		var action: Action = _actions[input_type]
@@ -78,7 +77,6 @@ func _update_actions(controller: PlayerRobotController) -> void:
 
 
 func _build_prompt(input_type: Type, sprite_frames: SpriteFrames, label: String, prompt_position: Vector2) -> void:
-		print(get_path(), " Building prompt for ", input_type, " at ", prompt_position)
 		var sprite_node: AnimatedSprite2D = AnimatedSprite2D.new()
 		sprite_node.frames = sprite_frames
 		sprite_node.set_centered(false)
