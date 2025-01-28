@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=39 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
@@ -15,17 +15,18 @@
 [ext_resource type="PackedScene" uid="uid://bk8r62r6huwgf" path="res://scenes/test/test_bullet_scene.tscn" id="11_232ms"]
 [ext_resource type="Script" path="res://game/world/weapons/weapon_stats.gd" id="12_sf1an"]
 [ext_resource type="AudioStream" uid="uid://g5h3yaek10gs" path="res://assets/sounds/kinetic.wav" id="12_uy21r"]
-[ext_resource type="PackedScene" path="res://scenes/test/hack_tutorial02.tscn" id="13_ekbye"]
+[ext_resource type="PackedScene" uid="uid://bqtp8ioyvmtfx" path="res://scenes/test/hack_tutorial06.tscn" id="13_hk1ul"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
-[ext_resource type="PackedScene" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
-[ext_resource type="PackedScene" path="res://scenes/test/hack_tutorial01.tscn" id="13_yketi"]
+[ext_resource type="PackedScene" uid="uid://bcv1jewh3p00r" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
 [ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
 [ext_resource type="AudioStream" uid="uid://bbepisos6fv1" path="res://assets/sounds/door.wav" id="15_bounm"]
 [ext_resource type="Script" path="res://game/robot/robot_character.gd" id="15_xp0nl"]
 [ext_resource type="Resource" uid="uid://cdw0u0do5rqcy" path="res://assets/robot_stats/roomba.tres" id="16_71f40"]
+[ext_resource type="PackedScene" uid="uid://ddr7asm8iy31r" path="res://scenes/test/hack_tutorial04.tscn" id="17_anpuk"]
 [ext_resource type="Resource" uid="uid://cxbksr1kugj8o" path="res://assets/robot_stats/laptop.tres" id="18_a41k4"]
 [ext_resource type="Resource" uid="uid://dtyfknspkowob" path="res://assets/robot_stats/cleaner_bot.tres" id="18_ncvcj"]
 [ext_resource type="Resource" uid="uid://cm13fw1hfhos8" path="res://assets/robot_stats/light_security_bot.tres" id="20_y78se"]
+[ext_resource type="PackedScene" uid="uid://diq0db2o3mluv" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_peu7m"]
 texture = ExtResource("4_7625h")
@@ -545,7 +546,7 @@ metadata/_edit_group_ = true
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("11_0mbbn")
-hack_scene = ExtResource("13_ekbye")
+hack_scene = ExtResource("13_hk1ul")
 success_triggers = [NodePath("../../LockedDoor/OpenTrigger")]
 one_time = true
 
@@ -554,27 +555,6 @@ position = Vector2(-0.5, -7)
 shape = SubResource("RectangleShape2D_t8f5p")
 
 [node name="Sprite2D" type="Sprite2D" parent="Computer"]
-texture = ExtResource("10_vai7r")
-
-[node name="Computer2" type="StaticBody2D" parent="."]
-position = Vector2(382, 182)
-collision_layer = 5
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="Hack" type="StaticBody2D" parent="Computer2" node_paths=PackedStringArray("success_triggers")]
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("11_0mbbn")
-hack_scene = ExtResource("13_ekbye")
-success_triggers = [NodePath("../../LockedDoor/OpenTrigger")]
-one_time = true
-
-[node name="MovementCollider" type="CollisionShape2D" parent="Computer2"]
-position = Vector2(-0.5, -7)
-shape = SubResource("RectangleShape2D_t8f5p")
-
-[node name="Sprite2D" type="Sprite2D" parent="Computer2"]
 texture = ExtResource("10_vai7r")
 
 [node name="LockedDoor" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
@@ -603,7 +583,7 @@ _stats = ExtResource("16_71f40")
 
 [node name="Hack" type="StaticBody2D" parent="Roomba" node_paths=PackedStringArray("success_triggers")]
 script = ExtResource("11_0mbbn")
-hack_scene = ExtResource("13_ekbye")
+hack_scene = ExtResource("17_anpuk")
 success_triggers = [NodePath("../OverrideTrigger")]
 
 [node name="OverrideTrigger" type="Node" parent="Roomba"]
@@ -616,7 +596,7 @@ _stats = ExtResource("18_a41k4")
 
 [node name="Hack" type="StaticBody2D" parent="Laptop" node_paths=PackedStringArray("success_triggers")]
 script = ExtResource("11_0mbbn")
-hack_scene = ExtResource("13_yketi")
+hack_scene = ExtResource("13_vging")
 success_triggers = [NodePath("../OverrideTrigger")]
 
 [node name="OverrideTrigger" type="Node" parent="Laptop"]
@@ -629,7 +609,7 @@ _stats = ExtResource("18_ncvcj")
 
 [node name="Hack" type="StaticBody2D" parent="CleanerBot" node_paths=PackedStringArray("success_triggers")]
 script = ExtResource("11_0mbbn")
-hack_scene = ExtResource("13_yketi")
+hack_scene = ExtResource("22_fbofc")
 success_triggers = [NodePath("../OverrideTrigger")]
 
 [node name="OverrideTrigger" type="Node" parent="CleanerBot"]

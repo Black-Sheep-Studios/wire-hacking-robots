@@ -90,7 +90,7 @@ offset_top = 240.0
 offset_right = 723.0
 offset_bottom = 289.0
 text = "Goal:
-1"
+0"
 horizontal_alignment = 1
 
 [node name="Tip3" type="Label" parent="."]

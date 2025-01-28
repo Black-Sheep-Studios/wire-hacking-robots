@@ -76,12 +76,12 @@ inputs = [NodePath("../LogicIn2")]
 [node name="Wire3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
 position = Vector2(511, 271)
 scale = Vector2(16, 1)
-inputs = [null]
+inputs = [NodePath("../LogicIn3")]
 
 [node name="Wire4" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
 position = Vector2(510, 305)
 scale = Vector2(16, 1)
-inputs = [NodePath("../LogicIn3")]
+inputs = [NodePath("../LogicIn4")]
 
 [node name="Wire5" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
 position = Vector2(616, 194)

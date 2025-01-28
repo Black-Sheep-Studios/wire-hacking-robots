@@ -8,4 +8,4 @@ func _ready() -> void:
 		push_warning("NOT gate with bad configuration: ", get_path())
 
 func _evaluate_state() -> bool:
-	return !inputs[0]
+	return !inputs[0].output
