@@ -34,7 +34,7 @@ static func find_or_create(container: Node) -> InputPrompt:
 	if not prompt:
 		prompt = InputPrompt.new()
 		prompt.name = "InputPrompt"
-		container.add_child(prompt)
+		container.add_child.call_deferred(prompt)
 	return prompt
 
 
