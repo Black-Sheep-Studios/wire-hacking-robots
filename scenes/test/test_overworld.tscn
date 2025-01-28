@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=42 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
@@ -27,6 +27,8 @@
 [ext_resource type="Resource" uid="uid://dtyfknspkowob" path="res://assets/robot_stats/cleaner_bot.tres" id="18_ncvcj"]
 [ext_resource type="Resource" uid="uid://cm13fw1hfhos8" path="res://assets/robot_stats/light_security_bot.tres" id="20_y78se"]
 [ext_resource type="PackedScene" uid="uid://diq0db2o3mluv" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
+[ext_resource type="Resource" uid="uid://dcvgevtc5f3y1" path="res://assets/robot_stats/heavy_security_bot.tres" id="28_a0kuv"]
+[ext_resource type="PackedScene" uid="uid://c8xc00liy85xj" path="res://scenes/test/hack_easy05.tscn" id="29_ipg0s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_peu7m"]
 texture = ExtResource("4_7625h")
@@ -464,6 +466,15 @@ damage_type = 0
 bullet_scene = ExtResource("11_232ms")
 fire_sound = ExtResource("12_uy21r")
 
+[sub_resource type="Resource" id="Resource_gr7ex"]
+script = ExtResource("12_sf1an")
+bullet_speed = 450.0
+fire_delay_seconds = 0.067
+damage = 3
+damage_type = 0
+bullet_scene = ExtResource("11_232ms")
+fire_sound = ExtResource("12_uy21r")
+
 [node name="TestOverworld" type="Node2D"]
 script = ExtResource("1_eur80")
 
@@ -631,3 +642,21 @@ script = ExtResource("14_gn8n4")
 [node name="Weapon" type="Node" parent="LightSecurityBot"]
 script = ExtResource("10_d3rmm")
 stats = SubResource("Resource_qfanf")
+
+[node name="HeavySecurityBot" type="CharacterBody2D" parent="."]
+position = Vector2(271, -739)
+scale = Vector2(2, 2)
+script = ExtResource("15_xp0nl")
+_stats = ExtResource("28_a0kuv")
+
+[node name="Hack" type="StaticBody2D" parent="HeavySecurityBot" node_paths=PackedStringArray("success_triggers")]
+script = ExtResource("11_0mbbn")
+hack_scene = ExtResource("29_ipg0s")
+success_triggers = [NodePath("../OverrideTrigger")]
+
+[node name="Weapon" type="Node" parent="HeavySecurityBot"]
+script = ExtResource("10_d3rmm")
+stats = SubResource("Resource_gr7ex")
+
+[node name="OverrideTrigger" type="Node" parent="HeavySecurityBot"]
+script = ExtResource("14_gn8n4")

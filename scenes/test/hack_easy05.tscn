@@ -1,0 +1,271 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8xc00liy85xj"]
+
+[ext_resource type="Script" path="res://game/wirehack_scene.gd" id="1_l67jq"]
+[ext_resource type="Script" path="res://game/player/player_hack_controller.gd" id="2_bkur6"]
+[ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="3_q8ofq"]
+[ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="4_idelf"]
+[ext_resource type="PackedScene" uid="uid://dr5vxukqwojan" path="res://scenes/components/not_gate.tscn" id="5_hb4fv"]
+[ext_resource type="PackedScene" uid="uid://dwptk50d5iig8" path="res://scenes/components/nand_gate.tscn" id="6_hjdeg"]
+[ext_resource type="PackedScene" uid="uid://c1nega7mda0ml" path="res://scenes/components/nor_gate.tscn" id="7_j5kxv"]
+[ext_resource type="PackedScene" uid="uid://5sibujrnogmh" path="res://scenes/components/and_gate.tscn" id="8_h7je0"]
+[ext_resource type="PackedScene" uid="uid://bsneb5dbia1mu" path="res://scenes/components/logic_out.tscn" id="9_nw5jc"]
+
+[node name="TutorialHackScene" type="CanvasLayer"]
+script = ExtResource("1_l67jq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+offset_right = 1200.0
+offset_bottom = 600.0
+color = Color(0, 0, 0, 0.627451)
+
+[node name="PlayerHackController" type="Node" parent="."]
+script = ExtResource("2_bkur6")
+
+[node name="succeed" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 381.0
+offset_top = -83.0
+offset_right = 505.0
+offset_bottom = -52.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Succeed hack"
+
+[node name="fail" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 381.0
+offset_top = -35.0
+offset_right = 505.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Fail hack"
+
+[node name="cancel" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 393.0
+offset_top = 13.0
+offset_right = 493.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Cancel hack"
+
+[node name="LogicInA" parent="." instance=ExtResource("3_q8ofq")]
+position = Vector2(299, 179)
+
+[node name="LogicInB" parent="." instance=ExtResource("3_q8ofq")]
+position = Vector2(299, 217)
+
+[node name="LogicInC" parent="." instance=ExtResource("3_q8ofq")]
+position = Vector2(301, 279)
+
+[node name="LogicInD" parent="." instance=ExtResource("3_q8ofq")]
+position = Vector2(302, 319)
+
+[node name="WireA" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(390, 180)
+scale = Vector2(72, 1)
+inputs = [NodePath("../LogicInA")]
+
+[node name="WireB1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(365, 217)
+scale = Vector2(48, 1)
+inputs = [NodePath("../LogicInB")]
+
+[node name="WireB2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(368, 234)
+scale = Vector2(1, 16)
+inputs = [NodePath("../LogicInB")]
+
+[node name="WireB3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(415, 251)
+scale = Vector2(48, 1)
+inputs = [NodePath("../LogicInB")]
+
+[node name="WireC" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(399, 279)
+scale = Vector2(80, 1)
+inputs = [NodePath("../LogicInC")]
+
+[node name="WireD" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(368, 319)
+scale = Vector2(48, 1)
+inputs = [NodePath("../LogicInD")]
+
+[node name="WireE" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(446, 218)
+scale = Vector2(16, 1)
+inputs = [NodePath("../NotGate1")]
+
+[node name="WireF" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(531, 200)
+scale = Vector2(8, 1)
+inputs = [NodePath("../NandGate1")]
+
+[node name="WireG1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(527, 268)
+scale = Vector2(16, 1)
+inputs = [NodePath("../NorGate1")]
+
+[node name="WireG2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(526, 252)
+scale = Vector2(1, 16)
+inputs = [NodePath("../NorGate1")]
+
+[node name="WireG3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(575, 237)
+scale = Vector2(48, 1)
+inputs = [NodePath("../NorGate1")]
+
+[node name="WireH1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(512, 319)
+scale = Vector2(80, 1)
+inputs = [NodePath("../NotGate2")]
+
+[node name="WireH2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(591, 310)
+scale = Vector2(1, 8)
+inputs = [NodePath("../NotGate2")]
+
+[node name="WireH3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(608, 303)
+scale = Vector2(16, 1)
+inputs = [NodePath("../NotGate2")]
+
+[node name="WireI" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(589, 200)
+scale = Vector2(24, 1)
+inputs = [NodePath("../NotGate3")]
+
+[node name="WireJ" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(596, 268)
+scale = Vector2(24, 1)
+inputs = [NodePath("../NotGate4")]
+
+[node name="WireK1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(678, 217)
+scale = Vector2(16, 1)
+inputs = [NodePath("../AndGate1")]
+
+[node name="WireK2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(693, 226)
+scale = Vector2(1, 8)
+inputs = [NodePath("../AndGate1")]
+
+[node name="WireK3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(708, 235)
+scale = Vector2(16, 1)
+inputs = [NodePath("../AndGate1")]
+
+[node name="WireL1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(678, 285)
+scale = Vector2(16, 1)
+inputs = [NodePath("../NorGate2")]
+
+[node name="WireL2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(693, 276)
+scale = Vector2(1, 8)
+inputs = [NodePath("../NorGate2")]
+
+[node name="WireL3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(708, 267)
+scale = Vector2(16, 1)
+inputs = [NodePath("../NorGate2")]
+
+[node name="WireW" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(811, 252)
+scale = Vector2(32, 1)
+inputs = [NodePath("../AndGate2")]
+
+[node name="NotGate1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_hb4fv")]
+position = Vector2(420, 218)
+scale = Vector2(1, 1)
+inputs = [NodePath("../WireB1")]
+
+[node name="NotGate2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_hb4fv")]
+position = Vector2(427, 319)
+scale = Vector2(1, 1)
+inputs = [NodePath("../WireD")]
+
+[node name="NotGate3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_hb4fv")]
+position = Vector2(554, 200)
+scale = Vector2(1, 1)
+inputs = [NodePath("../WireF")]
+
+[node name="NotGate4" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_hb4fv")]
+position = Vector2(558, 268)
+scale = Vector2(1, 1)
+inputs = [NodePath("../WireG1")]
+
+[node name="NandGate1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("6_hjdeg")]
+position = Vector2(491, 200)
+inputs = [NodePath("../WireA"), NodePath("../WireE")]
+
+[node name="NorGate1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("7_j5kxv")]
+position = Vector2(481, 268)
+inputs = [NodePath("../WireB3"), NodePath("../WireC")]
+
+[node name="NorGate2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("7_j5kxv")]
+position = Vector2(638, 285)
+inputs = [NodePath("../WireJ"), NodePath("../WireH3")]
+
+[node name="AndGate1" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_h7je0")]
+position = Vector2(637, 218)
+inputs = [NodePath("../WireI"), NodePath("../WireG3")]
+
+[node name="AndGate2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_h7je0")]
+position = Vector2(750, 252)
+inputs = [NodePath("../WireK3"), NodePath("../WireL3")]
+
+[node name="LogicOutW" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("9_nw5jc")]
+position = Vector2(858, 252)
+inputs = [NodePath("../WireW")]
+
+[node name="Goal1" type="Label" parent="."]
+offset_left = 873.0
+offset_top = 214.0
+offset_right = 913.0
+offset_bottom = 263.0
+text = "Goal:
+1"
+horizontal_alignment = 1
+
+[node name="Tip1" type="Label" parent="."]
+offset_left = 394.0
+offset_top = 367.0
+offset_right = 813.0
+offset_bottom = 394.0
+text = "REMEMBER: Start from the goal and trace backwards!"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 366.0
+offset_top = 215.0
+offset_right = 406.0
+offset_bottom = 255.0
+scale = Vector2(0.1, 0.1)
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+offset_left = 524.0
+offset_top = 266.0
+offset_right = 564.0
+offset_bottom = 306.0
+scale = Vector2(0.1, 0.1)
+
+[connection signal="button_down" from="succeed" to="." method="_on_success"]
+[connection signal="button_down" from="fail" to="." method="_on_fail"]
+[connection signal="button_down" from="cancel" to="." method="_on_cancel"]
