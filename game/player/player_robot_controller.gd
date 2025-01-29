@@ -87,7 +87,8 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 	var action: RobotCharacter.Action = RobotCharacter.Action.new()
 	action.movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	if Input.is_action_just_pressed(attack_key):
+	#if Input.is_action_just_pressed(attack_key): # changed so that holding attack button fires continuously, for example, with a minigun
+	if Input.is_action_pressed(attack_key):
 		action.attack = true
 
 	action.aim_direction = (current_robot.get_global_mouse_position() - current_robot.global_position).normalized()

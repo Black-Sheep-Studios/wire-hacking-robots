@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=50 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
@@ -17,18 +17,23 @@
 [ext_resource type="AudioStream" uid="uid://g5h3yaek10gs" path="res://assets/sounds/kinetic.wav" id="12_uy21r"]
 [ext_resource type="PackedScene" uid="uid://bqtp8ioyvmtfx" path="res://scenes/test/hack_tutorial06.tscn" id="13_hk1ul"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
-[ext_resource type="PackedScene" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
+[ext_resource type="PackedScene" uid="uid://bcv1jewh3p00r" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
 [ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
 [ext_resource type="AudioStream" uid="uid://bbepisos6fv1" path="res://assets/sounds/door.wav" id="15_bounm"]
 [ext_resource type="Script" path="res://game/robot/robot_character.gd" id="15_xp0nl"]
 [ext_resource type="Resource" uid="uid://cdw0u0do5rqcy" path="res://assets/robot_stats/roomba.tres" id="16_71f40"]
+[ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="16_wa7da"]
 [ext_resource type="PackedScene" uid="uid://ddr7asm8iy31r" path="res://scenes/test/hack_tutorial04.tscn" id="17_anpuk"]
+[ext_resource type="SpriteFrames" uid="uid://dmj687kyq1q8i" path="res://assets/graphics/wirelessAP.tres" id="17_d77c3"]
+[ext_resource type="PackedScene" uid="uid://kt4lhrkk0uab" path="res://scenes/test/hack_tutorial02.tscn" id="17_rx4ln"]
 [ext_resource type="Resource" uid="uid://cxbksr1kugj8o" path="res://assets/robot_stats/laptop.tres" id="18_a41k4"]
 [ext_resource type="Resource" uid="uid://dtyfknspkowob" path="res://assets/robot_stats/cleaner_bot.tres" id="18_ncvcj"]
 [ext_resource type="Resource" uid="uid://cm13fw1hfhos8" path="res://assets/robot_stats/light_security_bot.tres" id="20_y78se"]
-[ext_resource type="PackedScene" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
+[ext_resource type="PackedScene" uid="uid://diq0db2o3mluv" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
 [ext_resource type="Resource" uid="uid://dcvgevtc5f3y1" path="res://assets/robot_stats/heavy_security_bot.tres" id="28_a0kuv"]
 [ext_resource type="PackedScene" uid="uid://c8xc00liy85xj" path="res://scenes/test/hack_easy05.tscn" id="29_ipg0s"]
+[ext_resource type="Texture2D" uid="uid://e75sdpvamsyx" path="res://assets/graphics/supercomp01.png" id="31_soua7"]
+[ext_resource type="Texture2D" uid="uid://dbkps382tjqov" path="res://assets/graphics/supercomp02.png" id="32_7krif"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_peu7m"]
 texture = ExtResource("4_7625h")
@@ -412,6 +417,9 @@ physics_layer_0/collision_layer = 5
 physics_layer_0/collision_mask = 0
 sources/1 = SubResource("TileSetAtlasSource_peu7m")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lom5n"]
+size = Vector2(64, 126)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_bpd48"]
 atlas = ExtResource("13_hvl28")
 region = Rect2(384, 0, 128, 64)
@@ -451,11 +459,26 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_48kf8"]
 size = Vector2(128, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1du6g"]
+size = Vector2(20, 14)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8f5p"]
 size = Vector2(95, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im05h"]
 size = Vector2(128, 16)
+
+[sub_resource type="Resource" id="Resource_o3itk"]
+script = ExtResource("16_wa7da")
+move_speed = 0
+hit_points = 1.0
+weaknesses = Array[int]([])
+resistances = Array[int]([])
+abilities = Array[int]([1])
+move_sound_type = 1
+sprite = ExtResource("17_d77c3")
+collider_radius = 10.0
+interact_reach_distance = 120.0
 
 [sub_resource type="Resource" id="Resource_qfanf"]
 script = ExtResource("12_sf1an")
@@ -491,7 +514,43 @@ tile_set = SubResource("TileSet_v7rpy")
 script = ExtResource("2_ssp5s")
 _pause_menu_scene = ExtResource("3_h8k3s")
 _cursor_sprite = ExtResource("8_h0tql")
-current_robot = NodePath("../Laptop")
+current_robot = NodePath("../WirelessAP")
+
+[node name="Server01" type="Sprite2D" parent="."]
+position = Vector2(592, 145)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("31_soua7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Server01"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_lom5n")
+
+[node name="Server02" type="Sprite2D" parent="."]
+position = Vector2(624, 145)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("32_7krif")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Server02"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_lom5n")
+
+[node name="Server03" type="Sprite2D" parent="."]
+position = Vector2(656, 145)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("31_soua7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Server03"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_lom5n")
+
+[node name="Server04" type="Sprite2D" parent="."]
+position = Vector2(688, 145)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("32_7krif")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Server04"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_lom5n")
 
 [node name="Door" type="StaticBody2D" parent="." node_paths=PackedStringArray("open_trigger")]
 position = Vector2(480, 256)
@@ -547,6 +606,20 @@ animation = &"open"
 scale = Vector2(0.5, 1)
 shape = SubResource("RectangleShape2D_48kf8")
 
+[node name="HangarDoor" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="HangarDoor"]
+offset_left = 658.0
+offset_top = -799.0
+offset_right = 678.0
+offset_bottom = -673.0
+color = Color(0.500095, 0.500095, 0.500095, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HangarDoor"]
+position = Vector2(668, -736)
+scale = Vector2(1, 9)
+shape = SubResource("RectangleShape2D_1du6g")
+
 [node name="Computer" type="StaticBody2D" parent="."]
 position = Vector2(382, 182)
 collision_layer = 5
@@ -587,17 +660,16 @@ animation = &"open"
 [node name="MovementCollider" type="CollisionShape2D" parent="LockedDoor"]
 shape = SubResource("RectangleShape2D_im05h")
 
-[node name="Roomba" type="CharacterBody2D" parent="."]
-position = Vector2(815, 241)
+[node name="WirelessAP" type="CharacterBody2D" parent="."]
+position = Vector2(700, 115)
 script = ExtResource("15_xp0nl")
-_stats = ExtResource("16_71f40")
+_stats = SubResource("Resource_o3itk")
 
-[node name="Hack" type="StaticBody2D" parent="Roomba" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="WirelessAP"]
 script = ExtResource("11_0mbbn")
-hack_scene = ExtResource("17_anpuk")
-success_triggers = [NodePath("../OverrideTrigger")]
+hack_scene = ExtResource("17_rx4ln")
 
-[node name="OverrideTrigger" type="Node" parent="Roomba"]
+[node name="OverrideTrigger" type="Node" parent="WirelessAP"]
 script = ExtResource("14_gn8n4")
 
 [node name="Laptop" type="CharacterBody2D" parent="."]
@@ -611,6 +683,19 @@ hack_scene = ExtResource("13_vging")
 success_triggers = [NodePath("../OverrideTrigger")]
 
 [node name="OverrideTrigger" type="Node" parent="Laptop"]
+script = ExtResource("14_gn8n4")
+
+[node name="Roomba" type="CharacterBody2D" parent="."]
+position = Vector2(815, 241)
+script = ExtResource("15_xp0nl")
+_stats = ExtResource("16_71f40")
+
+[node name="Hack" type="StaticBody2D" parent="Roomba" node_paths=PackedStringArray("success_triggers")]
+script = ExtResource("11_0mbbn")
+hack_scene = ExtResource("17_anpuk")
+success_triggers = [NodePath("../OverrideTrigger")]
+
+[node name="OverrideTrigger" type="Node" parent="Roomba"]
 script = ExtResource("14_gn8n4")
 
 [node name="CleanerBot" type="CharacterBody2D" parent="."]
