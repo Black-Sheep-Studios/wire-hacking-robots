@@ -17,7 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://g5h3yaek10gs" path="res://assets/sounds/kinetic.wav" id="12_uy21r"]
 [ext_resource type="PackedScene" uid="uid://bqtp8ioyvmtfx" path="res://scenes/test/hack_tutorial06.tscn" id="13_hk1ul"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
-[ext_resource type="PackedScene" uid="uid://bcv1jewh3p00r" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
+[ext_resource type="PackedScene" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
 [ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
 [ext_resource type="AudioStream" uid="uid://bbepisos6fv1" path="res://assets/sounds/door.wav" id="15_bounm"]
 [ext_resource type="Script" path="res://game/robot/robot_character.gd" id="15_xp0nl"]
@@ -26,7 +26,7 @@
 [ext_resource type="Resource" uid="uid://cxbksr1kugj8o" path="res://assets/robot_stats/laptop.tres" id="18_a41k4"]
 [ext_resource type="Resource" uid="uid://dtyfknspkowob" path="res://assets/robot_stats/cleaner_bot.tres" id="18_ncvcj"]
 [ext_resource type="Resource" uid="uid://cm13fw1hfhos8" path="res://assets/robot_stats/light_security_bot.tres" id="20_y78se"]
-[ext_resource type="PackedScene" uid="uid://diq0db2o3mluv" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
+[ext_resource type="PackedScene" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
 [ext_resource type="Resource" uid="uid://dcvgevtc5f3y1" path="res://assets/robot_stats/heavy_security_bot.tres" id="28_a0kuv"]
 [ext_resource type="PackedScene" uid="uid://c8xc00liy85xj" path="res://scenes/test/hack_easy05.tscn" id="29_ipg0s"]
 
@@ -645,7 +645,6 @@ stats = SubResource("Resource_qfanf")
 
 [node name="HeavySecurityBot" type="CharacterBody2D" parent="."]
 position = Vector2(271, -739)
-scale = Vector2(2, 2)
 script = ExtResource("15_xp0nl")
 _stats = ExtResource("28_a0kuv")
 

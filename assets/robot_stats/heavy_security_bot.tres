@@ -14,5 +14,5 @@ abilities = Array[int]([1, 0])
 move_sound = ExtResource("1_lrmb0")
 move_sound_type = 1
 sprite = ExtResource("3_e34dj")
-collider_radius = 15.0
+collider_radius = 30.0
 interact_reach_distance = 30.0
