@@ -8,6 +8,7 @@ extends Node
 
 var _scene_manager: SceneManager
 
+@onready var _pause_menu_scene: PackedScene = preload("res://scenes/pause_menu.tscn")
 
 func _init() -> void:
 	# Controllers should always process inputs, even when the game is paused. The InputManager will

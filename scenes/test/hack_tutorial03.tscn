@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcv1jewh3p00r"]
+[gd_scene load_steps=7 format=3 uid="uid://c0f3el4vr2ju"]
 
 [ext_resource type="Script" path="res://game/wirehack_scene.gd" id="1_kpcco"]
 [ext_resource type="Script" path="res://game/player/player_hack_controller.gd" id="2_p8y8j"]
 [ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="3_iokvx"]
 [ext_resource type="PackedScene" uid="uid://dhukyh0heob0b" path="res://scenes/components/xor_gate.tscn" id="5_71d14"]
 [ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="7_78q6f"]
-[ext_resource type="PackedScene" uid="uid://bsneb5dbia1mu" path="res://scenes/components/logic_out.tscn" id="8_on11i"]
+[ext_resource type="PackedScene" path="res://scenes/components/logic_out.tscn" id="8_on11i"]
 
 [node name="TutorialHackScene" type="CanvasLayer"]
 script = ExtResource("1_kpcco")
@@ -125,6 +125,6 @@ offset_bottom = 384.0
 text = "Note — Any of these gates can have 2 or more inputs. Regardless, the same rules always apply!"
 horizontal_alignment = 1
 
-[connection signal="button_down" from="succeed" to="." method="_on_success"]
-[connection signal="button_down" from="fail" to="." method="_on_fail"]
-[connection signal="button_down" from="cancel" to="." method="_on_cancel"]
+[connection signal="button_down" from="succeed" to="." method="trigger_outcome_one"]
+[connection signal="button_down" from="fail" to="." method="trigger_failure"]
+[connection signal="button_down" from="cancel" to="." method="trigger_failure"]

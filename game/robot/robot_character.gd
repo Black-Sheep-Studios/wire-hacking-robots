@@ -24,21 +24,6 @@ var dead: bool = false
 @onready var move_sound: MovementSound = MovementSound.attach(self, VariablePitchSound.from_stream(_stats.move_sound), _stats.move_sound_type)
 
 
-func _ready() -> void:
-	# some components need to be late initialized after the robot is ready
-	for child in get_children():
-		if child.has_method("init"):
-			child.init()
-
-
-func _process(_delta: float) -> void:
-	if hit_points <= 0:
-		dead = true
-		_disable_collider()
-		died.emit()
-		return
-
-
 func act(action: Action) -> void:
 	if dead: return
 
@@ -61,7 +46,22 @@ func take_damage(damage: float, _damage_type: Weapon.DamageType) -> void:
 	elif _stats.resistances.has(_damage_type):
 		effective_damage /= 2
 	hit_points -= effective_damage
+
+	if hit_points <= 0:
+		kill()
+
 	damaged.emit()
+
+
+func disable() -> void:
+	# TODO: disable AI
+	pass
+
+
+func kill() -> void:
+	dead = true
+	_disable_collider()
+	died.emit()
 
 
 func can_do(ability: Abilities) -> bool:

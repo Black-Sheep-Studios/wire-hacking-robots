@@ -3,14 +3,13 @@ extends Interactable
 
 
 @export var hack_scene: PackedScene
-@export var fail_triggers: Array[Trigger]
-@export var success_triggers: Array[Trigger]
+
 @export var one_time: bool = false
 @export var retry_on_failure: bool = true
 
 
-func hack(player_controller: PlayerRobotController) -> Result:
-	var result = Result.new()
+func hack(player_controller: PlayerRobotController) -> InteractResult:
+	var result = InteractResult.new()
 
 	if not conditions_satisified():
 		return result
@@ -19,29 +18,60 @@ func hack(player_controller: PlayerRobotController) -> Result:
 		return result
 
 	var hack_scene_instance: HackScene = hack_scene.instantiate()
-	hack_scene_instance.hack_succeeded.connect(func() -> void:
-		_on_success(player_controller)
-		if one_time:
-			disable()
+	hack_scene_instance.outcome_triggered.connect(func(index: Outcome.Index) -> void:
+		_on_hack_outcome_triggered(player_controller, index)
 	)
-	hack_scene_instance.hack_failed.connect(func() -> void:
-		_on_failure(player_controller)
-		if one_time or not retry_on_failure:
-			disable()
-	)
+
+	var outcome_labels: Array[String] = []
+	for outcome in _success_outcomes():
+		outcome_labels.append(outcome.outcome_label)
+	hack_scene_instance.initialize_outcomes(outcome_labels)
 	
 	result.hack_scene = hack_scene_instance
 	return result
 
 
-func _on_success(player_controller: PlayerRobotController) -> void:
-	for trigger in success_triggers:
-		trigger.activate(player_controller)
+func _on_hack_outcome_triggered(player_controller: PlayerRobotController, index: Outcome.Index) -> void:
+	var payload: Outcome.Payload = Outcome.Payload.new()
+	payload.player_controller = player_controller
+	payload.target = parent_object
+
+	if index == Outcome.Index.Failure:
+		for outcome in _failure_outcomes():
+			outcome.trigger(payload)
+	else:
+		var success_outcomes: Array[Outcome] = _success_outcomes()
+		if index >= success_outcomes.size():
+			push_error(get_path(), " does not have an outcome for index ", str(index), " but it was triggered")
+			return
+		success_outcomes[index].trigger(payload)
 
 
-func _on_failure(player_controller: PlayerRobotController) -> void:
-	for trigger in fail_triggers:
-		trigger.activate(player_controller)
+func _all_outcomes() -> Array[Outcome]:
+	var outcomes: Array[Outcome] = []
+	for outcome in get_children():
+		if outcome is Outcome:
+			outcomes.append(outcome)
+	
+	return outcomes
+
+
+func _success_outcomes() -> Array[Outcome]:
+	var outcomes: Array[Outcome] = []
+	for outcome in _all_outcomes():
+		if not outcome.failure:
+			outcomes.append(outcome)
+	
+	return outcomes
+
+
+func _failure_outcomes() -> Array[Outcome]:
+	var outcomes: Array[Outcome] = []
+	for outcome in _all_outcomes():
+		if outcome.failure:
+			outcomes.append(outcome)
+	
+	return outcomes
 
 
 func can_interact(_interactor: RobotCharacter) -> bool:
@@ -56,5 +86,5 @@ func _interact_input() -> InputPrompt.Type:
 	return InputPrompt.Type.TERTIARY
 
 
-class Result:
+class InteractResult:
 	var hack_scene: HackScene

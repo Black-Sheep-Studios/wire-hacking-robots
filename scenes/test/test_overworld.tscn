@@ -1,9 +1,8 @@
-[gd_scene load_steps=50 format=4 uid="uid://dogs7u8f2jr8o"]
+[gd_scene load_steps=49 format=4 uid="uid://dogs7u8f2jr8o"]
 
 [ext_resource type="Script" path="res://scenes/test/test_overworld.gd" id="1_eur80"]
 [ext_resource type="Script" path="res://game/player/player_robot_camera.gd" id="2_5vywi"]
 [ext_resource type="Script" path="res://game/player/player_robot_controller.gd" id="2_ssp5s"]
-[ext_resource type="PackedScene" uid="uid://56osf625muiq" path="res://scenes/pause_menu.tscn" id="3_h8k3s"]
 [ext_resource type="Texture2D" uid="uid://svajrmgvnmfq" path="res://assets/graphics/tileset.png" id="4_7625h"]
 [ext_resource type="Script" path="res://game/world/door.gd" id="5_871bv"]
 [ext_resource type="Script" path="res://game/world/trigger.gd" id="6_h3vra"]
@@ -17,19 +16,19 @@
 [ext_resource type="AudioStream" uid="uid://g5h3yaek10gs" path="res://assets/sounds/kinetic.wav" id="12_uy21r"]
 [ext_resource type="PackedScene" uid="uid://bqtp8ioyvmtfx" path="res://scenes/test/hack_tutorial06.tscn" id="13_hk1ul"]
 [ext_resource type="Texture2D" uid="uid://dcjtykuw3jtsv" path="res://assets/graphics/tiles_v1.png" id="13_hvl28"]
-[ext_resource type="PackedScene" uid="uid://bcv1jewh3p00r" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
-[ext_resource type="Script" path="res://game/robot/override_trigger.gd" id="14_gn8n4"]
+[ext_resource type="PackedScene" uid="uid://c0f3el4vr2ju" path="res://scenes/test/hack_tutorial03.tscn" id="13_vging"]
 [ext_resource type="AudioStream" uid="uid://bbepisos6fv1" path="res://assets/sounds/door.wav" id="15_bounm"]
 [ext_resource type="Script" path="res://game/robot/robot_character.gd" id="15_xp0nl"]
 [ext_resource type="Resource" uid="uid://cdw0u0do5rqcy" path="res://assets/robot_stats/roomba.tres" id="16_71f40"]
 [ext_resource type="Script" path="res://game/robot/robot_stats.gd" id="16_wa7da"]
 [ext_resource type="PackedScene" uid="uid://ddr7asm8iy31r" path="res://scenes/test/hack_tutorial04.tscn" id="17_anpuk"]
-[ext_resource type="SpriteFrames" uid="uid://dmj687kyq1q8i" path="res://assets/graphics/wirelessAP.tres" id="17_d77c3"]
-[ext_resource type="PackedScene" uid="uid://kt4lhrkk0uab" path="res://scenes/test/hack_tutorial02.tscn" id="17_rx4ln"]
+[ext_resource type="SpriteFrames" uid="uid://c8u7a8b2flagd" path="res://assets/graphics/wirelessAP.tres" id="17_d77c3"]
+[ext_resource type="PackedScene" uid="uid://chcdngbp84r8g" path="res://scenes/test/hack_tutorial02.tscn" id="17_rx4ln"]
 [ext_resource type="Resource" uid="uid://cxbksr1kugj8o" path="res://assets/robot_stats/laptop.tres" id="18_a41k4"]
 [ext_resource type="Resource" uid="uid://dtyfknspkowob" path="res://assets/robot_stats/cleaner_bot.tres" id="18_ncvcj"]
 [ext_resource type="Resource" uid="uid://cm13fw1hfhos8" path="res://assets/robot_stats/light_security_bot.tres" id="20_y78se"]
-[ext_resource type="PackedScene" uid="uid://diq0db2o3mluv" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
+[ext_resource type="PackedScene" uid="uid://ch8aogxbjpkyq" path="res://scenes/test/hack_tutorial05.tscn" id="22_fbofc"]
+[ext_resource type="Script" path="res://game/world/interactions/outcome.gd" id="22_r0fdu"]
 [ext_resource type="Resource" uid="uid://dcvgevtc5f3y1" path="res://assets/robot_stats/heavy_security_bot.tres" id="28_a0kuv"]
 [ext_resource type="PackedScene" uid="uid://c8xc00liy85xj" path="res://scenes/test/hack_easy05.tscn" id="29_ipg0s"]
 [ext_resource type="Texture2D" uid="uid://e75sdpvamsyx" path="res://assets/graphics/supercomp01.png" id="31_soua7"]
@@ -512,7 +511,6 @@ tile_set = SubResource("TileSet_v7rpy")
 
 [node name="PlayerRobotController" type="Node" parent="." node_paths=PackedStringArray("current_robot")]
 script = ExtResource("2_ssp5s")
-_pause_menu_scene = ExtResource("3_h8k3s")
 _cursor_sprite = ExtResource("8_h0tql")
 current_robot = NodePath("../WirelessAP")
 
@@ -626,12 +624,11 @@ collision_layer = 5
 collision_mask = 0
 metadata/_edit_group_ = true
 
-[node name="Hack" type="StaticBody2D" parent="Computer" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="Computer"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("13_hk1ul")
-success_triggers = [NodePath("../../LockedDoor/OpenTrigger")]
 one_time = true
 
 [node name="MovementCollider" type="CollisionShape2D" parent="Computer"]
@@ -669,60 +666,57 @@ _stats = SubResource("Resource_o3itk")
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("17_rx4ln")
 
-[node name="OverrideTrigger" type="Node" parent="WirelessAP"]
-script = ExtResource("14_gn8n4")
-
 [node name="Laptop" type="CharacterBody2D" parent="."]
 position = Vector2(754, 224)
 script = ExtResource("15_xp0nl")
 _stats = ExtResource("18_a41k4")
 
-[node name="Hack" type="StaticBody2D" parent="Laptop" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="Laptop"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("13_vging")
-success_triggers = [NodePath("../OverrideTrigger")]
 
-[node name="OverrideTrigger" type="Node" parent="Laptop"]
-script = ExtResource("14_gn8n4")
+[node name="ControlOutcome" type="Node" parent="Laptop/Hack"]
+script = ExtResource("22_r0fdu")
+outcome_label = "Control"
 
 [node name="Roomba" type="CharacterBody2D" parent="."]
 position = Vector2(815, 241)
 script = ExtResource("15_xp0nl")
 _stats = ExtResource("16_71f40")
 
-[node name="Hack" type="StaticBody2D" parent="Roomba" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="Roomba"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("17_anpuk")
-success_triggers = [NodePath("../OverrideTrigger")]
 
-[node name="OverrideTrigger" type="Node" parent="Roomba"]
-script = ExtResource("14_gn8n4")
+[node name="ControlOutcome" type="Node" parent="Roomba/Hack"]
+script = ExtResource("22_r0fdu")
+outcome_label = "Control"
 
 [node name="CleanerBot" type="CharacterBody2D" parent="."]
 position = Vector2(543, 338)
 script = ExtResource("15_xp0nl")
 _stats = ExtResource("18_ncvcj")
 
-[node name="Hack" type="StaticBody2D" parent="CleanerBot" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="CleanerBot"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("22_fbofc")
-success_triggers = [NodePath("../OverrideTrigger")]
 
-[node name="OverrideTrigger" type="Node" parent="CleanerBot"]
-script = ExtResource("14_gn8n4")
+[node name="ControlOutcome" type="Node" parent="CleanerBot/Hack"]
+script = ExtResource("22_r0fdu")
+outcome_label = "Control"
 
 [node name="LightSecurityBot" type="CharacterBody2D" parent="."]
 position = Vector2(590, -400)
 script = ExtResource("15_xp0nl")
 _stats = ExtResource("20_y78se")
 
-[node name="Hack" type="StaticBody2D" parent="LightSecurityBot" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="LightSecurityBot"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("13_vging")
-success_triggers = [NodePath("../OverrideTrigger")]
 
-[node name="OverrideTrigger" type="Node" parent="LightSecurityBot"]
-script = ExtResource("14_gn8n4")
+[node name="ControlOutcome" type="Node" parent="LightSecurityBot/Hack"]
+script = ExtResource("22_r0fdu")
+outcome_label = "Control"
 
 [node name="Weapon" type="Node" parent="LightSecurityBot"]
 script = ExtResource("10_d3rmm")
@@ -733,14 +727,20 @@ position = Vector2(271, -739)
 script = ExtResource("15_xp0nl")
 _stats = ExtResource("28_a0kuv")
 
-[node name="Hack" type="StaticBody2D" parent="HeavySecurityBot" node_paths=PackedStringArray("success_triggers")]
+[node name="Hack" type="StaticBody2D" parent="HeavySecurityBot"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("29_ipg0s")
-success_triggers = [NodePath("../OverrideTrigger")]
+
+[node name="ControlOutcome" type="Node" parent="HeavySecurityBot/Hack"]
+script = ExtResource("22_r0fdu")
+outcome_label = "Control"
 
 [node name="Weapon" type="Node" parent="HeavySecurityBot"]
 script = ExtResource("10_d3rmm")
 stats = SubResource("Resource_gr7ex")
 
-[node name="OverrideTrigger" type="Node" parent="HeavySecurityBot"]
-script = ExtResource("14_gn8n4")
+[connection signal="triggered" from="Laptop/Hack/ControlOutcome" to="PlayerRobotController" method="override_robot_from_hack"]
+[connection signal="triggered" from="Roomba/Hack/ControlOutcome" to="PlayerRobotController" method="override_robot_from_hack"]
+[connection signal="triggered" from="CleanerBot/Hack/ControlOutcome" to="PlayerRobotController" method="override_robot_from_hack"]
+[connection signal="triggered" from="LightSecurityBot/Hack/ControlOutcome" to="PlayerRobotController" method="override_robot_from_hack"]
+[connection signal="triggered" from="HeavySecurityBot/Hack/ControlOutcome" to="PlayerRobotController" method="override_robot_from_hack"]

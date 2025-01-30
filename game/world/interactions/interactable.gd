@@ -28,11 +28,13 @@ func _ready() -> void:
 	_input_prompt = InputPrompt.find_or_create(parent_object)
 	_input_prompt.register_interactable(_interact_input(), self, interaction_label)
 
-	# If the parent has a collider, then we can init. Otherwise, we'll save that for a late init
-	# at which point the parent is responsible for calling init on its children
+	# If the parent has a collider, then we can init. Otherwise, we'll wait for the parent
+	# to be ready before we can init
 	var parent_collider = Util.find_child(parent_object, CollisionShape2D)
 	if parent_collider:
 		init()
+	else:
+		parent_object.ready.connect(init)
 
 	if parent_object.has_signal("died"):
 		parent_object.died.connect(disable)

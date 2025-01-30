@@ -2,7 +2,6 @@ class_name PlayerRobotController
 extends PlayerController
 
 
-@export var _pause_menu_scene: PackedScene
 @export var _cursor_sprite: SpriteFrames
 @export var current_robot: RobotCharacter
 
@@ -46,6 +45,15 @@ func process(delta: float) -> void:
 	current_robot.act(action)
 
 
+func override_robot_from_hack(payload: Outcome.Payload) -> void:
+	var robot: RobotCharacter = payload.target as RobotCharacter
+	if not robot:
+		push_error("PlayerRobotController tried to override a non-robot at ", payload.parent_object.get_path())
+		return
+
+	control_robot(robot)
+
+
 func control_robot(robot: RobotCharacter) -> void:
 	current_robot = robot
 	if Util.find_child(current_robot, Weapon):
@@ -87,7 +95,6 @@ func _build_action_from_inputs() -> RobotCharacter.Action:
 	var action: RobotCharacter.Action = RobotCharacter.Action.new()
 	action.movement_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
-	#if Input.is_action_just_pressed(attack_key): # changed so that holding attack button fires continuously, for example, with a minigun
 	if Input.is_action_pressed(attack_key):
 		action.attack = true
 
@@ -122,9 +129,12 @@ func _process_interaction(interaction_target: Interaction) -> void:
 
 
 func _process_hack(hack_target: Hack) -> void:
-	var result: Hack.Result = hack_target.hack(self)
-	if result.hack_scene:
-		_scene_manager.set_active_scene(result.hack_scene, true)
+	var result: Hack.InteractResult = hack_target.hack(self)
+	if not result.hack_scene:
+		push_error("PlayerRobotController tried to hack ", hack_target.get_path(), " but it did not return a hack scene")
+		return
+
+	_scene_manager.set_active_scene(result.hack_scene, true)
 
 
 func _get_aim_target() -> Node2D:

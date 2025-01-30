@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="3_q8ofq"]
 [ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="4_idelf"]
 [ext_resource type="PackedScene" uid="uid://dr5vxukqwojan" path="res://scenes/components/not_gate.tscn" id="5_hb4fv"]
-[ext_resource type="PackedScene" uid="uid://dwptk50d5iig8" path="res://scenes/components/nand_gate.tscn" id="6_hjdeg"]
-[ext_resource type="PackedScene" uid="uid://c1nega7mda0ml" path="res://scenes/components/nor_gate.tscn" id="7_j5kxv"]
+[ext_resource type="PackedScene" path="res://scenes/components/nand_gate.tscn" id="6_hjdeg"]
+[ext_resource type="PackedScene" path="res://scenes/components/nor_gate.tscn" id="7_j5kxv"]
 [ext_resource type="PackedScene" uid="uid://5sibujrnogmh" path="res://scenes/components/and_gate.tscn" id="8_h7je0"]
-[ext_resource type="PackedScene" uid="uid://bsneb5dbia1mu" path="res://scenes/components/logic_out.tscn" id="9_nw5jc"]
+[ext_resource type="PackedScene" path="res://scenes/components/logic_out.tscn" id="9_nw5jc"]
 
 [node name="TutorialHackScene" type="CanvasLayer"]
 script = ExtResource("1_l67jq")
@@ -21,48 +21,6 @@ color = Color(0, 0, 0, 0.627451)
 
 [node name="PlayerHackController" type="Node" parent="."]
 script = ExtResource("2_bkur6")
-
-[node name="succeed" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 381.0
-offset_top = -83.0
-offset_right = 505.0
-offset_bottom = -52.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Succeed hack"
-
-[node name="fail" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 381.0
-offset_top = -35.0
-offset_right = 505.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Fail hack"
-
-[node name="cancel" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 393.0
-offset_top = 13.0
-offset_right = 493.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Cancel hack"
 
 [node name="LogicInA" parent="." instance=ExtResource("3_q8ofq")]
 position = Vector2(299, 179)
@@ -265,7 +223,3 @@ offset_top = 266.0
 offset_right = 564.0
 offset_bottom = 306.0
 scale = Vector2(0.1, 0.1)
-
-[connection signal="button_down" from="succeed" to="." method="_on_success"]
-[connection signal="button_down" from="fail" to="." method="_on_fail"]
-[connection signal="button_down" from="cancel" to="." method="_on_cancel"]

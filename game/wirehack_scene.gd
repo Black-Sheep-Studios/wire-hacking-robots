@@ -3,21 +3,19 @@ extends HackScene
 
 
 func _ready() -> void:
+	super._ready()
 	_initialize_components()
 
 
 func _initialize_components() -> void:
 	for input: LogicIn in _all_logic_inputs():
 		input.initialize_state()
-	for output: LogicOut in _all_logic_outputs():
-		output.output_changed.connect(_check_for_success)
 
 
-func _check_for_success() -> void:
-	for output: LogicOut in _all_logic_outputs():
-		if not output.correct_output():
-			return
-	_on_success()
+func initialize_outcomes(labels: Array[String]) -> void:
+	# TODO: distribute labels to buttons and remove this debug log
+	print("Initializing outcomes: ", labels)
+	pass
 
 
 func _all_logic_inputs() -> Array[LogicIn]:
