@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="3_q8ofq"]
 [ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="4_idelf"]
 [ext_resource type="PackedScene" uid="uid://dr5vxukqwojan" path="res://scenes/components/not_gate.tscn" id="5_hb4fv"]
-[ext_resource type="PackedScene" path="res://scenes/components/nand_gate.tscn" id="6_hjdeg"]
-[ext_resource type="PackedScene" path="res://scenes/components/nor_gate.tscn" id="7_j5kxv"]
+[ext_resource type="PackedScene" uid="uid://dwptk50d5iig8" path="res://scenes/components/nand_gate.tscn" id="6_hjdeg"]
+[ext_resource type="PackedScene" uid="uid://c1nega7mda0ml" path="res://scenes/components/nor_gate.tscn" id="7_j5kxv"]
 [ext_resource type="PackedScene" uid="uid://5sibujrnogmh" path="res://scenes/components/and_gate.tscn" id="8_h7je0"]
-[ext_resource type="PackedScene" path="res://scenes/components/logic_out.tscn" id="9_nw5jc"]
+[ext_resource type="PackedScene" uid="uid://bsneb5dbia1mu" path="res://scenes/components/logic_out.tscn" id="9_nw5jc"]
 
 [node name="TutorialHackScene" type="CanvasLayer"]
 script = ExtResource("1_l67jq")
@@ -52,6 +52,11 @@ inputs = [NodePath("../LogicInB")]
 [node name="WireB3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
 position = Vector2(415, 251)
 scale = Vector2(48, 1)
+inputs = [NodePath("../LogicInB")]
+
+[node name="WireB4" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(368, 217)
+scale = Vector2(4, 4)
 inputs = [NodePath("../LogicInB")]
 
 [node name="WireC" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
@@ -210,16 +215,7 @@ offset_bottom = 394.0
 text = "REMEMBER: Start from the goal and trace backwards!"
 horizontal_alignment = 1
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-offset_left = 366.0
-offset_top = 215.0
-offset_right = 406.0
-offset_bottom = 255.0
-scale = Vector2(0.1, 0.1)
-
-[node name="ColorRect3" type="ColorRect" parent="."]
-offset_left = 524.0
-offset_top = 266.0
-offset_right = 564.0
-offset_bottom = 306.0
-scale = Vector2(0.1, 0.1)
+[node name="Wire" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_idelf")]
+position = Vector2(526, 268)
+scale = Vector2(4, 4)
+inputs = [NodePath("../NorGate1")]

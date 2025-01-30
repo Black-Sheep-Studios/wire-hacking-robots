@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ce7vb6mxloa4k" path="res://scenes/components/wire.tscn" id="3_iokvx"]
 [ext_resource type="PackedScene" uid="uid://dhukyh0heob0b" path="res://scenes/components/xor_gate.tscn" id="5_71d14"]
 [ext_resource type="PackedScene" uid="uid://bq0r6dpjumyjn" path="res://scenes/components/logic_in.tscn" id="7_78q6f"]
-[ext_resource type="PackedScene" path="res://scenes/components/logic_out.tscn" id="8_on11i"]
+[ext_resource type="PackedScene" uid="uid://bsneb5dbia1mu" path="res://scenes/components/logic_out.tscn" id="8_on11i"]
 
 [node name="TutorialHackScene" type="CanvasLayer"]
 script = ExtResource("1_kpcco")
