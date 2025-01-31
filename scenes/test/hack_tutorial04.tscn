@@ -20,13 +20,13 @@ color = Color(0, 0, 0, 0.627451)
 script = ExtResource("2_5nsif")
 
 [node name="Wire" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_a5lb4")]
-position = Vector2(512, 280)
-scale = Vector2(16, 1)
+position = Vector2(511, 280)
+scale = Vector2(32, 1)
 inputs = [NodePath("../LogicIn")]
 
 [node name="Wire2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_a5lb4")]
-position = Vector2(617, 280)
-scale = Vector2(16, 1)
+position = Vector2(611, 280)
+scale = Vector2(32, 1)
 inputs = [NodePath("../NotGate")]
 
 [node name="NotGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_52csp")]
@@ -35,18 +35,18 @@ scale = Vector2(1.25, 1.25)
 inputs = [NodePath("../Wire")]
 
 [node name="LogicIn" parent="." instance=ExtResource("7_c1nq5")]
-position = Vector2(470, 279)
+position = Vector2(469, 280)
 initial_state = true
 
 [node name="LogicOut" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_uqehq")]
-position = Vector2(654, 278)
+position = Vector2(654, 280)
 inputs = [NodePath("../Wire2")]
 
 [node name="Goal1" type="Label" parent="."]
-offset_left = 683.0
-offset_top = 240.0
-offset_right = 723.0
-offset_bottom = 289.0
+offset_left = 673.0
+offset_top = 242.0
+offset_right = 713.0
+offset_bottom = 291.0
 text = "Goal:
 0"
 horizontal_alignment = 1
@@ -72,7 +72,7 @@ offset_right = 505.0
 offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Succeed hack"
+text = "Take Control"
 
 [node name="fail" type="Button" parent="."]
 anchors_preset = 8
@@ -86,22 +86,7 @@ offset_right = 505.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Fail hack"
-
-[node name="cancel" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 393.0
-offset_top = 13.0
-offset_right = 493.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Cancel hack"
+text = "Abort Hack"
 
 [connection signal="button_down" from="succeed" to="." method="trigger_outcome_one"]
 [connection signal="button_down" from="fail" to="." method="trigger_failure"]
-[connection signal="button_down" from="cancel" to="." method="trigger_failure"]

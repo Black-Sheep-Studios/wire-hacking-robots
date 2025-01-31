@@ -31,7 +31,7 @@ offset_right = 505.0
 offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Succeed hack"
+text = "Jump"
 
 [node name="fail" type="Button" parent="."]
 anchors_preset = 8
@@ -45,35 +45,21 @@ offset_right = 505.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Fail hack"
-
-[node name="cancel" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 393.0
-offset_top = 13.0
-offset_right = 493.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Cancel hack"
+text = "Abort Hack"
 
 [node name="Wire4" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_fuyrl")]
-position = Vector2(502, 287)
-scale = Vector2(16, 1)
+position = Vector2(503, 287)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn3")]
 
 [node name="Wire5" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_fuyrl")]
-position = Vector2(505, 319)
-scale = Vector2(16, 1)
+position = Vector2(503, 319)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn4")]
 
 [node name="Wire6" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_fuyrl")]
-position = Vector2(611, 305)
-scale = Vector2(16, 1)
+position = Vector2(609, 304)
+scale = Vector2(24, 1)
 inputs = [NodePath("../AndGate")]
 
 [node name="AndGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("6_57b4t")]
@@ -81,20 +67,20 @@ position = Vector2(556, 304)
 inputs = [NodePath("../Wire4"), NodePath("../Wire5")]
 
 [node name="LogicIn3" parent="." instance=ExtResource("7_tb128")]
-position = Vector2(469, 286)
+position = Vector2(470, 287)
 
 [node name="LogicIn4" parent="." instance=ExtResource("7_tb128")]
-position = Vector2(470, 321)
+position = Vector2(470, 319)
 
 [node name="LogicOut2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_hgaen")]
-position = Vector2(641, 306)
+position = Vector2(642, 304)
 inputs = [NodePath("../Wire6")]
 
 [node name="Goal2" type="Label" parent="."]
-offset_left = 678.0
-offset_top = 266.0
-offset_right = 718.0
-offset_bottom = 315.0
+offset_left = 666.0
+offset_top = 265.0
+offset_right = 706.0
+offset_bottom = 314.0
 text = "Goal:
 1"
 horizontal_alignment = 1
@@ -107,6 +93,5 @@ offset_bottom = 205.0
 text = "AND gate: if ALL of the inputs are 1, the output is 1. Otherwise, the output is 0."
 horizontal_alignment = 1
 
-[connection signal="button_down" from="succeed" to="." method="_on_success"]
-[connection signal="button_down" from="fail" to="." method="_on_fail"]
-[connection signal="button_down" from="cancel" to="." method="_on_cancel"]
+[connection signal="button_down" from="succeed" to="." method="trigger_outcome_one"]
+[connection signal="button_down" from="fail" to="." method="trigger_failure"]

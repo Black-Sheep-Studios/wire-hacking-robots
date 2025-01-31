@@ -19,6 +19,20 @@ offset_right = 1200.0
 offset_bottom = 600.0
 color = Color(0, 0, 0, 0.627451)
 
+[node name="succeed" type="Button" parent="."]
+offset_left = 980.0
+offset_top = 196.0
+offset_right = 1108.0
+offset_bottom = 227.0
+text = "Take Control"
+
+[node name="abort" type="Button" parent="."]
+offset_left = 980.0
+offset_top = 247.0
+offset_right = 1108.0
+offset_bottom = 278.0
+text = "Abort Hack"
+
 [node name="PlayerHackController" type="Node" parent="."]
 script = ExtResource("2_bkur6")
 
@@ -219,3 +233,6 @@ horizontal_alignment = 1
 position = Vector2(526, 268)
 scale = Vector2(4, 4)
 inputs = [NodePath("../NorGate1")]
+
+[connection signal="button_down" from="succeed" to="." method="trigger_outcome_one"]
+[connection signal="button_down" from="abort" to="." method="trigger_failure"]

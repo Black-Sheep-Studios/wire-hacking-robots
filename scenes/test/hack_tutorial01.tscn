@@ -25,13 +25,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 381.0
+offset_left = 380.0
 offset_top = -83.0
-offset_right = 505.0
+offset_right = 508.0
 offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Succeed hack"
+text = "Jump"
 
 [node name="fail" type="Button" parent="."]
 anchors_preset = 8
@@ -39,62 +39,48 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 381.0
+offset_left = 380.0
 offset_top = -35.0
-offset_right = 505.0
+offset_right = 508.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Fail hack"
-
-[node name="cancel" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 393.0
-offset_top = 13.0
-offset_right = 493.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Cancel hack"
+text = "Abort Hack"
 
 [node name="Wire" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_yd1s4")]
-position = Vector2(471, 271)
-scale = Vector2(16, 1)
+position = Vector2(480, 283)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn")]
 
 [node name="Wire2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_yd1s4")]
-position = Vector2(471, 309)
-scale = Vector2(16, 1)
+position = Vector2(480, 317)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn2")]
 
 [node name="Wire3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_yd1s4")]
-position = Vector2(578, 289)
-scale = Vector2(16, 1)
+position = Vector2(575, 300)
+scale = Vector2(24, 1)
 inputs = [NodePath("../OrGate")]
 
 [node name="OrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("4_i1cog")]
-position = Vector2(522, 289)
+position = Vector2(522, 300)
 inputs = [NodePath("../Wire"), NodePath("../Wire2")]
 
 [node name="LogicIn" parent="." instance=ExtResource("7_ftmv2")]
-position = Vector2(442, 270)
+position = Vector2(442, 283)
 
 [node name="LogicIn2" parent="." instance=ExtResource("7_ftmv2")]
-position = Vector2(442, 308)
+position = Vector2(442, 317)
 
 [node name="LogicOut" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_plcbm")]
-position = Vector2(610, 290)
+position = Vector2(610, 300)
 inputs = [NodePath("../Wire3")]
 
 [node name="Goal1" type="Label" parent="."]
 offset_left = 639.0
-offset_top = 252.0
+offset_top = 262.0
 offset_right = 679.0
-offset_bottom = 301.0
+offset_bottom = 311.0
 text = "Goal:
 1"
 horizontal_alignment = 1
@@ -107,6 +93,5 @@ offset_bottom = 196.0
 text = "OR gate: if ANY of the inputs are 1, the output is 1. Otherwise, the output is 0."
 horizontal_alignment = 1
 
-[connection signal="button_down" from="succeed" to="." method="_on_success"]
-[connection signal="button_down" from="fail" to="." method="_on_fail"]
-[connection signal="button_down" from="cancel" to="." method="_on_cancel"]
+[connection signal="button_down" from="succeed" to="." method="trigger_outcome_one"]
+[connection signal="button_down" from="fail" to="." method="trigger_failure"]

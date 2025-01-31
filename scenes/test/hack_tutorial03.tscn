@@ -31,7 +31,7 @@ offset_right = 505.0
 offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Succeed hack"
+text = "Jump"
 
 [node name="fail" type="Button" parent="."]
 anchors_preset = 8
@@ -45,40 +45,26 @@ offset_right = 505.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Fail hack"
-
-[node name="cancel" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 393.0
-offset_top = 13.0
-offset_right = 493.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Cancel hack"
+text = "Abort Hack"
 
 [node name="Wire7" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_iokvx")]
-position = Vector2(522, 253)
-scale = Vector2(16, 1)
+position = Vector2(527, 255)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn5")]
 
 [node name="Wire8" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_iokvx")]
-position = Vector2(522, 275)
-scale = Vector2(16, 1)
+position = Vector2(531, 276)
+scale = Vector2(28, 1)
 inputs = [NodePath("../LogicIn6")]
 
 [node name="Wire9" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_iokvx")]
-position = Vector2(521, 296)
-scale = Vector2(16, 1)
+position = Vector2(527, 297)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn7")]
 
 [node name="Wire10" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_iokvx")]
-position = Vector2(630, 276)
-scale = Vector2(16, 1)
+position = Vector2(624, 276)
+scale = Vector2(24, 1)
 inputs = [NodePath("../XOrGate")]
 
 [node name="XOrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_71d14")]
@@ -86,25 +72,25 @@ position = Vector2(571, 276)
 inputs = [NodePath("../Wire7"), NodePath("../Wire8"), NodePath("../Wire9")]
 
 [node name="LogicIn5" parent="." instance=ExtResource("7_78q6f")]
-position = Vector2(487, 252)
+position = Vector2(486, 255)
 initial_state = true
 
 [node name="LogicIn6" parent="." instance=ExtResource("7_78q6f")]
-position = Vector2(487, 275)
+position = Vector2(486, 276)
 initial_state = true
 
 [node name="LogicIn7" parent="." instance=ExtResource("7_78q6f")]
-position = Vector2(487, 298)
+position = Vector2(486, 297)
 
 [node name="LogicOut3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_on11i")]
-position = Vector2(658, 277)
+position = Vector2(658, 276)
 inputs = [NodePath("../Wire10")]
 
 [node name="Goal3" type="Label" parent="."]
-offset_left = 696.0
-offset_top = 239.0
-offset_right = 736.0
-offset_bottom = 288.0
+offset_left = 672.0
+offset_top = 238.0
+offset_right = 712.0
+offset_bottom = 287.0
 text = "Goal:
 1"
 horizontal_alignment = 1
@@ -127,4 +113,3 @@ horizontal_alignment = 1
 
 [connection signal="button_down" from="succeed" to="." method="trigger_outcome_one"]
 [connection signal="button_down" from="fail" to="." method="trigger_failure"]
-[connection signal="button_down" from="cancel" to="." method="trigger_failure"]

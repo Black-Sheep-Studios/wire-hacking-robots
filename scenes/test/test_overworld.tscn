@@ -630,6 +630,10 @@ collision_mask = 0
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("13_hk1ul")
 one_time = true
+interaction_label_override = "Unlock"
+
+[node name="OpenTrigger" type="Node" parent="Computer"]
+script = ExtResource("6_h3vra")
 
 [node name="MovementCollider" type="CollisionShape2D" parent="Computer"]
 position = Vector2(-0.5, -7)
@@ -665,6 +669,7 @@ _stats = SubResource("Resource_o3itk")
 [node name="Hack" type="StaticBody2D" parent="WirelessAP"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("17_rx4ln")
+interaction_label_override = "Jump"
 
 [node name="Laptop" type="CharacterBody2D" parent="."]
 position = Vector2(754, 224)
@@ -674,6 +679,7 @@ _stats = ExtResource("18_a41k4")
 [node name="Hack" type="StaticBody2D" parent="Laptop"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("13_vging")
+interaction_label_override = "Jump"
 
 [node name="ControlOutcome" type="Node" parent="Laptop/Hack"]
 script = ExtResource("22_r0fdu")
@@ -687,6 +693,7 @@ _stats = ExtResource("16_71f40")
 [node name="Hack" type="StaticBody2D" parent="Roomba"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("17_anpuk")
+interaction_label_override = "Take Control"
 
 [node name="ControlOutcome" type="Node" parent="Roomba/Hack"]
 script = ExtResource("22_r0fdu")
@@ -700,6 +707,7 @@ _stats = ExtResource("18_ncvcj")
 [node name="Hack" type="StaticBody2D" parent="CleanerBot"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("22_fbofc")
+interaction_label_override = "Take Control"
 
 [node name="ControlOutcome" type="Node" parent="CleanerBot/Hack"]
 script = ExtResource("22_r0fdu")
@@ -713,6 +721,7 @@ _stats = ExtResource("20_y78se")
 [node name="Hack" type="StaticBody2D" parent="LightSecurityBot"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("13_vging")
+interaction_label_override = "Take Control"
 
 [node name="ControlOutcome" type="Node" parent="LightSecurityBot/Hack"]
 script = ExtResource("22_r0fdu")
@@ -730,6 +739,7 @@ _stats = ExtResource("28_a0kuv")
 [node name="Hack" type="StaticBody2D" parent="HeavySecurityBot"]
 script = ExtResource("11_0mbbn")
 hack_scene = ExtResource("29_ipg0s")
+interaction_label_override = "Take Control"
 
 [node name="ControlOutcome" type="Node" parent="HeavySecurityBot/Hack"]
 script = ExtResource("22_r0fdu")

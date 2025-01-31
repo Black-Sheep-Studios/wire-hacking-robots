@@ -27,13 +27,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 381.0
+offset_left = 380.0
 offset_top = -83.0
-offset_right = 505.0
+offset_right = 508.0
 offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Succeed hack"
+text = "Unlock"
 
 [node name="fail" type="Button" parent="."]
 anchors_preset = 8
@@ -41,72 +41,68 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 381.0
+offset_left = 380.0
 offset_top = -35.0
-offset_right = 505.0
+offset_right = 508.0
 offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Fail hack"
-
-[node name="cancel" type="Button" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 393.0
-offset_top = 13.0
-offset_right = 493.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Cancel hack"
+text = "Abort Hack"
 
 [node name="Wire" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(509, 178)
-scale = Vector2(16, 1)
+position = Vector2(512, 177)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn")]
 
 [node name="Wire2" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(509, 216)
-scale = Vector2(16, 1)
+position = Vector2(512, 215)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn2")]
 
 [node name="Wire3" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(511, 271)
-scale = Vector2(16, 1)
+position = Vector2(514, 269)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn3")]
 
 [node name="Wire4" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(510, 305)
-scale = Vector2(16, 1)
+position = Vector2(514, 307)
+scale = Vector2(24, 1)
 inputs = [NodePath("../LogicIn4")]
 
 [node name="Wire5" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(616, 194)
+position = Vector2(608, 196)
 scale = Vector2(16, 1)
 inputs = [NodePath("../XorGate")]
 
 [node name="Wire6" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(615, 290)
+position = Vector2(608, 288)
 scale = Vector2(16, 1)
 inputs = [NodePath("../OrGate")]
 
 [node name="Wire7" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(633, 214)
+position = Vector2(623, 213)
 scale = Vector2(1, 16)
-inputs = [NodePath("../Wire5")]
+inputs = [NodePath("../XorGate")]
 
 [node name="Wire8" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(632, 271)
+position = Vector2(623, 271)
 scale = Vector2(1, 16)
-inputs = [NodePath("../Wire6")]
+inputs = [NodePath("../OrGate")]
 
 [node name="Wire9" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
-position = Vector2(731, 242)
-scale = Vector2(16, 1)
+position = Vector2(728, 241)
+scale = Vector2(24, 1)
 inputs = [NodePath("../AndGate")]
+
+[node name="Wire10" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(632, 228)
+scale = Vector2(8, 1)
+inputs = [NodePath("../XorGate")]
+
+[node name="Wire11" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("3_ajiyh")]
+position = Vector2(632, 256)
+scale = Vector2(8, 1)
+inputs = [NodePath("../OrGate")]
 
 [node name="LogicIn" parent="." instance=ExtResource("4_wv12x")]
 position = Vector2(480, 177)
@@ -115,20 +111,20 @@ position = Vector2(480, 177)
 position = Vector2(480, 215)
 
 [node name="LogicIn3" parent="." instance=ExtResource("4_wv12x")]
-position = Vector2(477, 271)
+position = Vector2(482, 269)
 
 [node name="LogicIn4" parent="." instance=ExtResource("4_wv12x")]
-position = Vector2(478, 306)
+position = Vector2(482, 307)
 
 [node name="LogicOut" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("5_p2nsn")]
-position = Vector2(760, 242)
+position = Vector2(762, 241)
 inputs = [NodePath("../Wire9")]
 
 [node name="Goal1" type="Label" parent="."]
 offset_left = 781.0
-offset_top = 204.0
+offset_top = 202.0
 offset_right = 821.0
-offset_bottom = 253.0
+offset_bottom = 251.0
 text = "Goal:
 1"
 horizontal_alignment = 1
@@ -155,13 +151,12 @@ position = Vector2(560, 196)
 inputs = [NodePath("../Wire"), NodePath("../Wire2")]
 
 [node name="OrGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("7_475xi")]
-position = Vector2(558, 288)
+position = Vector2(560, 288)
 inputs = [NodePath("../Wire3"), NodePath("../Wire4")]
 
 [node name="AndGate" parent="." node_paths=PackedStringArray("inputs") instance=ExtResource("8_8iujp")]
-position = Vector2(676, 241)
-inputs = [NodePath("../Wire7"), NodePath("../Wire8")]
+position = Vector2(672, 241)
+inputs = [NodePath("../Wire10"), NodePath("../Wire11")]
 
-[connection signal="button_down" from="succeed" to="." method="_on_success"]
-[connection signal="button_down" from="fail" to="." method="_on_fail"]
-[connection signal="button_down" from="cancel" to="." method="_on_cancel"]
+[connection signal="button_down" from="succeed" to="." method="trigger_outcome_one"]
+[connection signal="button_down" from="fail" to="." method="trigger_failure"]
